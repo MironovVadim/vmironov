@@ -10,7 +10,7 @@ package ru.job4j;
 
 public class Calculate {
 	/**
-	* Метод выводит в консоль строку "Hello World!"
+	* Метод выводит в консоль строку "Hello World".
 	* @param args - массив строк
 	*/
 	public static void main(String[] args) {
