@@ -1,5 +1,5 @@
 /**
-* Tests for class Counter, BoardTest, Factorial.
+* Tests for class Counter, BoardTest, Factorial, Paint.
 *
 * @author Vadim Moronov (Mironov6292@gmail.ru/Multik6292@mail.ru)
 * @version $Id$
