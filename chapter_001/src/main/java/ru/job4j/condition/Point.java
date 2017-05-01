@@ -48,6 +48,6 @@ public class Point {
 	* @return boolean - is compared points lays on the function
 	*/
 	public boolean is(int a, int b) {
-		return y == a * x + b ? true : false;
+		return y == a * x + b;
 	}
 }

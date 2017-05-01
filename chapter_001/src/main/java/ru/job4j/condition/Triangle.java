@@ -39,6 +39,6 @@ public class Triangle {
 	* @return - area of triangle
 	*/
 	public double area() {
-		return 0.5D * ((a.getX() - c.getX()) * (b.getY() - c.getY()) - (b.getX() - c.getX()) * (a.getY() - c.getY()));
+		return Math.abs(0.5D * ((a.getX() - c.getX()) * (b.getY() - c.getY()) - (b.getX() - c.getX()) * (a.getY() - c.getY())));
 	}
 }
