@@ -20,19 +20,20 @@ public class ArrayDuplicate {
 	* @return int[] - array after removing duplicates
 	*/
 	public String[] remove(String[] array) {
-		for (int i = 0; i < array.length; i++) {
+		int resultSize = array.length;
+		for (int i = 0; i < resultSize; i++) {
 			if (array[i] == null) {
 				return Arrays.copyOf(array, i);
 			}
 			for (int j = i + 1; j < array.length - 1; j++) {
 				if (array[i].equals(array[j])) {
+					resultSize--;
 					for (int t = j; t < array.length - 1; t++) {
 						array[t] = array[t + 1];
-						array[t + 1] = null;
 					}
 				}
 			}
 		}
-		return array;
+		return Arrays.copyOf(array, resultSize);
 	}
 }
