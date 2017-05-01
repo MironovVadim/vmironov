@@ -22,9 +22,6 @@ public class ArrayDuplicate {
 	public String[] remove(String[] array) {
 		int resultSize = array.length;
 		for (int i = 0; i < resultSize; i++) {
-			if (array[i] == null) {
-				return Arrays.copyOf(array, i);
-			}
 			for (int j = i + 1; j < array.length - 1; j++) {
 				if (array[i].equals(array[j])) {
 					resultSize--;
