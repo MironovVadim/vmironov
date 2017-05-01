@@ -1,5 +1,5 @@
 /**
-* Test class.
+* Test classes for arrays.
 *
 * @author Vadim Moronov (Mironov6292@gmail.ru/Multik6292@mail.ru)
 * @version $Id$
