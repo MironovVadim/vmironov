@@ -18,7 +18,7 @@ public class Turn {
 	* @return int[] - array after turning
 	*/
 	public int[] back(int[] array) {
-		for (int i = 0, j = array.lentgh - 1; i < j; i++, j--) {
+		for (int i = 0, j = array.length - 1; i < j; i++, j--) {
 			int temp = array[i];
 			array[i] = array[j];
 			array[j] = temp;

@@ -1,5 +1,5 @@
 /**
-* Class for turning array[].
+* Class for turning, sort array[].
 *
 * @author Vadim Moronov (Mironov6292@gmail.ru/Multik6292@mail.ru)
 * @version $Id$
