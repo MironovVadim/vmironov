@@ -21,9 +21,21 @@ public class SubStringClassTest {
 	* Test method.
 	*/
 	@Test
+	public void whenStringIsNotContainsSubStringThenFalse() {
+		String origin = " An enum is a kind of class and an annotation";
+		String sub = "clss";
+		SubStringClass testTask = new SubStringClass();
+		boolean result = testTask.contains(origin, sub);
+		boolean expected = false;
+		assertThat(result, is(expected));
+	}
+	/**
+	* Test method.
+	*/
+	@Test
 	public void whenStringContainsSubStringThenTrue() {
-		String origin = "The Java language provides special support for the string concatenation operator ( + )";
-		String sub = "support for the string ";
+		String origin = "Instances of the class Class";
+		String sub = "class";
 		SubStringClass testTask = new SubStringClass();
 		boolean result = testTask.contains(origin, sub);
 		boolean expected = true;

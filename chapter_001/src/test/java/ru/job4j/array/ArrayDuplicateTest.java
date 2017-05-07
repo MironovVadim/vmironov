@@ -23,8 +23,8 @@ public class ArrayDuplicateTest {
 	@Test
 	public void whenRemoveDuplicatesThenArrayWithoutDuplicate() {
 		ArrayDuplicate arrayDuplicate = new ArrayDuplicate();
-		String[] result = arrayDuplicate.remove(new String[]{"Привет", "Мир", "Привет", "Супер", "Мир"});
-		String[] expected = {"Привет", "Мир", "Супер"};
+		String[] result = arrayDuplicate.remove(new String[]{"Hello", "World", "Hello", "Super", "World"});
+		String[] expected = {"Hello", "World", "Super"};
 		assertThat(result, is(expected));
 	}
 }
