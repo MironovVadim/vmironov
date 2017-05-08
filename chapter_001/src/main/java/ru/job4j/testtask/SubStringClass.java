@@ -27,6 +27,7 @@ public class SubStringClass {
 				for (int j = i + 1, t = 1; t < subArray.length; j++, t++) {
 					if (originArray[j] != subArray[t]) {
 						isContains = false;
+						break;
 					}
 				}
 				if (isContains) {
