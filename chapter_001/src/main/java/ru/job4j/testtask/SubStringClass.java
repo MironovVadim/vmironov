@@ -23,12 +23,15 @@ public class SubStringClass {
 		char[] subArray = sub.toCharArray();
 		label: for (int i = 0; i < originArray.length - subArray.length; i++) {
 			if (originArray[i] == subArray[0]) {
+				boolean isContains = true;
 				for (int j = i + 1, t = 1; t < subArray.length; j++, t++) {
 					if (originArray[j] != subArray[t]) {
-						continue label;
+						isContains = false;
 					}
 				}
-				return true;
+				if (isContains) {
+					return true;
+				}
 			}
 		}
 		return false;
