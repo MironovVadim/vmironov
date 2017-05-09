@@ -21,7 +21,7 @@ public class SubStringClass {
 	public boolean contains(String origin, String sub) {
 		char[] originArray = origin.toCharArray();
 		char[] subArray = sub.toCharArray();
-		label: for (int i = 0; i < originArray.length - subArray.length; i++) {
+		for (int i = 0; i < originArray.length - subArray.length; i++) {
 			if (originArray[i] == subArray[0]) {
 				boolean isContains = true;
 				for (int j = i + 1, t = 1; t < subArray.length; j++, t++) {
