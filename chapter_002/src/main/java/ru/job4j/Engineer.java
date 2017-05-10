@@ -8,42 +8,25 @@
 
 package ru.job4j;
 
-import java.io.File;
-
 /**
  * Class with Engineer person.
  */
 public class Engineer extends Profession {
     /**
-     * Category of engineer.
-     */
-    private int category;
-    /**
      * Constructor.
      * @param name - name of engineer
-     * @param surname - surname of engineer
      * @param speciality - speciality of engineer
-     * @param category - category of engineer
      */
-    public Engineer(String name, String surname, String speciality, int category) {
-        super(name, surname, speciality);
-        this.category = Math.abs(category);
+    public Engineer(String name, String speciality) {
+        super(name, speciality);
     }
     /**
-     * Category getter.
-     * @return int - category
+     * Repair an equipment.
+     *  @param profession - person with equipment to repair
+     *  @return String - result of repairing
      */
-    public int getCategory() {
-        return category;
-    }
-    /**
-     * Making a document.
-     *  @param subject - theme of document
-     *  @return File - file with document
-     */
-    public File makeADocument(String subject) {
-        File file = new File(subject);
-        return file;
+    public String repairEquipment(Profession profession) {
+        return String.format("%s %s ремонтирует инструменты у %s", getSpeciality(), getName(), profession.getName());
     }
 
 

@@ -17,32 +17,11 @@ public class DoctorTest {
      * Test method.
      */
     @Test
-    public void whenAddnewClientThenTrue() {
-        Doctor doctor = new Doctor("Сергей", "Булыжников", "Хирург");
-        boolean result = true;
-        boolean expected = doctor.addNewClient("Какой то пациент");
-        assertThat(result, is(expected));
-    }
-    /**
-     * Test method.
-     */
-    @Test
-    public void whenServeNextClientThenSuccessString() {
-        Doctor doctor = new Doctor("Сергей", "Булыжников", "Хирург");
-        String client = "Андрей Некто";
-        doctor.addNewClient(client);
-        String result = String.format("Доктор %s %s вылечил пациента %s", doctor.getName(), doctor.getSurname(), client);
-        String expected = doctor.serveNextClient();
-        assertThat(result, is(expected));
-    }
-    /**
-     * Test method.
-     */
-    @Test
-    public void whenServeNextClientThenGoHomeString() {
-        Doctor doctor = new Doctor("Сергей", "Булыжников", "Хирург");
-        String result = "Все излечены, пора идти домой.";
-        String expected = doctor.serveNextClient();
+    public void whenHealVladClientThenHeHealed() {
+        Doctor doctor = new Doctor("Сергей", "Хирург");
+        Profession engineer = new Engineer("Влад", "Судостроитель");
+        String result = doctor.heal(engineer);
+        String expected = String.format("%s %s лечит %s", doctor.getSpeciality(), doctor.getName(), engineer.getName());
         assertThat(result, is(expected));
     }
 }

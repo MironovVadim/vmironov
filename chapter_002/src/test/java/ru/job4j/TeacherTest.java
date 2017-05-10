@@ -17,24 +17,12 @@ public class TeacherTest {
      * Test method.
      */
     @Test
-    public void whenPutTwoPupilsThenCheckTheirHomeWork() {
-        Teacher teacher = new Teacher("Сергей", "Булыжников", "Историк");
-        String[] pupils = {"Андрей Некто", "Сергей Некто"};
-        StringBuilder sb = new StringBuilder(String.format("%s %s проверил(а) домашние задания у следующих учеников: %s, %s", teacher.getName(), teacher.getSurname(), pupils[0], pupils[1]));
-        String result = sb.toString();
-        String expected = teacher.checkHomeWork(pupils);
+    public void whenTeachSergeiThenTeachingHim() {
+        Teacher teacher = new Teacher("Владимир", "Историк");
+        Profession doctor = new Doctor("Сергей", "Хирург");
+        String result = teacher.teach(doctor);
+        String expected = String.format("%s %s учит %s", teacher.getSpeciality(), teacher.getName(), doctor.getName());
         assertThat(result, is(expected));
-    }
-    /**
-     * Test method.
-     */
-    @Test
-    public void whenPutTwoPupilsThenConductALesson() {
-        Teacher teacher = new Teacher("Сергей", "Булыжников", "Историк");
-        String[] pupils = {"Андрей Некто", "Сергей Некто"};
-        StringBuilder sb = new StringBuilder(String.format("%s %s провел(а) занятия у следующих учеников: %s, %s", teacher.getName(), teacher.getSurname(), pupils[0], pupils[1]));
-        String result = sb.toString();
-        String expected = teacher.conductALesson(pupils);
-        assertThat(result, is(expected));
+
     }
 }

@@ -17,20 +17,11 @@ public class EngineerTest {
      * Test method.
      */
     @Test
-    public void whenSomeStringThenFileWithThisString() {
-        Engineer engineer = new Engineer("Сергей", "Булыжников", "Кораблестроитель", 3);
-        String result = "План управления балластом";
-        String expected = engineer.makeADocument(result).getName();
-        assertThat(result, is(expected));
-    }
-    /**
-     * Test method.
-     */
-    @Test
-    public void whenNegativeTwoThenTwo() {
-        Engineer engineer = new Engineer("Сергей", "Булыжников", "Кораблестроитель", -2);
-        int result = 2;
-        int expected = engineer.getCategory();
+    public void whenRepairSomeThingsThenStringWithGoodResult() {
+        Engineer engineer = new Engineer("Сергей", "Электрик");
+        Profession doctor = new Doctor("Стас", "Дантист");
+        String result = engineer.repairEquipment(doctor);
+        String expected = String.format("%s %s ремонтирует инструменты у %s", engineer.getSpeciality(), engineer.getName(), doctor.getName());
         assertThat(result, is(expected));
     }
 }

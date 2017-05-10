@@ -17,22 +17,16 @@ public class Profession {
      */
     private String name;
     /**
-     * surname of person.
-     */
-    private String surname;
-    /**
      * speciality of person.
      */
     private String speciality;
     /**
      * Constructor.
      * @param name - name of person
-     * @param surname - surname of person
      * @param speciality - speciality of person
      */
-    public Profession(String name, String surname, String speciality) {
+    public Profession(String name, String speciality) {
         this.name = name;
-        this.surname = surname;
         this.speciality = speciality;
     }
     /**
@@ -41,13 +35,6 @@ public class Profession {
      */
     public String getName() {
         return name;
-    }
-    /**
-     * Surname getter.
-     * @return String - surname of person
-     */
-    public String getSurname() {
-        return surname;
     }
     /**
      * Speciality getter.

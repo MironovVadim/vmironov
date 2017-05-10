@@ -1,41 +1,34 @@
+/**
+ * Class Doctor.
+ *
+ * @author Vadim Mironov (multik6292@mail.ru/mironov6292@gmail.ru)
+ * @version $Id$
+ * @since 0.1
+ */
+
 package ru.job4j;
 
 /**
- * Created by ПК on 09.05.2017.
+ * Class Teacher.
  */
 public class Teacher extends Profession {
     /**
      * Constructor.
      * @param name - name of teacher
-     * @param surname - surname of teacher
      * @param speciality - speciality of teacher
      */
-    public Teacher(String name, String surname, String speciality) {
-        super(name, surname, speciality);
+    public Teacher(String name, String speciality) {
+        super(name, speciality);
     }
     /**
-     * Checking home work.
-     * @param pupils - massif of pupils
-     * @return String - result of checking
+     * Teaching a person.
+     * @param profession - person for teaching
+     * @return String - result of teaching
      */
-    public String checkHomeWork(String[] pupils) {
-        StringBuilder sb = new StringBuilder(String.format("%s %s проверил(а) домашние задания у следующих учеников: ", getName(), getSurname()));
-        for (String pupil : pupils) {
-            sb.append(pupil + ", ");
-        }
-        return sb.toString().substring(0, sb.length() - 2);
+    public String teach(Profession profession) {
+        return String.format("%s %s учит %s", getSpeciality(), getName(), profession.getName());
     }
-    /**
-     * Conducting a lesson.
-     * @param pupils - massif of pupils
-     * @return String - result of conducting a lesson
-     */
-    public String conductALesson(String[] pupils) {
-        StringBuilder sb = new StringBuilder(String.format("%s %s провел(а) занятия у следующих учеников: ", getName(), getSurname()));
-        for (String pupil : pupils) {
-            sb.append(pupil + ", ");
-        }
-        return sb.toString().substring(0, sb.length() - 2);
-    }
+
+
 
 }
