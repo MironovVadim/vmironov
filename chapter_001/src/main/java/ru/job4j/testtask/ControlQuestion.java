@@ -1,7 +1,14 @@
+/**
+ * Class with answers and questions.
+ *
+ * @author Vadim Mironov (multik6292@mail.ru/mironov6292@gmail.ru)
+ * @version $Id$
+ * @since 0.1
+ */
 package ru.job4j.testtask;
 
 /**
- * Created by ПК on 13.05.2017.
+ * Some class.
  */
 public class ControlQuestion {
     /**
@@ -30,7 +37,7 @@ public class ControlQuestion {
      * Имеются вложенные друг в друга циклы, как грамотно вернуться из внутренеего во внешний без меток?
      * Ниже код, который был принят по проекту в тестовом задании "Создать программу проверяющую, что строка sub является подстрокой origin.".
      * Еще ниже код с использованием меток.
-     */
+
     public boolean contains(String origin, String sub) {
         char[] originArray = origin.toCharArray();
         char[] subArray = sub.toCharArray();
@@ -50,10 +57,11 @@ public class ControlQuestion {
         }
         return false;
     }
+    */
 
     /**
      * Такой вариант с меткой я изначально написал.
-     */
+
     public boolean containsWithLable(String origin, String sub) {
         char[] originArray = origin.toCharArray();
         char[] subArray = sub.toCharArray();
@@ -69,4 +77,5 @@ public class ControlQuestion {
         }
         return false;
     }
+     */
 }
