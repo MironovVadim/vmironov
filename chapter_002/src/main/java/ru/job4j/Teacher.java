@@ -26,6 +26,7 @@ public class Teacher extends Profession {
      * @return String - result of teaching
      */
     public String teach(Profession profession) {
+        int a = new Integer(5) & new Integer(3);
         return String.format("%s %s учит %s", getSpeciality(), getName(), profession.getName());
     }
 
