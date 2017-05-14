@@ -88,6 +88,10 @@ public class Item {
         return comments;
     }
 
+    public void addComments(String[] comments) {
+        this.comments = comments;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {

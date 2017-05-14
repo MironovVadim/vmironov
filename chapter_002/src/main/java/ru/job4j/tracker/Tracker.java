@@ -21,8 +21,10 @@ public class Tracker {
      * index of first null element in items[].
      */
     private int index = 0;
+
     /**
      * Adding new Item element.
+     *
      * @param item - Item element to add in items[]
      * @return Item - added element
      */
@@ -32,8 +34,10 @@ public class Tracker {
         }
         return item;
     }
+
     /**
      * Update item by item.getId().
+     *
      * @param item - item with update id
      */
     public void update(Item item) {
@@ -44,8 +48,10 @@ public class Tracker {
             }
         }
     }
+
     /**
      * Deleting item and offset elements to left.
+     *
      * @param item - item for deleting
      */
     public void delete(Item item) {
@@ -58,15 +64,19 @@ public class Tracker {
             }
         }
     }
+
     /**
      * Searching all items in items without null items.
+     *
      * @return all not null items from items[]
      */
     public Item[] findAll() {
         return Arrays.copyOf(items, index);
     }
+
     /**
      * Searching all items that equals key.
+     *
      * @param key - name of search items
      * @return all found items with name that equals key
      */
@@ -80,8 +90,10 @@ public class Tracker {
         }
         return Arrays.copyOf(itemMassif, indexOfItemMassif);
     }
+
     /**
      * Searching item by id.
+     *
      * @param id - id of search item
      * @return found item with id
      */
@@ -92,25 +104,5 @@ public class Tracker {
             }
         }
         return null;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-
-        Tracker tracker = (Tracker) o;
-
-        // Probably incorrect - comparing Object[] arrays with Arrays.equals
-        return Arrays.equals(items, tracker.items);
-    }
-
-    @Override
-    public int hashCode() {
-        return Arrays.hashCode(items);
     }
 }
