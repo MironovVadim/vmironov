@@ -45,6 +45,7 @@ public class Item {
         this.id = Integer.toString(countOfObjects++);
         this.name = name;
         this.desc = desc;
+        this.created = System.currentTimeMillis();
     }
 
     /**
