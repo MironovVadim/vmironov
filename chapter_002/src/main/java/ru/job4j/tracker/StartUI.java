@@ -1,5 +1,5 @@
 /**
- * Class StartUi - UI for control class Tracker.
+ * Class StartUI - UI for control class Tracker.
  *
  * @author Vadim Mironov (multik6292@mail.ru/mironov6292@gmail.ru)
  * @version $Id$
@@ -9,9 +9,9 @@
 package ru.job4j.tracker;
 
 /**
- * Class StartUi.
+ * Class StartUI.
  */
-public class StartUi {
+public class StartUI {
     /**
      * Method main.
      * @param args - args

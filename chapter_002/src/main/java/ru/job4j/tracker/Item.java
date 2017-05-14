@@ -38,8 +38,8 @@ public class Item {
 
     /**
      * Constructor.
-     * @param desc - description of object
      * @param name - name of object
+     * @param desc - description of object
      */
     public Item(String name, String desc) {
         this.id = Integer.toString(countOfObjects++);
