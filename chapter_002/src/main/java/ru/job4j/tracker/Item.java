@@ -12,6 +12,10 @@ package ru.job4j.tracker;
  */
 public class Item {
     /**
+     * Item objects count.
+     */
+    private static int countOfObjects = 0;
+    /**
      * Id.
      */
     private String id;
@@ -34,12 +38,13 @@ public class Item {
 
     /**
      * Constructor.
-     * @param id - id of this object
+     * @param desc - description of object
      * @param name - name of object
      */
-    public Item(String id, String name) {
-        this.id = id;
+    public Item(String name, String desc) {
+        this.id = Integer.toString(countOfObjects++);
         this.name = name;
+        this.desc = desc;
     }
 
     /**
@@ -104,5 +109,14 @@ public class Item {
         int result = id != null ? id.hashCode() : 0;
         result = 31 * result + (name != null ? name.hashCode() : 0);
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return "Item{"
+                + "id='" + id + '\''
+                + ", name='" + name + '\''
+                + ", desc='" + desc + '\''
+                + '}';
     }
 }

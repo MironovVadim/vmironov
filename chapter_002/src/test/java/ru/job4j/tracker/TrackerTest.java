@@ -23,7 +23,7 @@ public class TrackerTest {
     @Test
     public void whenAddItemThenGetThisItem() {
         Tracker tracker = new Tracker();
-        Item expected = new Item("5", "someName");
+        Item expected = new Item("SomeName", "someDesc");
         Item result = tracker.add(expected);
         assertThat(result, is(expected));
     }
@@ -33,8 +33,8 @@ public class TrackerTest {
     @Test
     public void whenUseMethodThenMassifWithoutNullElements() {
         Tracker tracker = new Tracker();
-        Item item1 = new Item("0", "SomeItem");
-        Item item2 = new Item("1", "SomeItem");
+        Item item1 = new Item("SomeName1", "SomeDesc1");
+        Item item2 = new Item("SomeName2", "SomeDesc2");
         tracker.add(item1);
         tracker.add(item2);
         Item[] result = tracker.findAll();
@@ -47,9 +47,9 @@ public class TrackerTest {
     @Test
     public void whenSearchSomeItemThenGetMassifWithTwoItems() {
         Tracker tracker = new Tracker();
-        Item item1 = new Item("0", "SomeItem");
-        Item item2 = new Item("1", "SomeItem");
-        Item item3 = new Item("2", "NotSomeItem");
+        Item item1 = new Item("SomeItem", "SomeDesc");
+        Item item2 = new Item("SomeItem", "SomeDescToo");
+        Item item3 = new Item("SomeOtherItem", "SomeDesc2");
         tracker.add(item1);
         tracker.add(item2);
         tracker.add(item3);
@@ -64,16 +64,16 @@ public class TrackerTest {
     @Test
     public void whenSearchByTwoThenGetItemWithIdTwo() {
         Tracker tracker = new Tracker();
-        Item item0 = new Item("0", "SomeItem0");
-        Item item1 = new Item("1", "SomeItem1");
-        Item item2 = new Item("2", "SomeItem2");
-        Item item3 = new Item("3", "SomeItem3");
+        Item item0 = new Item("SomeItem0", "SomeDesc");
+        Item item1 = new Item("SomeItem1", "SomeDesc");
+        Item item2 = new Item("SomeItem2", "SomeDesc");
+        Item item3 = new Item("SomeItem3", "SomeDesc");
         tracker.add(item0);
         tracker.add(item1);
         tracker.add(item2);
         tracker.add(item3);
-        Item result = tracker.findById("2");
-        Item expected = item2;
+        Item result = tracker.findById("7");
+        Item expected = item3;
         assertThat(result, is(expected));
     }
 }
