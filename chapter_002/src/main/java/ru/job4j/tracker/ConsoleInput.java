@@ -12,7 +12,7 @@ import java.util.Scanner;
 /**
  * Class ConsoleInput.
  */
-public class ConsoleInput {
+public class ConsoleInput implements Input {
     /**
      * Scanner.
      */
@@ -23,6 +23,7 @@ public class ConsoleInput {
      * @param question - String for printing in console
      * @return String - user input
      */
+    @Override
     public String ask(String question) {
         System.out.println(question);
         return scanner.nextLine();
