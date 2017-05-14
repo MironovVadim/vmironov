@@ -12,10 +12,23 @@ package ru.job4j.tracker;
  * Class StartUI.
  */
 public class StartUI {
+    /**
+     * Input of StartUI class.
+     */
     private Input input;
+    /**
+     * Tracker object.
+     */
+    private Tracker tracker;
 
-    public StartUI(Input input) {
+    /**
+     * Constructor.
+     * @param input - set input
+     * @param tracker - tracker object
+     */
+    public StartUI(Input input, Tracker tracker) {
         this.input = input;
+        this.tracker = tracker;
     }
 
     /**
@@ -24,11 +37,14 @@ public class StartUI {
      */
     public static void main(String[] args) {
         Input input = new ConsoleInput();
-        new StartUI(input).init();
+        Tracker tracker = new Tracker();
+        new StartUI(input, tracker).init();
     }
 
+    /**
+     * Start program method.
+     */
     public void init() {
-        Tracker tracker = new Tracker();
         String allCommands = "0. Add new Item\n"
                 + "1. Show all items\n"
                 + "2. Edit item\n"

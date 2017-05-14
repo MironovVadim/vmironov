@@ -88,7 +88,11 @@ public class Item {
         return comments;
     }
 
-    public void addComments(String[] comments) {
+    /**
+     * Set any comments.
+     * @param comments - comments of item
+     */
+    public void setComments(String[] comments) {
         this.comments = comments;
     }
 

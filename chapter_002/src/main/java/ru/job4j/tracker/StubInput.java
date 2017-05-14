@@ -11,6 +11,25 @@ package ru.job4j.tracker;
  * StubInput class.
  */
 public class StubInput implements Input {
+
+    /**
+     * Massif of command and other strings.
+     */
+    private String[] answers;
+
+    /**
+     * Index of answers.
+     */
+    private int index = 0;
+
+    /**
+     * Constructor.
+     * @param answers - answers of command and other strings
+     */
+    public StubInput(String[] answers) {
+        this.answers = answers;
+    }
+
     /**
      * Method for printing param and returning user input.
      * @param question - String for printing in console
@@ -18,6 +37,9 @@ public class StubInput implements Input {
      */
     @Override
     public String ask(String question) {
-        return null;
+        if (index >= answers.length) {
+            return "6";
+        }
+        return answers[index++];
     }
 }

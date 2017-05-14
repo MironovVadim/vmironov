@@ -62,7 +62,7 @@ public class TrackerTest {
      * Test findById(String id) method.
      */
     @Test
-    public void whenSearchByTwoThenGetItemWithIdTwo() {
+    public void whenSearchByFourThenGetItemWithIdFour() {
         Tracker tracker = new Tracker();
         Item item0 = new Item("SomeItem0", "SomeDesc");
         Item item1 = new Item("SomeItem1", "SomeDesc");
@@ -72,7 +72,7 @@ public class TrackerTest {
         tracker.add(item1);
         tracker.add(item2);
         tracker.add(item3);
-        Item result = tracker.findById("7");
+        Item result = tracker.findById(item3.getId());
         Item expected = item3;
         assertThat(result, is(expected));
     }
