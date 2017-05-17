@@ -27,7 +27,7 @@ public class SquareTest {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(baos));
         Shape shape = new Square();
-        new Paint().draw(shape);
+        new Paint(shape).draw();
         StringBuilder sb = new StringBuilder();
         sb.append("0000" + System.lineSeparator()).append("0  0" + System.lineSeparator()).
                 append("0  0" + System.lineSeparator()).append("0  0" + System.lineSeparator()).append("0000");

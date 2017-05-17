@@ -11,11 +11,20 @@ package ru.job4j.strategy;
  * Class Paint.
  */
 public class Paint {
+    private Shape shape;
+
     /**
-     * Draw shape.
+     * Constructor.
      * @param shape - shape for drawing
      */
-    public void draw(Shape shape) {
+    public Paint(Shape shape) {
+        this.shape = shape;
+    }
+
+    /**
+     * Draw shape.
+     */
+    public void draw() {
         System.out.print(shape.pic());
     }
 }

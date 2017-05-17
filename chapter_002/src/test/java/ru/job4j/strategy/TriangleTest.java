@@ -27,7 +27,7 @@ public class TriangleTest {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(baos));
         Shape shape = new Triangle();
-        new Paint().draw(shape);
+        new Paint(shape).draw();
         StringBuilder sb = new StringBuilder();
         sb.append("00000" + System.lineSeparator()).append(" 000 " + System.lineSeparator()).append("  0  ");
         assertThat(baos.toString(), is(sb.toString()));
