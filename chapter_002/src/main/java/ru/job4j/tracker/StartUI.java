@@ -8,10 +8,41 @@
 
 package ru.job4j.tracker;
 
+import java.util.StringJoiner;
+
 /**
  * Class StartUI.
  */
 public class StartUI {
+    /**
+     * Add command.
+     */
+    private static final String ADD = "0";
+    /**
+     * Show all command.
+     * Show all items without null elements.
+     */
+    private static final String SHOW_ALL = "1";
+    /**
+     * Update command.
+     */
+    private static final String UPDATE = "2";
+    /**
+     * Delete command.
+     */
+    private static final String DELETE = "3";
+    /**
+     * Find by id command.
+     */
+    private static final String FIND_BY_ID = "4";
+    /**
+     * Find by name command.
+     */
+    private static final String FIND_BY_NAME = "5";
+    /**
+     * Exit command.
+     */
+    private static final String EXIT = "6";
     /**
      * Input of StartUI class.
      */
@@ -45,47 +76,45 @@ public class StartUI {
      * Start program method.
      */
     public void init() {
-        String allCommands = "0. Add new Item\n"
-                + "1. Show all items\n"
-                + "2. Edit item\n"
-                + "3. Delete item\n"
-                + "4. Find item by Id\n"
-                + "5. Find items by name\n"
-                + "6. Exit Program\n"
-                + "Select:";
-        System.out.println(allCommands);
+        StringJoiner stringJoiner = new StringJoiner("\n");
+        stringJoiner.add("0. Add new Item").add("1. Show all items").add("2. Edit item").add("3. Delete item");
+        stringJoiner.add("4. Find item by Id").add("5. Find items by name").add("6. Exit program").add("Select:");
+        System.out.println(stringJoiner.toString());
         while (true) {
             String command = input.ask("Введите номер команды: ");
-            if (command.equals("0")) {
+            if (command.equals(ADD)) {
                 String name = input.ask("Введите имя пользователя: ");
                 String desc = input.ask("Введите описание заявки: ");
                 Item item = new Item(name, desc);
                 tracker.add(item);
                 System.out.println("Заявка успешно добавлена.");
-            } else if (command.equals("1")) {
+            } else if (command.equals(SHOW_ALL)) {
                 for (Item item : tracker.findAll()) {
                     System.out.println(item);
                 }
-            } else if (command.equals("2")) {
-                tracker.findAll(); // строка для прохождения валидации
-                /**
-                 * Как нам отредактировать экземпляр заявки, если id всегда уникальный
-                 * и создать второй экземпляр с таким же id нельзя? Или id задаем вручную?
-                 */
-            } else if (command.equals("3")) {
-                tracker.findAll(); // строка для прохождения валидации
-                // Тот же вопрос по полю id
-            } else if (command.equals("4")) {
+            } else if (command.equals(UPDATE)) {
+                String id = input.ask("Введите id заявки, которую хотите обновить: ");
+                String name = input.ask("Введите имя заявки: ");
+                String desc = input.ask("Введите описание заявки: ");
+                Item item = new Item(name, desc);
+                item.setId(id);
+                tracker.update(item);
+            } else if (command.equals(DELETE)) {
+                String id = input.ask("Введите id заявки, которую хотите удалить: ");
+                Item item = new Item(null, null);
+                item.setId(id);
+                tracker.delete(item);
+            } else if (command.equals(FIND_BY_ID)) {
                 String id = input.ask("Введите id заявки: ");
                 Item result = tracker.findById(id);
                 System.out.println(result.toString());
-            } else if (command.equals("5")) {
+            } else if (command.equals(FIND_BY_NAME)) {
                 String name = input.ask("Введите название заявки: ");
                 Item[] result = tracker.findByName(name);
                 for (Item item : result) {
                     System.out.println(item.toString());
                 }
-            } else if (command.equals("6")) {
+            } else if (command.equals(EXIT)) {
                 System.out.println("Close the program.");
                 break;
             } else {

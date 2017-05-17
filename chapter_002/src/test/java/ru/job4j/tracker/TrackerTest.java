@@ -27,6 +27,36 @@ public class TrackerTest {
         Item result = tracker.add(expected);
         assertThat(result, is(expected));
     }
+
+    /**
+     *  Test update() method.
+     */
+    @Test
+    public void whenUpdateItem() {
+        Tracker tracker = new Tracker();
+        Item itemForUpdate = new Item("someName", "someDesc");
+        Item updatedItem = new Item("updatedName", "updatedDesc");
+        updatedItem.setId(itemForUpdate.getId());
+        tracker.add(itemForUpdate);
+        tracker.update(updatedItem);
+        Item result = tracker.findById(itemForUpdate.getId());
+        Item expected = updatedItem;
+        assertThat(result, is(expected));
+    }
+
+    /**
+     * Test delete() method.
+     */
+    @Test
+    public void whenDeleteItemThenGetNull() {
+        Tracker tracker = new Tracker();
+        Item item = new Item("someName", "someDesc");
+        tracker.add(item);
+        tracker.delete(item);
+        Item result = tracker.findById(item.getId());
+        Item expected = null;
+        assertThat(result, is(expected));
+    }
     /**
      * Test findAll() method.
      */
@@ -45,7 +75,7 @@ public class TrackerTest {
      * Test findByName(String key) method.
      */
     @Test
-    public void whenSearchSomeItemThenGetMassifWithTwoItems() {
+    public void whenSearchSomeItemByNameThenGetMassifWithTwoItems() {
         Tracker tracker = new Tracker();
         Item item1 = new Item("SomeItem", "SomeDesc");
         Item item2 = new Item("SomeItem", "SomeDescToo");
@@ -62,18 +92,26 @@ public class TrackerTest {
      * Test findById(String id) method.
      */
     @Test
-    public void whenSearchByFourThenGetItemWithIdFour() {
+    public void whenSearchByIdThenGetItemWithThisID() {
         Tracker tracker = new Tracker();
-        Item item0 = new Item("SomeItem0", "SomeDesc");
-        Item item1 = new Item("SomeItem1", "SomeDesc");
-        Item item2 = new Item("SomeItem2", "SomeDesc");
-        Item item3 = new Item("SomeItem3", "SomeDesc");
-        tracker.add(item0);
-        tracker.add(item1);
-        tracker.add(item2);
-        tracker.add(item3);
-        Item result = tracker.findById(item3.getId());
-        Item expected = item3;
+        Item item = new Item("SomeItem", "SomeDesc");
+        tracker.add(item);
+        Item result = tracker.findById(item.getId());
+        Item expected = item;
         assertThat(result, is(expected));
     }
+
+    /**
+     * Test findById(String id) method.
+     */
+    @Test
+    public void whenSearchByIdThenGetNull() {
+        Tracker tracker = new Tracker();
+        Item item = new Item("SomeItem", "SomeDesc");
+        tracker.add(item);
+        Item result = tracker.findById("SomeId");
+        Item expected = null;
+        assertThat(result, is(expected));
+    }
+
 }

@@ -7,10 +7,16 @@
  */
 package ru.job4j.tracker;
 
+import java.util.Random;
+
 /**
  * Class Item.
  */
 public class Item {
+    /**
+     * Random number to generate item id.
+     */
+    private static Random random = new Random();
     /**
      * Item objects count.
      */
@@ -42,7 +48,7 @@ public class Item {
      * @param desc - description of object
      */
     public Item(String name, String desc) {
-        this.id = Integer.toString(countOfObjects++);
+        this.id = generateId();
         this.name = name;
         this.desc = desc;
         this.created = System.currentTimeMillis();
@@ -50,10 +56,18 @@ public class Item {
 
     /**
      * Id getter.
-     * @return String - id
+     * @return String - item id
      */
     public String getId() {
         return id;
+    }
+
+    /**
+     * Id setter.
+     * @param id -  item id
+     */
+    public void setId(String id) {
+        this.id = id;
     }
 
     /**
@@ -94,6 +108,14 @@ public class Item {
      */
     public void setComments(String[] comments) {
         this.comments = comments;
+    }
+
+    /**
+     * Generator item id.
+     * @return String - item id
+     */
+    private String generateId() {
+        return Long.toString(System.currentTimeMillis() + random.nextInt(100));
     }
 
     @Override
