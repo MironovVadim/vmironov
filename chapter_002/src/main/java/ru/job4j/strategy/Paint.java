@@ -11,8 +11,10 @@ package ru.job4j.strategy;
  * Class Paint.
  */
 public class Paint {
+    /**
+     * Realised interface.
+     */
     private Shape shape;
-
     /**
      * Constructor.
      * @param shape - shape for drawing

@@ -36,6 +36,7 @@ public class Tracker {
     }
 
     /**
+     *
      * Update item by item.getId().
      *
      * @param item - item with update id
@@ -98,11 +99,13 @@ public class Tracker {
      * @return found item with id
      */
     public Item findById(String id) {
+        Item result = null;
         for (int i = 0; i < index; i++) {
             if (items[i].getId().equals(id)) {
-                return items[i];
+                result = items[i];
+                break;
             }
         }
-        return null;
+        return result;
     }
 }

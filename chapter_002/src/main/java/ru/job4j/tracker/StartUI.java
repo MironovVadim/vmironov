@@ -76,7 +76,7 @@ public class StartUI {
      * Start program method.
      */
     public void init() {
-        StringJoiner stringJoiner = new StringJoiner("\n");
+        StringJoiner stringJoiner = new StringJoiner(System.lineSeparator());
         stringJoiner.add("0. Add new Item").add("1. Show all items").add("2. Edit item").add("3. Delete item");
         stringJoiner.add("4. Find item by Id").add("5. Find items by name").add("6. Exit program").add("Select:");
         System.out.println(stringJoiner.toString());
@@ -107,7 +107,9 @@ public class StartUI {
             } else if (command.equals(FIND_BY_ID)) {
                 String id = input.ask("Введите id заявки: ");
                 Item result = tracker.findById(id);
-                System.out.println(result.toString());
+                if (result != null) {
+                    System.out.println(result.toString());
+                }
             } else if (command.equals(FIND_BY_NAME)) {
                 String name = input.ask("Введите название заявки: ");
                 Item[] result = tracker.findByName(name);
