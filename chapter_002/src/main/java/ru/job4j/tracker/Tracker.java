@@ -57,11 +57,11 @@ public class Tracker {
      */
     public void delete(Item item) {
         for (int i = 0; i < index; i++) {
-            if (items[i].getId().equals(item.getId())) {
+            if (item.getId().equals(items[i].getId())) {
                 for (int j = i; j < index - 1; j++) {
                     items[j] = items[j + 1];
                 }
-                items[--index] = null;
+                index--;
             }
         }
     }
@@ -85,7 +85,7 @@ public class Tracker {
         Item[] itemMassif = new Item[items.length];
         int indexOfItemMassif = 0;
         for (int i = 0; i < index; i++) {
-            if (items[i].getName().equals(key)) {
+            if (key.equals(items[i].getName())) {
                 itemMassif[indexOfItemMassif++] = items[i];
             }
         }
@@ -101,7 +101,7 @@ public class Tracker {
     public Item findById(String id) {
         Item result = null;
         for (int i = 0; i < index; i++) {
-            if (items[i].getId().equals(id)) {
+            if (id.equals(items[i].getId())) {
                 result = items[i];
                 break;
             }
