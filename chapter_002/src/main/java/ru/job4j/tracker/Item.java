@@ -18,10 +18,6 @@ public class Item {
      */
     private static Random random = new Random();
     /**
-     * Item objects count.
-     */
-    private static int countOfObjects = 0;
-    /**
      * Id.
      */
     private String id;

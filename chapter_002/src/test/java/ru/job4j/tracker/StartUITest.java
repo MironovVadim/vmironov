@@ -48,8 +48,9 @@ public class StartUITest {
         new StartUI(input, tracker).init();
         StringJoiner stringJoiner = new StringJoiner(System.lineSeparator());
         stringJoiner.add("0. Add new Item").add("1. Show all items").add("2. Edit item").add("3. Delete item");
-        stringJoiner.add("4. Find item by Id").add("5. Find items by name").add("6. Exit program").add("Select:");
-        stringJoiner.add(item.toString()).add(item1.toString()).add("Close the program.").add("");
+        stringJoiner.add("4. Find item by id").add("5. Find items by name").add("6. Exit program").add("Select: ");
+        String menu = stringJoiner.toString();
+        stringJoiner.add(item.toString()).add(item1.toString()).add(menu).add("");
         String expected = stringJoiner.toString();
         assertThat(baos.toString(), is(expected));
     }
@@ -106,9 +107,9 @@ public class StartUITest {
         tracker.add(itemForDel);
         String[] answers = new String[]{"3", "NonexistentId", "6"};
         Input input = new StubInput(answers);
-        Item expected = itemForDel;
+        int expected = 1;
         new StartUI(input, tracker).init();
-        assertThat(tracker.findAll()[0], is(expected));
+        assertThat(tracker.findAll().length, is(expected));
     }
     /**
      * Test findById() method.
@@ -125,8 +126,9 @@ public class StartUITest {
         new StartUI(input, tracker).init();
         StringJoiner stringJoiner = new StringJoiner(System.lineSeparator());
         stringJoiner.add("0. Add new Item").add("1. Show all items").add("2. Edit item").add("3. Delete item");
-        stringJoiner.add("4. Find item by Id").add("5. Find items by name").add("6. Exit program").add("Select:");
-        stringJoiner.add("Close the program.").add("");
+        stringJoiner.add("4. Find item by id").add("5. Find items by name").add("6. Exit program").add("Select: ");
+        String menu = stringJoiner.toString();
+        stringJoiner.add("Введите id заявки: ").add("Заявки с заданым id несущетсвует.").add(menu).add("");
         String expected = stringJoiner.toString();
         assertThat(baos.toString(), is(expected));
     }
@@ -145,8 +147,9 @@ public class StartUITest {
         new StartUI(input, tracker).init();
         StringJoiner stringJoiner = new StringJoiner(System.lineSeparator());
         stringJoiner.add("0. Add new Item").add("1. Show all items").add("2. Edit item").add("3. Delete item");
-        stringJoiner.add("4. Find item by Id").add("5. Find items by name").add("6. Exit program").add("Select:");
-        stringJoiner.add(item.toString()).add("Close the program.").add("");
+        stringJoiner.add("4. Find item by id").add("5. Find items by name").add("6. Exit program").add("Select: ");
+        String menu = stringJoiner.toString();
+        stringJoiner.add("Введите id заявки: ").add(item.toString()).add(menu).add("");
         String expected = stringJoiner.toString();
         assertThat(baos.toString(), is(expected));
     }
@@ -167,8 +170,9 @@ public class StartUITest {
         new StartUI(input, tracker).init();
         StringJoiner stringJoiner = new StringJoiner(System.lineSeparator());
         stringJoiner.add("0. Add new Item").add("1. Show all items").add("2. Edit item").add("3. Delete item");
-        stringJoiner.add("4. Find item by Id").add("5. Find items by name").add("6. Exit program").add("Select:");
-        stringJoiner.add(item.toString()).add(item1.toString()).add("Close the program.").add("");
+        stringJoiner.add("4. Find item by id").add("5. Find items by name").add("6. Exit program").add("Select: ");
+        String menu = stringJoiner.toString();
+        stringJoiner.add("Введите название заявки: ").add(item.toString()).add(item1.toString()).add(menu).add("");
         String expected = stringJoiner.toString();
         assertThat(baos.toString(), is(expected));
     }
@@ -189,8 +193,9 @@ public class StartUITest {
         new StartUI(input, tracker).init();
         StringJoiner stringJoiner = new StringJoiner(System.lineSeparator());
         stringJoiner.add("0. Add new Item").add("1. Show all items").add("2. Edit item").add("3. Delete item");
-        stringJoiner.add("4. Find item by Id").add("5. Find items by name").add("6. Exit program").add("Select:");
-        stringJoiner.add("Close the program.").add("");
+        stringJoiner.add("4. Find item by id").add("5. Find items by name").add("6. Exit program").add("Select: ");
+        String menu = stringJoiner.toString();
+        stringJoiner.add("Введите название заявки: ").add("Заявок с заданным именем не найдено.").add(menu).add("");
         String expected = stringJoiner.toString();
         assertThat(baos.toString(), is(expected));
     }

@@ -37,6 +37,7 @@ public class StubInput implements Input {
      */
     @Override
     public String ask(String question) {
+        System.out.println(question);
         if (index >= answers.length) {
             return "6";
         }
