@@ -70,7 +70,7 @@ public class MenuTracker {
     /**
      * Class with add command.
      */
-    class AddAction implements UserAction {
+    private class AddAction implements UserAction {
         @Override
         public int key() {
             return 0;
@@ -94,7 +94,7 @@ public class MenuTracker {
     /**
      * Class with show all command.
      */
-    static class ShowAllAction implements UserAction {
+    private static class ShowAllAction implements UserAction {
         @Override
         public int key() {
             return 1;
@@ -120,7 +120,7 @@ public class MenuTracker {
     /**
      * Class with edit command.
      */
-    class EditAction implements UserAction {
+    private class EditAction implements UserAction {
         @Override
         public int key() {
             return 2;
@@ -145,7 +145,7 @@ public class MenuTracker {
     /**
      * Class with find by id command.
      */
-    class FindByIdAction implements UserAction {
+    private class FindByIdAction implements UserAction {
         @Override
         public int key() {
             return 4;
@@ -167,7 +167,7 @@ public class MenuTracker {
     /**
      * Class with find by name command.
      */
-    class FindByNameAction implements UserAction {
+    private class FindByNameAction implements UserAction {
         @Override
         public int key() {
             return 5;
