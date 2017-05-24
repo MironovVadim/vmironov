@@ -77,7 +77,7 @@ public class MenuTrackerTest {
         String[] answers = new String[]{"NoSuchId", itemUfterEdit.getName(), itemUfterEdit.getDesc()};
         Input input = new StubInput(answers);
         new MenuTracker(input, tracker).select(2);
-        assertThat(tracker.findAll()[0], is(itemUfterEdit));
+        assertThat(tracker.findAll()[0], is(itemForEdit));
     }
     /**
      * Test DeleteAction class.

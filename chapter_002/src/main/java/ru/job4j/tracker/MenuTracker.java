@@ -22,7 +22,7 @@ public class MenuTracker {
     /**
      * All commands.
      */
-    private UserAction[] actions = new UserAction[6];
+    private UserAction[] actions = new UserAction[7];
 
     /**
      * Constructor.
@@ -40,9 +40,7 @@ public class MenuTracker {
      * @param key - number of operation
      */
     public void select(int key) {
-        if (key >= 0 && key < actions.length) {
             actions[key].execute(input, tracker);
-        }
     }
 
     /**
@@ -55,6 +53,19 @@ public class MenuTracker {
         actions[3] = new DeleteAction();
         actions[4] = this.new FindByIdAction();
         actions[5] = this.new FindByNameAction();
+        actions[6] = this.new ExitAction();
+    }
+
+    /**
+     * Create massif of of command numbers.
+     * @return command massif
+     */
+    public int[] getRange() {
+        int[] range = new int[actions.length];
+        for (int i = 0; i < range.length; i++) {
+            range[i] = i;
+        }
+        return range;
     }
 
     /**
@@ -64,7 +75,6 @@ public class MenuTracker {
         for (UserAction action : actions) {
             System.out.println(action.info());
         }
-        System.out.println("6. Exit program");
     }
 
     /**
@@ -189,6 +199,26 @@ public class MenuTracker {
         @Override
         public String info() {
             return String.format("%s. Find items by name", this.key());
+        }
+    }
+
+    /**
+     * Class with exit command.
+     */
+    private class ExitAction implements UserAction {
+        @Override
+        public int key() {
+            return 6;
+        }
+
+        @Override
+        public void execute(Input input, Tracker tracker) {
+            return;
+        }
+
+        @Override
+        public String info() {
+            return String.format("%s. Exit program", this.key());
         }
     }
 }

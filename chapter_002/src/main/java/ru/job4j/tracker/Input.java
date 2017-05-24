@@ -17,4 +17,12 @@ public interface Input {
      * @return String - user input
      */
     String ask(String question);
+
+    /**
+     * ask() mtethod with test user input.
+     * @param question - String for printing in console
+     * @param range - range of commands
+     * @return number of command
+     */
+    int ask(String question, int[] range);
 }

@@ -13,6 +13,10 @@ package ru.job4j.tracker;
  */
 public class StartUI {
     /**
+     * massif of range of commands.
+     */
+    private int[] range;
+    /**
      * Input of StartUI class.
      */
     private Input input;
@@ -33,6 +37,7 @@ public class StartUI {
         this.input = input;
         this.tracker = tracker;
         menuTracker = new MenuTracker(input, tracker);
+        this.range = menuTracker.getRange();
     }
 
     /**
@@ -40,7 +45,7 @@ public class StartUI {
      * @param args - args
      */
     public static void main(String[] args) {
-        Input input = new ConsoleInput();
+        Input input = new ValidateInput();
         Tracker tracker = new Tracker();
         new StartUI(input, tracker).init();
     }
@@ -52,7 +57,7 @@ public class StartUI {
         int key;
         do {
             menuTracker.showActions();
-            key = Integer.valueOf(input.ask("Select: "));
+            key = input.ask("Select: ", range);
             menuTracker.select(key);
         } while (!"6".equals(Integer.toString(key)));
     }
