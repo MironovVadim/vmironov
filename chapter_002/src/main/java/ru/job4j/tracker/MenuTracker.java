@@ -47,13 +47,13 @@ public class MenuTracker {
      * Method that fill actions[].
      */
     private void fillActions() {
-        actions[0] = this.new AddAction();
-        actions[1] = new MenuTracker.ShowAllAction();
-        actions[2] = this.new EditAction();
-        actions[3] = new DeleteAction();
-        actions[4] = this.new FindByIdAction();
-        actions[5] = this.new FindByNameAction();
-        actions[6] = this.new ExitAction();
+        actions[0] = this.new AddAction("Add new Item", 0);
+        actions[1] = new MenuTracker.ShowAllAction("Show all items", 1);
+        actions[2] = this.new EditAction("Edit item", 2);
+        actions[3] = new DeleteAction("Delete item", 3);
+        actions[4] = this.new FindByIdAction("Find item by id", 4);
+        actions[5] = this.new FindByNameAction("Find items by name", 5);
+        actions[6] = this.new ExitAction("Exit program", 6);
     }
 
     /**
@@ -80,10 +80,19 @@ public class MenuTracker {
     /**
      * Class with add command.
      */
-    private class AddAction implements UserAction {
+    private class AddAction extends BaseAction {
+        /**
+         * Constructor.
+         * @param name - test of action
+         * @param key - number of action
+         */
+        private AddAction(String name, int key) {
+            super(name, key);
+        }
+
         @Override
         public int key() {
-            return 0;
+            return this.key;
         }
 
         @Override
@@ -94,20 +103,24 @@ public class MenuTracker {
             tracker.add(item);
             System.out.println("Заявка успешно добавлена");
         }
-
-        @Override
-        public String info() {
-            return String.format("%s. Add new Item", this.key());
-        }
     }
 
     /**
      * Class with show all command.
      */
-    private static class ShowAllAction implements UserAction {
+    private static class ShowAllAction extends BaseAction {
+        /**
+         * Constructor.
+         * @param name - test of action
+         * @param key - number of action
+         */
+        private ShowAllAction(String name, int key) {
+            super(name, key);
+        }
+
         @Override
         public int key() {
-            return 1;
+            return this.key;
         }
 
         @Override
@@ -120,20 +133,24 @@ public class MenuTracker {
                 System.out.println("Список заявок пуст.");
             }
         }
-
-        @Override
-        public String info() {
-            return String.format("%s. Show all items", this.key());
-        }
     }
 
     /**
      * Class with edit command.
      */
-    private class EditAction implements UserAction {
+    private class EditAction extends BaseAction {
+        /**
+         * Constructor.
+         * @param name - test of action
+         * @param key - number of action
+         */
+        private EditAction(String name, int key) {
+            super(name, key);
+        }
+
         @Override
         public int key() {
-            return 2;
+            return this.key;
         }
 
         @Override
@@ -145,20 +162,24 @@ public class MenuTracker {
             item.setId(id);
             tracker.update(item);
         }
-
-        @Override
-        public String info() {
-            return String.format("%s. Edit item", this.key());
-        }
     }
 
     /**
      * Class with find by id command.
      */
-    private class FindByIdAction implements UserAction {
+    private class FindByIdAction extends BaseAction {
+        /**
+         * Constructor.
+         * @param name - test of action
+         * @param key - number of action
+         */
+        private FindByIdAction(String name, int key) {
+            super(name, key);
+        }
+
         @Override
         public int key() {
-            return 4;
+            return this.key;
         }
 
         @Override
@@ -167,20 +188,24 @@ public class MenuTracker {
             Item result = tracker.findById(id);
             System.out.println(result != null ? result.toString() : "Заявки с заданым id несущетсвует.");
         }
-
-        @Override
-        public String info() {
-            return String.format("%s. Find item by id", this.key());
-        }
     }
 
     /**
      * Class with find by name command.
      */
-    private class FindByNameAction implements UserAction {
+    private class FindByNameAction extends BaseAction {
+        /**
+         * Constructor.
+         * @param name - test of action
+         * @param key - number of action
+         */
+        private FindByNameAction(String name, int key) {
+            super(name, key);
+        }
+
         @Override
         public int key() {
-            return 5;
+            return this.key;
         }
 
         @Override
@@ -195,30 +220,29 @@ public class MenuTracker {
                 System.out.println("Заявок с заданным именем не найдено.");
             }
         }
-
-        @Override
-        public String info() {
-            return String.format("%s. Find items by name", this.key());
-        }
     }
 
     /**
      * Class with exit command.
      */
-    private class ExitAction implements UserAction {
+    private class ExitAction extends BaseAction {
+        /**
+         * Constructor.
+         * @param name - test of action
+         * @param key - number of action
+         */
+        private ExitAction(String name, int key) {
+            super(name, key);
+        }
+
         @Override
         public int key() {
-            return 6;
+            return this.key;
         }
 
         @Override
         public void execute(Input input, Tracker tracker) {
             return;
-        }
-
-        @Override
-        public String info() {
-            return String.format("%s. Exit program", this.key());
         }
     }
 }
@@ -226,10 +250,19 @@ public class MenuTracker {
 /**
  * Class with delete command.
  */
-class DeleteAction implements UserAction {
+class DeleteAction extends BaseAction {
+    /**
+     * Constructor.
+     * @param name - test of action
+     * @param key - number of action
+     */
+    public DeleteAction(String name, int key) {
+        super(name, key);
+    }
+
     @Override
     public int key() {
-        return 3;
+        return this.key;
     }
 
     @Override
@@ -238,10 +271,5 @@ class DeleteAction implements UserAction {
         Item item = new Item(null, null);
         item.setId(id);
         tracker.delete(item);
-    }
-
-    @Override
-    public String info() {
-        return String.format("%s. Delete item", this.key());
     }
 }
