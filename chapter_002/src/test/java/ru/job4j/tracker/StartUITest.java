@@ -199,4 +199,42 @@ public class StartUITest {
         String expected = stringJoiner.toString();
         assertThat(baos.toString(), is(expected));
     }
+
+    /**
+     * Test method for getting MenuOutException.
+     */
+    @Test
+    public void whenInsertInvalidDataThenGetMenuOutExceptionMessage() {
+        Tracker tracker = new Tracker();
+        String[] answers = new String[]{"-1", "6"};
+        Input input = new StubValidateInput(answers);
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(baos));
+        new StartUI(input, tracker).init();
+        StringJoiner stringJoiner = new StringJoiner(System.lineSeparator());
+        stringJoiner.add("0. Add new Item").add("1. Show all items").add("2. Edit item").add("3. Delete item");
+        stringJoiner.add("4. Find item by id").add("5. Find items by name").add("6. Exit program").add("Select: ");
+        stringJoiner.add("Please enter validate data.").add("Select: ").add("");
+        String expected = stringJoiner.toString();
+        assertThat(baos.toString(), is(expected));
+    }
+
+    /**
+     * Test method for getting NumberFormatException.
+     */
+    @Test
+    public void whenInsertInvalidDataThenGetNumberFormatExceptionMessage() {
+        Tracker tracker = new Tracker();
+        String[] answers = new String[]{"a", "6"};
+        Input input = new StubValidateInput(answers);
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(baos));
+        new StartUI(input, tracker).init();
+        StringJoiner stringJoiner = new StringJoiner(System.lineSeparator());
+        stringJoiner.add("0. Add new Item").add("1. Show all items").add("2. Edit item").add("3. Delete item");
+        stringJoiner.add("4. Find item by id").add("5. Find items by name").add("6. Exit program").add("Select: ");
+        stringJoiner.add("Please enter the number.").add("Select: ").add("");
+        String expected = stringJoiner.toString();
+        assertThat(baos.toString(), is(expected));
+    }
 }

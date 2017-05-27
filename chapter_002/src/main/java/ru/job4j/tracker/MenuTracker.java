@@ -91,11 +91,6 @@ public class MenuTracker {
         }
 
         @Override
-        public int key() {
-            return this.key;
-        }
-
-        @Override
         public void execute(Input input, Tracker tracker) {
             String name = input.ask("Введите имя пользователя: ");
             String desc = input.ask("Введите описание заявки: ");
@@ -116,11 +111,6 @@ public class MenuTracker {
          */
         private ShowAllAction(String name, int key) {
             super(name, key);
-        }
-
-        @Override
-        public int key() {
-            return this.key;
         }
 
         @Override
@@ -149,11 +139,6 @@ public class MenuTracker {
         }
 
         @Override
-        public int key() {
-            return this.key;
-        }
-
-        @Override
         public void execute(Input input, Tracker tracker) {
             String id = input.ask("Введите id заявки, которую хотите обновить: ");
             String name = input.ask("Введите имя заявки: ");
@@ -178,11 +163,6 @@ public class MenuTracker {
         }
 
         @Override
-        public int key() {
-            return this.key;
-        }
-
-        @Override
         public void execute(Input input, Tracker tracker) {
             String id = input.ask("Введите id заявки: ");
             Item result = tracker.findById(id);
@@ -201,11 +181,6 @@ public class MenuTracker {
          */
         private FindByNameAction(String name, int key) {
             super(name, key);
-        }
-
-        @Override
-        public int key() {
-            return this.key;
         }
 
         @Override
@@ -236,11 +211,6 @@ public class MenuTracker {
         }
 
         @Override
-        public int key() {
-            return this.key;
-        }
-
-        @Override
         public void execute(Input input, Tracker tracker) {
             return;
         }
@@ -256,13 +226,8 @@ class DeleteAction extends BaseAction {
      * @param name - test of action
      * @param key - number of action
      */
-    public DeleteAction(String name, int key) {
+    DeleteAction(String name, int key) {
         super(name, key);
-    }
-
-    @Override
-    public int key() {
-        return this.key;
     }
 
     @Override
