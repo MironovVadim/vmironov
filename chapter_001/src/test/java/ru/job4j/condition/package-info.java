@@ -1,5 +1,5 @@
 /**
-* Package with test classes for search triangle area and compare two points.
+* Package with testtask classes for search triangle area and compare two points.
 *
 * @author Vadim Moronov (Mironov6292@gmail.ru/Multik6292@mail.ru)
 * @version $Id$

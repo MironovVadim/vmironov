@@ -18,7 +18,7 @@ import static org.junit.Assert.assertThat;
 */
 public class MaxTest {
 	/**
-	* test method.
+	* testtask method.
 	*/
 	@Test
 	public void whenCompareFiveAndThreeThenFive() {
@@ -28,7 +28,7 @@ public class MaxTest {
 		assertThat(result, is(expected));
 	}
 	/**
-	* test method.
+	* testtask method.
 	*/
 	@Test
 	public void whenCompareFiveAndSixAndSevenThenSeven() {

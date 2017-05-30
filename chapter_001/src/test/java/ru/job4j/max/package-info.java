@@ -1,5 +1,5 @@
 /**
-* Package with test class for search max number.
+* Package with testtask class for search max number.
 *
 * @author Vadim Moronov (Mironov6292@gmail.ru/Multik6292@mail.ru)
 * @version $Id$

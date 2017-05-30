@@ -1,5 +1,5 @@
 /**
-* Package for test Calculate class.
+* Package for testtask Calculate class.
 *
 * @author Vadim Moronov (Mironov6292@gmail.ru/Multik6292@mail.ru)
 * @version $Id$

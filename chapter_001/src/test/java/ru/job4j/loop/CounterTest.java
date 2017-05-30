@@ -18,7 +18,7 @@ import static org.junit.Assert.assertThat;
 */
 public class CounterTest {
 	/**
-	* test method.
+	* testtask method.
 	*/
 	@Test
 	public void whenAddOneAndTenThenThirty() {

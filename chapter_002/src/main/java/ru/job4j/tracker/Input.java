@@ -19,7 +19,7 @@ public interface Input {
     String ask(String question);
 
     /**
-     * ask() mtethod with test user input.
+     * ask() mtethod with testtask user input.
      * @param question - String for printing in console
      * @param range - range of commands
      * @return number of command

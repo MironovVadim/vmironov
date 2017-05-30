@@ -83,7 +83,7 @@ public class MenuTracker {
     private class AddAction extends BaseAction {
         /**
          * Constructor.
-         * @param name - test of action
+         * @param name - testtask of action
          * @param key - number of action
          */
         private AddAction(String name, int key) {
@@ -106,7 +106,7 @@ public class MenuTracker {
     private static class ShowAllAction extends BaseAction {
         /**
          * Constructor.
-         * @param name - test of action
+         * @param name - testtask of action
          * @param key - number of action
          */
         private ShowAllAction(String name, int key) {
@@ -131,7 +131,7 @@ public class MenuTracker {
     private class EditAction extends BaseAction {
         /**
          * Constructor.
-         * @param name - test of action
+         * @param name - testtask of action
          * @param key - number of action
          */
         private EditAction(String name, int key) {
@@ -155,7 +155,7 @@ public class MenuTracker {
     private class FindByIdAction extends BaseAction {
         /**
          * Constructor.
-         * @param name - test of action
+         * @param name - testtask of action
          * @param key - number of action
          */
         private FindByIdAction(String name, int key) {
@@ -176,7 +176,7 @@ public class MenuTracker {
     private class FindByNameAction extends BaseAction {
         /**
          * Constructor.
-         * @param name - test of action
+         * @param name - testtask of action
          * @param key - number of action
          */
         private FindByNameAction(String name, int key) {
@@ -203,7 +203,7 @@ public class MenuTracker {
     private class ExitAction extends BaseAction {
         /**
          * Constructor.
-         * @param name - test of action
+         * @param name - testtask of action
          * @param key - number of action
          */
         private ExitAction(String name, int key) {
@@ -223,7 +223,7 @@ public class MenuTracker {
 class DeleteAction extends BaseAction {
     /**
      * Constructor.
-     * @param name - test of action
+     * @param name - testtask of action
      * @param key - number of action
      */
     DeleteAction(String name, int key) {
