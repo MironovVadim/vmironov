@@ -34,7 +34,8 @@ public class Robot {
     public Robot(int[][] board) {
         this.board = board;
         cells = new Cell[board.length * board[0].length];
-        cells[0] = new Cell(0, 0);
+        cells[0] = new Cell(-1, -1);
+        cells[1] = new Cell(0, 0);
     }
 
     public void addCell(Cell cell) {
@@ -47,28 +48,25 @@ public class Robot {
 
     public boolean start() {
         boolean result = false;
-        try {
-            do {
-                if (y < board.length - 1 && board[x][y + 1] == 0) {
-                    if (x < board.length - 1 && board[x + 1][y] == 0) {
-                        addCell(new Cell(x, y));
-                    }
-                    y++;
-                } else if (x < board.length - 1 && board[x + 1][y] == 0) {
-                    x++;
-                } else {
-                    Cell cell = getCell();
-                    x = cell.getX();
-                    x++;
-                    y = cell.getY();
+        do {
+            if (y < board.length - 1 && board[x][y + 1] == 0) {
+                if (x < board.length - 1 && board[x + 1][y] == 0) {
+                    addCell(new Cell(x, y));
                 }
-                System.out.println(x + ", " + y);
-                if (x == board.length - 1 && y == board.length - 1) {
-                    result = true;
-                    break;
-                }
-            } while (true);
-        } catch (ArrayIndexOutOfBoundsException e) {}
+                y++;
+            } else if (x < board.length - 1 && board[x + 1][y] == 0) {
+                x++;
+            } else {
+                Cell cell = getCell();
+                x = cell.getX() + 1;
+                y = cell.getY();
+            }
+            System.out.println(String.format("%d, %d", x, y));
+            if (x == board.length - 1 && y == board.length - 1) {
+                result = true;
+                break;
+            }
+        } while (x != 0 && y != -1);
         return result;
     }
 
