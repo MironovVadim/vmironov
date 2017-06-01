@@ -52,4 +52,19 @@ public class ConvertList {
         Arrays.fill(result[result.length - 1], row, result[result.length - 1].length - 1, 0);
         return result;
     }
+
+    /**
+     * Convert List<int[]> to List<<Integer>.
+     * @param list for converting
+     * @return converting list
+     */
+    public List<Integer> convert(List<int[]> list) {
+        List<Integer> result = new ArrayList<>();
+        for (int[] massif : list) {
+            for (int number : massif) {
+                result.add(number);
+            }
+        }
+        return result;
+    }
 }
