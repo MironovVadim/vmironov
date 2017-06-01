@@ -7,30 +7,27 @@
  */
 package ru.job4j.tracker;
 
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Class Tracker.
  */
 public class Tracker {
     /**
-     * massif of Item elements.
+     * List of Item elements.
      */
-    private Item[] items = new Item[100];
-    /**
-     * index of first null element in items[].
-     */
-    private int index = 0;
+    private List<Item> items = new ArrayList<>();
 
     /**
      * Adding new Item element.
      *
-     * @param item - Item element to add in items[]
+     * @param item - Item element to add in List<Item>
      * @return Item - added element
      */
     public Item add(Item item) {
-        if (item != null && index < items.length) {
-            items[index++] = item;
+        if (item != null) {
+            items.add(item);
         }
         return item;
     }
@@ -42,37 +39,35 @@ public class Tracker {
      * @param item - item with update id
      */
     public void update(Item item) {
-        for (int i = 0; i < index; i++) {
-            if (items[i].getId().equals(item.getId())) {
-                items[i] = item;
+        for (Item itemInItems : items) {
+            if (item.getId().equals(itemInItems.getId())) {
+                items.add(items.indexOf(itemInItems), item);
                 return;
             }
         }
     }
 
     /**
-     * Deleting item and offset elements to left.
+     * Deleting item from items.
      *
      * @param item - item for deleting
      */
     public void delete(Item item) {
-        for (int i = 0; i < index; i++) {
-            if (item.getId().equals(items[i].getId())) {
-                for (int j = i; j < index - 1; j++) {
-                    items[j] = items[j + 1];
-                }
-                index--;
+        for (Item itemInItems : items) {
+            if (item.getId().equals(itemInItems.getId())) {
+                items.remove(itemInItems);
+                return;
             }
         }
     }
 
     /**
-     * Searching all items in items without null items.
+     * Retern items.
      *
-     * @return all not null items from items[]
+     * @return items
      */
-    public Item[] findAll() {
-        return Arrays.copyOf(items, index);
+    public List<Item> findAll() {
+        return items;
     }
 
     /**
@@ -81,15 +76,14 @@ public class Tracker {
      * @param key - name of search items
      * @return all found items with name that equals key
      */
-    public Item[] findByName(String key) {
-        Item[] itemMassif = new Item[items.length];
-        int indexOfItemMassif = 0;
-        for (int i = 0; i < index; i++) {
-            if (key.equals(items[i].getName())) {
-                itemMassif[indexOfItemMassif++] = items[i];
+    public List<Item> findByName(String key) {
+        List<Item> itemList = new ArrayList<>();
+        for (Item item : items) {
+            if (key.equals(item.getName())) {
+                itemList.add(item);
             }
         }
-        return Arrays.copyOf(itemMassif, indexOfItemMassif);
+        return itemList;
     }
 
     /**
@@ -100,9 +94,9 @@ public class Tracker {
      */
     public Item findById(String id) {
         Item result = null;
-        for (int i = 0; i < index; i++) {
-            if (id.equals(items[i].getId())) {
-                result = items[i];
+        for (Item item : items) {
+            if (id.equals(item.getId())) {
+                result = item;
                 break;
             }
         }

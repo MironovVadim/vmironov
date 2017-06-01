@@ -7,6 +7,9 @@
  */
 package ru.job4j.tracker;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Class with inner classes as commands.
  */
@@ -22,7 +25,7 @@ public class MenuTracker {
     /**
      * All commands.
      */
-    private UserAction[] actions = new UserAction[7];
+    private List<UserAction> actions = new ArrayList<>();
 
     /**
      * Constructor.
@@ -40,29 +43,29 @@ public class MenuTracker {
      * @param key - number of operation
      */
     public void select(int key) {
-            actions[key].execute(input, tracker);
+            actions.get(key).execute(input, tracker);
     }
 
     /**
-     * Method that fill actions[].
+     * Method that fill actions.
      */
     private void fillActions() {
-        actions[0] = this.new AddAction("Add new Item", 0);
-        actions[1] = new MenuTracker.ShowAllAction("Show all items", 1);
-        actions[2] = this.new EditAction("Edit item", 2);
-        actions[3] = new DeleteAction("Delete item", 3);
-        actions[4] = this.new FindByIdAction("Find item by id", 4);
-        actions[5] = this.new FindByNameAction("Find items by name", 5);
-        actions[6] = this.new ExitAction("Exit program", 6);
+        actions.add(this.new AddAction("Add new Item", 0));
+        actions.add(new MenuTracker.ShowAllAction("Show all items", 1));
+        actions.add(this.new EditAction("Edit item", 2));
+        actions.add(new DeleteAction("Delete item", 3));
+        actions.add(this.new FindByIdAction("Find item by id", 4));
+        actions.add(this.new FindByNameAction("Find items by name", 5));
+        actions.add(this.new ExitAction("Exit program", 6));
     }
 
     /**
-     * Create massif of of command numbers.
+     * Create list of command numbers.
      * @return command massif
      */
     public int[] getRange() {
-        int[] range = new int[actions.length];
-        for (int i = 0; i < range.length; i++) {
+        int[] range = new int[actions.size()];
+        for (int i = 0; i < actions.size(); i++) {
             range[i] = i;
         }
         return range;
@@ -115,7 +118,7 @@ public class MenuTracker {
 
         @Override
         public void execute(Input input, Tracker tracker) {
-            if (tracker.findAll().length != 0) {
+            if (tracker.findAll().size() != 0) {
                 for (Item item : tracker.findAll()) {
                     System.out.println(item);
                 }
@@ -186,8 +189,8 @@ public class MenuTracker {
         @Override
         public void execute(Input input, Tracker tracker) {
             String name = input.ask("Введите название заявки: ");
-            Item[] result = tracker.findByName(name);
-            if (result.length != 0) {
+            List<Item> result = tracker.findByName(name);
+            if (result.size() != 0) {
                 for (Item item : result) {
                     System.out.println(item.toString());
                 }

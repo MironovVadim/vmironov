@@ -7,6 +7,7 @@
  */
 package ru.job4j.tracker;
 
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -36,7 +37,7 @@ public class Item {
     /**
      * Comments massif.
      */
-    private String[] comments;
+    private List<String> comments;
 
     /**
      * Constructor.
@@ -94,7 +95,7 @@ public class Item {
      * Comments getter.
      * @return String[] - comments
      */
-    public String[] getComments() {
+    public List<String> getComments() {
         return comments;
     }
 
@@ -102,7 +103,7 @@ public class Item {
      * Set any comments.
      * @param comments - comments of item
      */
-    public void setComments(String[] comments) {
+    public void setComments(List<String> comments) {
         this.comments = comments;
     }
 

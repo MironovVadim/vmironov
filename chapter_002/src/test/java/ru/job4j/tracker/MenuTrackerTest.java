@@ -30,7 +30,7 @@ public class MenuTrackerTest {
         Input input = new StubInput(answers);
         new MenuTracker(input, tracker).select(0);
         int expected = 1;
-        assertThat(tracker.findAll().length, is(expected));
+        assertThat(tracker.findAll().size(), is(expected));
     }
     /**
      * Test showAllAction class.
@@ -55,14 +55,14 @@ public class MenuTrackerTest {
     @Test
     public void whenExecuteEditActionThenGetEditedItem() {
         Item itemForEdit = new Item("SomeName", "SomeDesc");
-        Item itemUfterEdit = new Item("UpdatedName", "UpdatedDesc");
-        itemUfterEdit.setId(itemForEdit.getId());
+        Item itemAfterEdit = new Item("UpdatedName", "UpdatedDesc");
+        itemAfterEdit.setId(itemForEdit.getId());
         Tracker tracker = new Tracker();
         tracker.add(itemForEdit);
-        String[] answers = new String[]{itemForEdit.getId(), itemUfterEdit.getName(), itemUfterEdit.getDesc()};
+        String[] answers = new String[]{itemForEdit.getId(), itemAfterEdit.getName(), itemAfterEdit.getDesc()};
         Input input = new StubInput(answers);
         new MenuTracker(input, tracker).select(2);
-        assertThat(tracker.findAll()[0], is(itemUfterEdit));
+        assertThat(tracker.findAll().get(0), is(itemAfterEdit));
     }
     /**
      * Test EditAction class.
@@ -77,7 +77,7 @@ public class MenuTrackerTest {
         String[] answers = new String[]{"NoSuchId", itemUfterEdit.getName(), itemUfterEdit.getDesc()};
         Input input = new StubInput(answers);
         new MenuTracker(input, tracker).select(2);
-        assertThat(tracker.findAll()[0], is(itemForEdit));
+        assertThat(tracker.findAll().get(0), is(itemForEdit));
     }
     /**
      * Test DeleteAction class.
@@ -91,7 +91,7 @@ public class MenuTrackerTest {
         Input input = new StubInput(answers);
         new MenuTracker(input, tracker).select(3);
         int expected = 0;
-        assertThat(tracker.findAll().length, is(expected));
+        assertThat(tracker.findAll().size(), is(expected));
     }
     /**
      * Test DeleteAction class.
@@ -105,7 +105,7 @@ public class MenuTrackerTest {
         Input input = new StubInput(answers);
         new MenuTracker(input, tracker).select(3);
         int expected = 1;
-        assertThat(tracker.findAll().length, is(expected));
+        assertThat(tracker.findAll().size(), is(expected));
     }
     /**
      * Test FindByIdAction class.

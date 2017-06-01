@@ -29,7 +29,7 @@ public class StartUITest {
         Input input = new StubInput(answers);
         Tracker tracker = new Tracker();
         new StartUI(input, tracker).init();
-        assertThat(tracker.findAll()[0].getName(), is(answers[1]));
+        assertThat(tracker.findAll().get(0).getName(), is(answers[1]));
     }
     /**
      * Test findAll() method.
@@ -67,7 +67,7 @@ public class StartUITest {
         Item expected = new Item(answers[2], answers[3]);
         expected.setId(itemForUpdate.getId());
         new StartUI(input, tracker).init();
-        assertThat(tracker.findAll()[0], is(expected));
+        assertThat(tracker.findAll().get(0), is(expected));
     }
     /**
      * Test update() method.
@@ -81,7 +81,7 @@ public class StartUITest {
         Input input = new StubInput(answers);
         Item expected = itemForUpdate;
         new StartUI(input, tracker).init();
-        assertThat(tracker.findAll()[0], is(expected));
+        assertThat(tracker.findAll().get(0), is(expected));
     }
     /**
      * Test delete() method.
@@ -95,7 +95,7 @@ public class StartUITest {
         Input input = new StubInput(answers);
         int expected = 0;
         new StartUI(input, tracker).init();
-        assertThat(tracker.findAll().length, is(expected));
+        assertThat(tracker.findAll().size(), is(expected));
     }
     /**
      * Test delete() method.
@@ -109,7 +109,7 @@ public class StartUITest {
         Input input = new StubInput(answers);
         int expected = 1;
         new StartUI(input, tracker).init();
-        assertThat(tracker.findAll().length, is(expected));
+        assertThat(tracker.findAll().size(), is(expected));
     }
     /**
      * Test findById() method.
