@@ -1,3 +1,10 @@
+/**
+ * Test ConvertList class.
+ *
+ * @author Vadim Mironov (multik6292@mail.ru/mironov6292@gmail.ru)
+ * @version $Id$
+ * @since 0.1
+ */
 package ru.job4j;
 
 import org.junit.Test;
