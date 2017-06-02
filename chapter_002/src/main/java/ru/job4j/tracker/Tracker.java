@@ -41,7 +41,7 @@ public class Tracker {
     public void update(Item item) {
         for (Item itemInItems : items) {
             if (item.getId().equals(itemInItems.getId())) {
-                items.add(items.indexOf(itemInItems), item);
+                items.set(items.indexOf(itemInItems), item);
                 return;
             }
         }
@@ -53,12 +53,7 @@ public class Tracker {
      * @param item - item for deleting
      */
     public void delete(Item item) {
-        for (Item itemInItems : items) {
-            if (item.getId().equals(itemInItems.getId())) {
-                items.remove(itemInItems);
-                return;
-            }
-        }
+        items.remove(item);
     }
 
     /**

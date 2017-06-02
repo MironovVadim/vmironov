@@ -9,6 +9,7 @@ package ru.job4j;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -37,16 +38,20 @@ public class ConvertList {
      * @return array[][]
      */
     public int[][] toArray(List<Integer> list, int rows) {
-        int index = 0;
         int row = 0;
         int column = list.size() / rows;
         if (list.size() % rows > 0) {
             column++;
         }
+        Iterator<Integer> it = list.iterator();
         int[][] result = new int[column][rows];
         for (int i = 0; i < result.length; i++) {
-            for (row = 0; index < list.size() && row < result[i].length; row++) {
-                result[i][row] = list.get(index++);
+            for (row = 0; row < result[i].length; row++) {
+                if (it.hasNext()) {
+                    result[i][row] = it.next();
+                } else {
+                    break;
+                }
             }
         }
         Arrays.fill(result[result.length - 1], row, result[result.length - 1].length - 1, 0);

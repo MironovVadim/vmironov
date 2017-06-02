@@ -14,6 +14,7 @@ import static org.junit.Assert.assertThat;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -49,7 +50,7 @@ public class ConvertListTest {
     @Test
     public void whenConvertListThenGetArray() {
         ConvertList convertList = new ConvertList();
-        List<Integer> list = new ArrayList<>();
+        List<Integer> list = new LinkedList<>();
         for (int i = 1; i < 11; i++) {
             list.add(i);
         }
