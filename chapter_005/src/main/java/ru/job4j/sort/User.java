@@ -30,6 +30,14 @@ public class User implements Comparable<User> {
         this.name = name;
     }
 
+    /**
+     * name length getter.
+     * @return name length
+     */
+    public int getStringLength() {
+        return name.length();
+    }
+
     @Override
     public int compareTo(User o) {
         return Integer.compare(this.age, o.age);
@@ -41,5 +49,29 @@ public class User implements Comparable<User> {
                 + "age=" + age
                 + ", name='" + name + '\''
                 + '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
+        User user = (User) o;
+
+        if (age != user.age) {
+            return false;
+        }
+        return name != null ? name.equals(user.name) : user.name == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = age;
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        return result;
     }
 }

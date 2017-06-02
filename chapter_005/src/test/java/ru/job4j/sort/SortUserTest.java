@@ -42,4 +42,46 @@ public class SortUserTest {
         String expected = new StringJoiner(" : ").add(user1.toString()).add(user0.toString()).add(user2.toString()).toString();
         assertThat(result, is(expected));
     }
+
+    /**
+     * Test method.
+     */
+    @Test
+    public void whenSortListByHashCodeThenGetSortedList() {
+        SortUser sortUser = new SortUser();
+        List<User> list = new ArrayList<>();
+        User user0 = new User(25, "Vadim");
+        User user1 = new User(20, "Maks");
+        User user2 = new User(28, "Michail");
+        Collections.addAll(list, user0, user1, user2);
+        List<User> sortedList = sortUser.sortHash(list);
+        StringJoiner sj = new StringJoiner(" : ");
+        for (User user : sortedList) {
+            sj.add(user.toString());
+        }
+        String result = sj.toString();
+        String expected = new StringJoiner(" : ").add(user2.toString()).add(user1.toString()).add(user0.toString()).toString();
+        assertThat(result, is(expected));
+    }
+
+    /**
+     * Test method.
+     */
+    @Test
+    public void whenSortListByNameLengthThenGetSortedList() {
+        SortUser sortUser = new SortUser();
+        List<User> list = new ArrayList<>();
+        User user0 = new User(25, "Vadim");
+        User user1 = new User(20, "Maks");
+        User user2 = new User(28, "Michail");
+        Collections.addAll(list, user0, user1, user2);
+        List<User> sortedList = sortUser.sortLength(list);
+        StringJoiner sj = new StringJoiner(" : ");
+        for (User user : sortedList) {
+            sj.add(user.toString());
+        }
+        String result = sj.toString();
+        String expected = new StringJoiner(" : ").add(user1.toString()).add(user0.toString()).add(user2.toString()).toString();
+        assertThat(result, is(expected));
+    }
 }
