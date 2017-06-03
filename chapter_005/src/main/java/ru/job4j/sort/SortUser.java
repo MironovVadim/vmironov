@@ -34,12 +34,7 @@ public class SortUser {
      * @return list after sorting
      */
     public List<User> sortHash(List<User> list) {
-        Collections.sort(list, new Comparator<User>() {
-            @Override
-            public int compare(User o1, User o2) {
-                return Integer.compare(o1.hashCode(), o2.hashCode());
-            }
-        });
+        Collections.sort(list, Comparator.comparingInt(User::hashCode));
         return list;
     }
 
@@ -49,12 +44,7 @@ public class SortUser {
      * @return list after sorting
      */
     public List<User> sortLength(List<User> list) {
-        Collections.sort(list, new Comparator<User>() {
-            @Override
-            public int compare(User o1, User o2) {
-                return Integer.compare(o1.getStringLength(), o2.getStringLength());
-            }
-        });
+        Collections.sort(list, Comparator.comparingInt(User::getStringLength));
         return list;
     }
 }
