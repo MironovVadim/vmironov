@@ -83,27 +83,22 @@ public class Bank {
      */
     public boolean transferMoney(User srcUser, Account srcAccount, User dstUser, Account dstAccount, double amount) {
         boolean result = false;
-        Account srcUserAccount = null;
-        Account dstUserAccount = null;
+        Account srcUserAccount;
+        Account dstUserAccount;
         try {
-            for (Account account : bankMap.get(srcUser)) {
-                if (srcAccount.equals(srcAccount)) {
-                    srcUserAccount = account;
-                }
-            }
-            for (Account account : bankMap.get(dstUser)) {
-                if (dstAccount.equals(account)) {
-                    dstUserAccount = account;
-                    break;
-                }
-            }
+            List<Account> srcUserList = bankMap.get(srcUser);
+            srcUserAccount = srcUserList.get(srcUserList.indexOf(srcAccount));
+            List<Account> dstUserList = bankMap.get(dstUser);
+            dstUserAccount = dstUserList.get(dstUserList.indexOf(dstAccount));
             double value = srcUserAccount.takeValue(amount);
             if (value > 0) {
                 dstUserAccount.addValue(value);
                 result = true;
             }
         } catch (NullPointerException e) {
-            // do nothing
+            System.out.print("Пользователей с введенными данными не сущетсвует.");
+        } catch (IndexOutOfBoundsException e) {
+            System.out.print("Указанных номеров счетов нет в базе.");
         }
         return result;
     }

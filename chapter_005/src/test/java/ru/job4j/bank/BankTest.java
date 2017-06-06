@@ -12,6 +12,8 @@ import org.junit.Test;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -86,13 +88,13 @@ public class BankTest {
     @Test
     public void whenTransferMoneyThenGetTrue() {
         Map<User, List<Account>> bankMap = new HashMap<>();
-        User srcUser = new User("NotMe", 111111);
+        User srcUser = new User("srcName", 111111);
         Account srcUserAccount = new Account(12345678);
         srcUserAccount.addValue(1000);
         Bank bank = new Bank(bankMap);
         bank.addUser(srcUser);
         bank.addAccountToUser(srcUser, srcUserAccount);
-        User dstUser = new User("NotMe", 111111);
+        User dstUser = new User("dstName", 222222);
         Account dstUserAccount = new Account(12345678);
         dstUserAccount.addValue(100);
         bank.addUser(dstUser);
@@ -108,6 +110,53 @@ public class BankTest {
     @Test
     public void whenTransferMoneyThenGetFalse() {
         Map<User, List<Account>> bankMap = new HashMap<>();
+        User srcUser = new User("srcName", 111111);
+        Account srcUserAccount = new Account(12345678);
+        srcUserAccount.addValue(1000);
+        Bank bank = new Bank(bankMap);
+        bank.addUser(srcUser);
+        bank.addAccountToUser(srcUser, srcUserAccount);
+        User dstUser = new User("dstName", 222222);
+        Account dstUserAccount = new Account(12345678);
+        dstUserAccount.addValue(100);
+        bank.addUser(dstUser);
+        bank.addAccountToUser(dstUser, dstUserAccount);
+        boolean result = bank.transferMoney(srcUser, srcUserAccount, dstUser, dstUserAccount, 1500);
+        boolean expected = false;
+        assertThat(result, is(expected));
+    }
+
+    /**
+     * Test method.
+     */
+    @Test
+    public void whenTransferMoneyThenGetNullPointerEMessage() {
+        Map<User, List<Account>> bankMap = new HashMap<>();
+        User srcUser = new User("srcName", 111111);
+        Account srcUserAccount = new Account(12345678);
+        srcUserAccount.addValue(1000);
+        Bank bank = new Bank(bankMap);
+        bank.addUser(srcUser);
+        bank.addAccountToUser(srcUser, srcUserAccount);
+        User dstUser = new User("dstName", 222222);
+        Account dstUserAccount = new Account(12345678);
+        srcUserAccount.addValue(100);
+        bank.addUser(dstUser);
+        bank.addAccountToUser(dstUser, dstUserAccount);
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(baos));
+        bank.transferMoney(srcUser, srcUserAccount, new User("SomeName", 1234567), dstUserAccount, 1500);
+        String result = baos.toString();
+        String expected = "Пользователей с введенными данными не сущетсвует.";
+        assertThat(result, is(expected));
+    }
+
+    /**
+     * Test method.
+     */
+    @Test
+    public void whenTransferMoneyThenGetIndexOutOfBoundEMessage() {
+        Map<User, List<Account>> bankMap = new HashMap<>();
         User srcUser = new User("NotMe", 111111);
         Account srcUserAccount = new Account(12345678);
         srcUserAccount.addValue(1000);
@@ -118,9 +167,12 @@ public class BankTest {
         Account dstUserAccount = new Account(12345678);
         srcUserAccount.addValue(100);
         bank.addUser(dstUser);
-        bank.addAccountToUser(dstUser, dstUserAccount);
-        boolean result = bank.transferMoney(srcUser, srcUserAccount, dstUser, dstUserAccount, 1500);
-        boolean expected = false;
+        bank.addAccountToUser(dstUser, new Account(98765432));
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(baos));
+        bank.transferMoney(srcUser, srcUserAccount, dstUser, new Account(555555), 900);
+        String result = baos.toString();
+        String expected = "Указанных номеров счетов нет в базе.";
         assertThat(result, is(expected));
     }
 }
