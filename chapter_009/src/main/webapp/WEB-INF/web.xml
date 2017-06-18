@@ -5,7 +5,7 @@
     </servlet>
 
     <servlet-mapping>
-        <server-name>EchoServlet</server-name>
+        <servlet-name>EchoServlet</servlet-name>
         <url-pattern>/echo</url-pattern>
     </servlet-mapping>
 </web-app>
