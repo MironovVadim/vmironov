@@ -73,7 +73,7 @@ public class Frog {
             srcX = tempX;
             srcY = tempY;
         }
-        this.findTheWayFrom(srcY, srcX, new ArrayList<>());
+        this.findTheWayFrom(new Point(srcY, srcX), new ArrayList<>());
         int minLength = -1;
         if (!allPaths.isEmpty()) {
             minLength = allPaths.get(0) - 1;
@@ -91,78 +91,75 @@ public class Frog {
      * Рекурсивный метод для нахождения всех вариантов прохода до ячейки назначения.
      * Также метод заполняет список allPaths всеми возможными случаями
      * удачных проходов от старта до ячейки нахождения (В список попадает только количество прыжков на каждый случай).
-     * @param srcY - координата Y ячейки в которой находится лягушка
-     * @param srcX - координата X ячейки в которой находится лягушка
+     * @param currentPoint - класс с координатами ячейки в которой находится лягушка
      * @param path список ячеек, в которых побывала лягушка в одном варианте прохода
      */
-    private void findTheWayFrom(int srcY, int srcX, List<Point> path) {
+    private void findTheWayFrom(Point currentPoint, List<Point> path) {
         boolean isDestination = false;
-        Point curPosition = new Point(srcY, srcX);
-        path.add(curPosition);
-        if (curPosition.getY() == dstY && curPosition.getX() == dstX) {
+        int curY = currentPoint.getY();
+        int curX = currentPoint.getX();
+        path.add(currentPoint);
+        if (dstY == curY && dstX == curX) {
             allPaths.add(path.size());
         }
-        if (dstY != curPosition.getY() && dstX <= curPosition.getX()) {
-            path.remove(curPosition);
+        if (dstY != curY && dstX <= curX) {
+            path.remove(currentPoint);
             isDestination = true;
         }
-        if (!isDestination && canNextMove(srcY - 2, srcX + 1)) {
-            this.findTheWayFrom(srcY - 2, srcX + 1, path);
+        if (!isDestination && canNextMove(new Point(curY - 2, curX + 2))) {
+            this.findTheWayFrom(new Point(curY - 2, curX + 1), path);
         }
-        if (!isDestination && canNextMove(srcY - 1, srcX + 2)) {
-            this.findTheWayFrom(srcY - 1, srcX + 2, path);
+        if (!isDestination && canNextMove(new Point(curY - 1, curX + 2))) {
+            this.findTheWayFrom(new Point(curY - 1, curX + 2), path);
         }
-        if (!isDestination && canNextMove(srcY, srcX + 3)) {
-            this.findTheWayFrom(srcY, srcX + 3, path);
+        if (!isDestination && canNextMove(new Point(curY, curX + 3))) {
+            this.findTheWayFrom(new Point(curY, curX + 3), path);
         }
-        if (!isDestination && canNextMove(srcY + 1, srcX + 2)) {
-            this.findTheWayFrom(srcY + 1, srcX + 2, path);
+        if (!isDestination && canNextMove(new Point(curY + 1, curX + 2))) {
+            this.findTheWayFrom(new Point(curY + 1, curX + 2), path);
         }
-        if (!isDestination && canNextMove(srcY + 2, srcX + 1)) {
-            this.findTheWayFrom(srcY + 2, srcX + 1, path);
+        if (!isDestination && canNextMove(new Point(curY + 2, curX + 1))) {
+            this.findTheWayFrom(new Point(curY + 2, curX + 1), path);
         }
         if (!isDestination) {
-            path.remove(curPosition);
+            path.remove(currentPoint);
         }
     }
 
     /**
      * Метод проверят может ли лягушка совершить прыжок на предполагаемую ячейку.
-     * @param nextY - координата Y предполагаемой ячейки
-     * @param nextX - координата X предполагаемой ячейки
+     * @param nextPoint - класс с координатами следующей ячейки
      * @return true - если ячейка находится в пределах поля, она не занята деревом и ячейка нне находится за ячейкой назначения.
      */
-    private boolean canNextMove(int nextY, int nextX) {
-        return isInField(nextY, nextX) && isPointFree(nextY, nextX) && !isNewPointLayAfterDstPoint(nextX);
+    private boolean canNextMove(Point nextPoint) {
+        return isInField(nextPoint) && isPointFree(nextPoint) && !isNewPointLayAfterDstPoint(nextPoint);
     }
 
     /**
      * Метод проверяет находится ли предполагаемая ячейка в пределах поля.
-     * @param nextY - координата Y предполагаемой ячейки
-     * @param nextX - координата X предполагаемой ячейки
+     * @param nextPoint - класс с координатами следующей ячейки
      * @return true - если ячейка находится в пределах поля; false - если ячейка за пределами поля
      */
-    private boolean isInField(int nextY, int nextX) {
-        return 0 <= nextX && field[0].length > nextX && 0 <= nextY && field.length > nextY;
+    private boolean isInField(Point nextPoint) {
+        return 0 <= nextPoint.getX() && field[0].length > nextPoint.getX() && 0 <= nextPoint.getY() && field.length > nextPoint.getY();
     }
 
     /**
      * Метод проверяет перепрыгнула ли лягушка нужную ячейку или нет.
-     * @param nextX - координата X проверяемой ячейки
+     * @param nextPoint - класс с координатами следующей ячейки
      * @return true - если nextX дальше координаты X ячейки назначения; false - если nextX раньше координаты X ячейки назначения
      */
-    private boolean isNewPointLayAfterDstPoint(int nextX) {
-        return dstX < nextX;
+    private boolean isNewPointLayAfterDstPoint(Point nextPoint) {
+        return dstX < nextPoint.getX();
     }
 
     /**
      * Метод проверят свободна ли ячейка или нет.
-     * @param nextY - координата Y
-     * @param nextX - координата X
+     * @param nextPoint - класс с координатами следующей ячейки
      * @return true - если ячейка свободна; false - если занята деревом
      */
-    private boolean isPointFree(int nextY, int nextX) {
-        return field[nextY][nextX] == 0;
+    private boolean isPointFree(Point nextPoint) {
+        return field[nextPoint.getY()][nextPoint.getX()] == 0;
     }
 }
 
