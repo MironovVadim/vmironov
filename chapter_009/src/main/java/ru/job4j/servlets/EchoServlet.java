@@ -22,13 +22,13 @@ public class EchoServlet extends HttpServlet {
     /**
      * Server address.
      */
-    private static final String URL = "jdbc:postgresql:5432//localhost/UserDB";
+    private static final String URL = "jdbc:postgresql://localhost:5432/UserDB";
     /**
      * Login and password.
      */
     private static final Properties PROPERTIES = new Properties();
     static {
-        PROPERTIES.setProperty("login", "postgres");
+        PROPERTIES.setProperty("user", "postgres");
         PROPERTIES.setProperty("password", "user");
     }
 
@@ -36,7 +36,7 @@ public class EchoServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
         try (Connection connection = DriverManager.getConnection(URL, PROPERTIES)) {
-            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM user WHERE id = ?");
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM public.user WHERE id = ?");
             int id = Integer.parseInt(req.getParameter("id"));
             preparedStatement.setInt(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -59,7 +59,7 @@ public class EchoServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
         try (Connection connection = DriverManager.getConnection(URL, PROPERTIES)) {
-            PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO user (name, login, email) VALUES (?, ?, ?)");
+            PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO public.user (name, login, email) VALUES (?, ?, ?)");
             preparedStatement.setString(1, req.getParameter("name"));
             preparedStatement.setString(2, req.getParameter("login"));
             preparedStatement.setString(3, req.getParameter("email"));
@@ -74,7 +74,7 @@ public class EchoServlet extends HttpServlet {
     protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
         try (Connection connection = DriverManager.getConnection(URL, PROPERTIES)) {
-            PreparedStatement preparedStatement = connection.prepareStatement("UPDATE user SET email = ? WHERE name = ?");
+            PreparedStatement preparedStatement = connection.prepareStatement("UPDATE public.user SET email = ? WHERE name = ?");
             preparedStatement.setString(1, req.getParameter("email"));
             preparedStatement.setString(2, req.getParameter("name"));
             preparedStatement.executeUpdate();
@@ -88,7 +88,7 @@ public class EchoServlet extends HttpServlet {
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
         try (Connection connection = DriverManager.getConnection(URL, PROPERTIES)) {
-            PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM user WHERE name = ?");
+            PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM public.user WHERE name = ?");
             preparedStatement.setString(1, req.getParameter("name"));
             preparedStatement.executeUpdate();
             preparedStatement.close();
