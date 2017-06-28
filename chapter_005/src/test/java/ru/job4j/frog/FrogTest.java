@@ -21,10 +21,10 @@ public class FrogTest {
      */
     @Test
     public void whenFrogReachedDstCellThenGetTwo() {
-        int[][] field = new int[6][6];
-        Frog frog = new Frog(field, 4, 5);
+        int[][] field = new int[8][8];
+        Frog frog = new Frog(field, 6, 7);
         int result = frog.findTheWayFrom(3, 0);
-        int expected = 2;
+        int expected = 4;
         assertThat(result, is(expected));
     }
 

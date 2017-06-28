@@ -30,6 +30,11 @@ public class Frog {
      * Список хранит количество прыжков необходимых лягушке для того, чтобы добраться до ячейки назначения для каждого удачного прохода от начала до конца.
      */
     private List<Integer> allPaths;
+    /**
+     * Все возможные ходы лягушки.
+     */
+    private Point[] steps = new Point[]{new Point(-2, 1), new Point(-1, 2),
+            new Point(0, 3), new Point(1, 2), new Point(2, 1)};
 
     /**
      * Конструктор принимает двумерный массив, которое служит игровым полем и координаты X, Y ячейки, которая является пунктом назначения.
@@ -65,6 +70,7 @@ public class Frog {
      * @return количество шагов на самом коротком удачном проходе до ячейки назначения
      */
     public int findTheWayFrom(int srcY, int srcX) {
+
         if (dstX < srcX) {
             int tempX = dstX;
             int tempY = dstY;
@@ -73,7 +79,7 @@ public class Frog {
             srcX = tempX;
             srcY = tempY;
         }
-        this.findTheWayFrom(new Point(srcY, srcX), new ArrayList<>());
+        this.findTheWayFrom(srcY, srcX, new ArrayList<>());
         int minLength = -1;
         if (!allPaths.isEmpty()) {
             minLength = allPaths.get(0) - 1;
@@ -91,39 +97,26 @@ public class Frog {
      * Рекурсивный метод для нахождения всех вариантов прохода до ячейки назначения.
      * Также метод заполняет список allPaths всеми возможными случаями
      * удачных проходов от старта до ячейки нахождения (В список попадает только количество прыжков на каждый случай).
-     * @param currentPoint - класс с координатами ячейки в которой находится лягушка
+     * @param curY - ордината положения лягушки.
+     * @param curX - абцисса положения лягушки
      * @param path список ячеек, в которых побывала лягушка в одном варианте прохода
      */
-    private void findTheWayFrom(Point currentPoint, List<Point> path) {
-        boolean isDestination = false;
-        int curY = currentPoint.getY();
-        int curX = currentPoint.getX();
-        path.add(currentPoint);
-        if (dstY == curY && dstX == curX) {
-            allPaths.add(path.size());
+    private void findTheWayFrom(int curY, int curX, List<Point> path) {
+        Point currentPoint = new Point(curY, curX);
+        if (canNextMove(currentPoint)) {
+            path.add(currentPoint);
+            if (dstX == curX && dstY == curY) {
+                allPaths.add(path.size());
+            }
+        } else {
+            return;
         }
-        if (dstY != curY && dstX <= curX) {
-            path.remove(currentPoint);
-            isDestination = true;
+
+        for (Point step : steps) {
+            findTheWayFrom(curY + step.getY(), curX + step.getX(), path);
         }
-        if (!isDestination && canNextMove(new Point(curY - 2, curX + 2))) {
-            this.findTheWayFrom(new Point(curY - 2, curX + 1), path);
-        }
-        if (!isDestination && canNextMove(new Point(curY - 1, curX + 2))) {
-            this.findTheWayFrom(new Point(curY - 1, curX + 2), path);
-        }
-        if (!isDestination && canNextMove(new Point(curY, curX + 3))) {
-            this.findTheWayFrom(new Point(curY, curX + 3), path);
-        }
-        if (!isDestination && canNextMove(new Point(curY + 1, curX + 2))) {
-            this.findTheWayFrom(new Point(curY + 1, curX + 2), path);
-        }
-        if (!isDestination && canNextMove(new Point(curY + 2, curX + 1))) {
-            this.findTheWayFrom(new Point(curY + 2, curX + 1), path);
-        }
-        if (!isDestination) {
-            path.remove(currentPoint);
-        }
+
+        path.remove(currentPoint);
     }
 
     /**
