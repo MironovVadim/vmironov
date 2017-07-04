@@ -7,9 +7,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-import java.sql.SQLException;
-import java.sql.ResultSet;
-
 /**
  * Servlet.
  */
@@ -31,21 +28,14 @@ public class EchoServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
         int id = Integer.parseInt(req.getParameter("id"));
-        ResultSet resultSet = this.dbController.get(id);
-        PrintWriter pw = new PrintWriter(resp.getOutputStream());
-        try {
-            while (resultSet.next()) {
-                pw.append("name:" + resultSet.getString("name")
-                        + " login: " + resultSet.getString("login")
-                        + " email: " + resultSet.getString("email"));
-                pw.flush();
-            }
-            resultSet.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            pw.close();
+        String result = this.dbController.get(id);
+        PrintWriter pw = new PrintWriter(resp.getOutputStream(), true);
+        if (result != null) {
+            pw.append(result);
+        } else {
+            pw.append("User'a с таким id в БД нет.");
         }
+        pw.close();
     }
 
     @Override

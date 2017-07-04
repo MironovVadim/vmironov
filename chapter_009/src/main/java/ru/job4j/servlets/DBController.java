@@ -1,17 +1,14 @@
 package ru.job4j.servlets;
-
-import java.sql.ResultSet;
-
 /**
  * Controller of DB.
  */
 public interface DBController {
     /**
-     * Возвращает ResultSet с user'ом из БД.
+     * Возвращает строковый результат с user'ом из БД.
      * @param id user'а
-     * @return результат запросы в БД
+     * @return строковый результат запроса
      */
-   ResultSet get(int id);
+   String get(int id);
 
     /**
      * Метод добавляет нового user'a в БД.

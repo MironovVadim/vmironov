@@ -35,12 +35,16 @@ public class PostgresDBController implements DBController {
     }
 
     @Override
-    public ResultSet get(int id) {
-        ResultSet result = null;
+    public String get(int id) {
+        String result = null;
         try (Connection connection = basicDataSource.getConnection()) {
             PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM public.user WHERE id = ?");
             preparedStatement.setInt(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                result = String.format("name: %s, login: %s, email: %s", resultSet.getString("name"),
+                        resultSet.getString("login"), resultSet.getString("email"));
+            }
             resultSet.close();
             preparedStatement.close();
         } catch (SQLException e) {
