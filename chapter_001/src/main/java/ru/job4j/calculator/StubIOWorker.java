@@ -3,8 +3,8 @@ package ru.job4j.calculator;
 /**
  * Class for testing InteractCalc.
  */
-public class StubIOWorker implements IOWork {
-    /**b
+public class StubIOWorker extends IOWork {
+    /**
      * Array with answers.
      */
     private String[] array;
@@ -18,6 +18,7 @@ public class StubIOWorker implements IOWork {
      * @param array - String array with answers.
      */
     public StubIOWorker(String... array) {
+        super(null);
         this.array = array;
     }
 

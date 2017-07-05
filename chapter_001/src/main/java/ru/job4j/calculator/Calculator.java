@@ -8,78 +8,91 @@
 
 package ru.job4j.calculator;
 
+import ru.job4j.calculator.operations.AddOperation;
+import ru.job4j.calculator.operations.DivOperation;
+import ru.job4j.calculator.operations.MultiplyOperation;
+import ru.job4j.calculator.operations.SingleOperation;
+import ru.job4j.calculator.operations.SubstractOperation;
+
+
+
+import java.util.ArrayList;
+import java.util.List;
+
 /**
 * Class for simple math operations with two numbers.
 */
 public class Calculator {
+
+    /**
+     * All possible operations in this instance.
+     */
+	private List<SingleOperation> allOperations;
+
+    /**
+     * Default constructor. Constructor uses initializeOperations() method
+     * to initialize collection with commands.
+     */
+	public Calculator() {
+		allOperations = this.initializeOperations();
+	}
+
 	/**
 	* result after math operation.
 	*/
 	private double result;
-	/**
-	* Addition method.
-	* @param first - first double value
-	* @param second - second double value
-	*/
-	public void add(double first, double second) {
-		result = first + second;
-	}
-	/**
-	 * Addition to previous result method.
-	 * @param second - second double value
-	 */
-	public void add(double second) {
-		result += second;
-	}
-	/**
-	* Substraction method.
-	* @param first - first double value
-	* @param second - second double value
-	*/
-	public void substract(double first, double second) {
-		result = first - second;
-	}
-	/**
-	 * Substraction from previous result method.
-	 * @param second - second double value
-	 */
-	public void substract(double second) {
-		result -= second;
-	}
-	/**
-	* Division method.
-	* @param first - first double value
-	* @param second - second double value
-	*/
-	public void div(double first, double second) {
-		result = first / second;
-	}
-	/**
-	 * Division previous result method.
-	 * @param second - second double value
-	 */
-	public void div(double second) {
-		result /= second;
-	}
-	/**
-	 * Multiplication method.
-	 * @param first - first double value
-	 * @param second - second double value
-	 */
-	public void multiple(double first, double second) {
-		result = first * second;
-	}
-	/**
-	 * Multiplication previous result method.
-	 * @param second - second double value
-	 */
-	public void multiple(double second) {
-		result *= second;
-	}
+
 	/**
 	* @return value - result after math operation
 	*/
 	public double getResult() {
 		return result;
 	}
+
+    /**
+     * Method set a zero in field result.
+     */
+	public void setResultZero() {
+		this.result = 0;
+	}
+
+    /**
+     * Fill List allOperations by all possible operations.
+     * @return List with operations.
+     */
+	protected List<SingleOperation> initializeOperations() {
+		List<SingleOperation> operationList = new ArrayList<>();
+		operationList.add(new AddOperation());
+		operationList.add(new DivOperation());
+		operationList.add(new MultiplyOperation());
+		operationList.add(new SubstractOperation());
+		return operationList;
+	}
+
+    /**
+     * Method return all keys from allOperations.
+     * @return String[] with keys of operation
+     */
+	public String[] getAllKeys() {
+	    String[] commands = new String[allOperations.size()];
+	    for (int i = 0; i < commands.length; i++) {
+	        commands[i] = allOperations.get(i).key();
+        }
+        return commands;
+    }
+
+    /**
+     * Method execute one of operations with two numbers and write result into fiend this.result.
+     * @param first - first number.
+     * @param operation - symbol of operations.
+     * @param second - second number.
+     */
+    public void doSingleOperation(double first, String operation, double second) {
+	    for (SingleOperation so : allOperations) {
+	        if (operation.equals(so.key())) {
+	            this.result = so.doOperation(first, second);
+	            break;
+            }
+        }
+    }
 }

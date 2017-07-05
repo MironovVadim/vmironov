@@ -16,9 +16,10 @@ public class InteractCalcTest {
     public void whenAddFourWithSixAndAddFiveThenGetFifteen() {
         String[] answers = new String[]{"4", "+", "6", "true", "+", "5", "false", "true"};
         IOWork ioWork = new StubIOWorker(answers);
-        InteractCalc calc = new InteractCalc(ioWork);
-        calc.init();
-        double result = calc.getResultFromCalc();
+        Calculator calc = new Calculator();
+        InteractCalc calculator = new InteractCalc(calc, ioWork);
+        calculator.init();
+        double result = calculator.getResultFromCalc();
         double expected = 15;
         assertThat(result, is(expected));
     }

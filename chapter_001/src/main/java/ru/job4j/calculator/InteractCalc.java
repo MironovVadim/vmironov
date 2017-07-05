@@ -11,16 +11,18 @@ public class InteractCalc {
     /**
      * Class for working with IO library.
      */
-    private IOWork ioWorker = new IOWorker();
+    private IOWork ioWorker;
     /**
      * Continue calculate or start with no result calculation.
      */
     private boolean isContinueOperation = false;
     /**
      * Default constructor.
+     * @param calc - Calculator class.
      * @param ioWorker - class for working with Input/Output.
      */
-    public InteractCalc(IOWork ioWorker) {
+    public InteractCalc(Calculator calc, IOWork ioWorker) {
+        this.calc = calc;
         this.ioWorker = ioWorker;
     }
 
@@ -31,7 +33,7 @@ public class InteractCalc {
         boolean isExit = false;
         while (!isExit) {
             if (!this.isContinueOperation) {
-                this.calc = new Calculator();
+                this.calc.setResultZero();
             }
                 this.nextOperation();
                 this.printResult();
@@ -53,15 +55,7 @@ public class InteractCalc {
         }
         String operation = this.ioWorker.inputOperation("Введите символ операции.");
         double second = this.ioWorker.inputOperand("Введите второй операнд.");
-        if ("+".equals(operation)) {
-            this.calc.add(first, second);
-        } else if ("-".equals(operation)) {
-            this.calc.substract(first, second);
-        } else if ("/".equals(operation)) {
-            this.calc.div(first, second);
-        } else if ("*".equals(operation)) {
-            this.calc.multiple(first, second);
-        }
+        this.calc.doSingleOperation(first, operation, second);
     }
 
     /**

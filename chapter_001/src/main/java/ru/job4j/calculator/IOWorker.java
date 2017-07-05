@@ -7,7 +7,15 @@ import java.io.InputStreamReader;
 /**
  * Class for working with IO library and InteractCalc class.
  */
-public class IOWorker implements IOWork {
+public class IOWorker extends IOWork {
+    /**
+     *
+     * Default constructor.
+     * @param commands - all commands of Calculator class.
+     */
+    public IOWorker(String[] commands) {
+        super(commands);
+    }
     /**
      * BufferedInputReader.
      */
@@ -19,7 +27,14 @@ public class IOWorker implements IOWork {
         String result;
         try {
             result = reader.readLine();
-            if (!result.matches("^[+\\-/*]$")) {
+            boolean isOperationExist = false;
+            for (String command : this.getCommands()) {
+                if (result.equals(command)) {
+                    isOperationExist = true;
+                    break;
+                }
+            }
+            if (!isOperationExist) {
                 throw new IOException();
             }
         } catch (IOException e) {
