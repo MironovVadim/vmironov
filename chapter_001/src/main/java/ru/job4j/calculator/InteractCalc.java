@@ -35,7 +35,15 @@ public class InteractCalc {
             if (!this.isContinueOperation) {
                 this.calc.setResultZero();
             }
-                this.nextOperation();
+            double firstNumber;
+            if (this.isContinueOperation) {
+                firstNumber = this.calc.getResult();
+            } else {
+                firstNumber = this.ioWorker.inputOperand("Введите первый операнд.");
+            }
+            String operation = this.ioWorker.inputOperation("Введите символ операции.");
+            double secondNumber = this.ioWorker.inputOperand("Введите второй операнд.");
+                this.nextOperation(firstNumber, operation, secondNumber);
                 this.printResult();
                 this.isContinueComputing();
             if (!this.isContinueOperation) {
@@ -43,18 +51,14 @@ public class InteractCalc {
             }
         }
     }
+
     /**
      * Method for calculation.
+     * @param first - first number.
+     * @param operation - operation.
+     * @param second - second number.
      */
-    private void nextOperation() {
-        double first;
-        if (this.isContinueOperation) {
-            first = this.calc.getResult();
-        } else {
-            first = this.ioWorker.inputOperand("Введите первый операнд.");
-        }
-        String operation = this.ioWorker.inputOperation("Введите символ операции.");
-        double second = this.ioWorker.inputOperand("Введите второй операнд.");
+    private void nextOperation(double first, String operation, double second) {
         this.calc.doSingleOperation(first, operation, second);
     }
 

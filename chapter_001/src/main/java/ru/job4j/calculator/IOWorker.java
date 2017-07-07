@@ -2,24 +2,26 @@ package ru.job4j.calculator;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 
 /**
  * Class for working with IO library and InteractCalc class.
  */
 public class IOWorker extends IOWork {
     /**
+     * BufferedInputReader.
+     */
+    private BufferedReader reader;
+
+    /**
      *
      * Default constructor.
      * @param commands - all commands of Calculator class.
+     * @param reader - BufferedReader for work with user input.
      */
-    public IOWorker(String[] commands) {
+    public IOWorker(String[] commands, BufferedReader reader) {
         super(commands);
+        this.reader = reader;
     }
-    /**
-     * BufferedInputReader.
-     */
-    private BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
     @Override
     public String inputOperation(String forPrint) {
