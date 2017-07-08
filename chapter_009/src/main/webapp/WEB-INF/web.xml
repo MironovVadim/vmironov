@@ -1,11 +1,40 @@
 <web-app>
     <servlet>
-        <servlet-name>EchoServlet</servlet-name>
-        <servlet-class>ru.job4j.servlets.EchoServlet</servlet-class>
+        <servlet-name>DoDeleteServlet</servlet-name>
+        <servlet-class>ru.job4j.servlets.DoDeleteServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DoGetServlet</servlet-name>
+        <servlet-class>ru.job4j.servlets.DoGetServlet</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>DoPostServlet</servlet-name>
+        <servlet-class>ru.job4j.servlets.DoPostServlet</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>DoPutServlet</servlet-name>
+        <servlet-class>ru.job4j.servlets.DoPutServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
-        <servlet-name>EchoServlet</servlet-name>
-        <url-pattern>/echo</url-pattern>
+        <servlet-name>DoDeleteServlet</servlet-name>
+        <url-pattern>/delServ</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>DoGetServlet</servlet-name>
+        <url-pattern>/getServ</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>DoPutServlet</servlet-name>
+        <url-pattern>/putServ</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>DoPostServlet</servlet-name>
+        <url-pattern>/postServ</url-pattern>
     </servlet-mapping>
 </web-app>
