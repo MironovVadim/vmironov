@@ -29,6 +29,7 @@ public class PostgresDBController implements DBController {
     private static BasicDataSource basicDataSource = new BasicDataSource();
 
     static {
+        basicDataSource.setDriverClassName("org.postgresql.Driver");
         basicDataSource.setUrl(URL);
         basicDataSource.setUsername(USER);
         basicDataSource.setPassword(PASSWORD);

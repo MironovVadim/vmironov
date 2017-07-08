@@ -19,28 +19,22 @@ public class DoGetServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
-        /*
-        int id = Integer.parseInt(req.getParameter("id"));
-        String result = this.dbController.get(id);
+        //int id = Integer.parseInt(req.getParameter("id"));
+        String result = this.dbController.get(2);
         PrintWriter pw = new PrintWriter(resp.getOutputStream(), true);
         if (result != null) {
-            pw.append(result);
+            pw.append("<!DOCTYPE html>\n" +
+                    "<html lang=\"en\">\n" +
+                    "<head>\n" +
+                    "    <meta charset=\"UTF-8\">\n" +
+                    "    <title>Title</title>\n" +
+                    "</head>\n" +
+                    "<body>\n" +
+                    result +
+                    "</body>\n" +
+                    "</html>");
         } else {
             pw.append("User'a с таким id в БД нет.");
         }
-        pw.close();
-        */
-        PrintWriter pw = new PrintWriter(resp.getOutputStream(), true);
-        pw.append("<!DOCTYPE html>\n" +
-                "<html lang=\"en\">\n" +
-                "<head>\n" +
-                "    <meta charset=\"UTF-8\">\n" +
-                "    <title>Title</title>\n" +
-                "</head>\n" +
-                "<body>\n" +
-                "someText\n" +
-                "</body>\n" +
-                "</html>");
-        pw.close();
     }
 }
