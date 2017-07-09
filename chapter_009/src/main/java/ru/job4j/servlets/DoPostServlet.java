@@ -17,9 +17,10 @@ public class DoPostServlet extends HttpServlet {
     private DBController dbController = new PostgresDBController();
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
         StringBuilder sb = new StringBuilder();
+        PrintWriter pw = new PrintWriter(resp.getOutputStream(), true);
         sb.append("<!DOCTYPE html>\n" +
                 "<html lang=\"en\">\n" +
                 "<head>\n" +
@@ -34,15 +35,23 @@ public class DoPostServlet extends HttpServlet {
                 "<p>Add user</p>" +
                 "<form action='" + req.getContextPath() + "/postServ' method='post'>" +
                 "Name : <input type='text' name='name' />" +
+                "<br/>" +
                 "Login : <input type='text' name='login' />" +
+                "<br/>" +
                 "Email : <input type='text' name='email' />" +
+                "<br/>" +
                 "<input type='submit'>" +
                 "</form>" +
                 "<br/>" +
                 "</body>\n" +
                 "</html>");
-        PrintWriter pw = new PrintWriter(resp.getOutputStream(), true);
         pw.append(sb.toString());
+        pw.close();
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.setContentType("text/html");
         String name = req.getParameter("name");
         String login = req.getParameter("login");
         String email = req.getParameter("email");

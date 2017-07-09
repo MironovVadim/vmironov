@@ -30,7 +30,9 @@ public class DoGetServlet extends HttpServlet {
                 "</head>\n" +
                 "<body>\n" +
                 "<a href=\"delServ\">delServ</a>\n" +
+                "<br/>" +
                 "<a href=\"postServ\">postServ</a>\n" +
+                "<br/>" +
                 "<a href=\"putServ\">putServ</a>\n" +
                 "<br/>" +
                 "<p>Get user</p>" +

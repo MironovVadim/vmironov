@@ -17,8 +17,9 @@ public class DoPutServlet extends HttpServlet {
     private DBController dbController = new PostgresDBController();
 
     @Override
-    protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
+        PrintWriter pw = new PrintWriter(resp.getOutputStream(), true);
         StringBuilder sb = new StringBuilder();
         sb.append("<!DOCTYPE html>\n" +
                 "<html lang=\"en\">\n" +
@@ -34,14 +35,21 @@ public class DoPutServlet extends HttpServlet {
                 "<p>Update user</p>" +
                 "<form action='" + req.getContextPath() + "/putServ' method='put'>" +
                 "Email : <input type='text' name='email' />" +
+                "<br/>" +
                 "Name : <input type='text' name='name' />" +
+                "<br/>" +
                 "<input type='submit'>" +
                 "</form>" +
                 "<br/>" +
                 "</body>\n" +
                 "</html>");
-        PrintWriter pw = new PrintWriter(resp.getOutputStream(), true);
         pw.append(sb.toString());
+        pw.close();
+    }
+
+    @Override
+    protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.setContentType("text/html");
         String email = req.getParameter("email");
         String name = req.getParameter("name");
         this.dbController.put(email, name);

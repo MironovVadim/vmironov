@@ -17,7 +17,7 @@ public class DoDeleteServlet extends HttpServlet {
     private DBController dbController = new PostgresDBController();
 
     @Override
-    protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
         PrintWriter pw = new PrintWriter(resp.getOutputStream(), true);
         StringBuilder sb = new StringBuilder("<!DOCTYPE html>\n" +
@@ -30,16 +30,21 @@ public class DoDeleteServlet extends HttpServlet {
                 "<a href=\"getServ\">getServ</a>\n" +
                 "<a href=\"postServ\">postServ</a>\n" +
                 "<a href=\"putServ\">putServ</a>\n" +
-                "<br/>" +
                 "<p>Delete user</p>" +
                 "<form action='" + req.getContextPath() + "/delServ' method='delete'>" +
                 "Name : <input type='text' name='name' />" +
+                "<br/>" +
                 "<input type='submit'>" +
                 "</form>" +
                 "</body>\n" +
                 "</html>");
         pw.append(sb.toString());
         pw.close();
+    }
+
+    @Override
+    protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.setContentType("text/html");
         String name = req.getParameter("name");
         this.dbController.delete(name);
     }
