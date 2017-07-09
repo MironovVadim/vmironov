@@ -19,22 +19,30 @@ public class DoGetServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
-        //int id = Integer.parseInt(req.getParameter("id"));
-        String result = this.dbController.get(2);
+        int id = Integer.parseInt(req.getParameter("id"));
+        String result = this.dbController.get(id);
         PrintWriter pw = new PrintWriter(resp.getOutputStream(), true);
-        if (result != null) {
-            pw.append("<!DOCTYPE html>\n" +
-                    "<html lang=\"en\">\n" +
-                    "<head>\n" +
-                    "    <meta charset=\"UTF-8\">\n" +
-                    "    <title>Title</title>\n" +
-                    "</head>\n" +
-                    "<body>\n" +
-                    result +
-                    "</body>\n" +
-                    "</html>");
-        } else {
-            pw.append("User'a с таким id в БД нет.");
-        }
+        StringBuilder sb = new StringBuilder("<!DOCTYPE html>\n" +
+                "<html lang=\"en\">\n" +
+                "<head>\n" +
+                "    <meta charset=\"UTF-8\">\n" +
+                "    <title>Title</title>\n" +
+                "</head>\n" +
+                "<body>\n" +
+                "<a href=\"delServ\">delServ</a>\n" +
+                "<a href=\"postServ\">postServ</a>\n" +
+                "<a href=\"putServ\">putServ</a>\n" +
+                "<br/>" +
+                "<p>Get user</p>" +
+                "<form action='" + req.getContextPath() + "/getServ' method='get'>" +
+                "Id : <input type='text' name='id' />" +
+                "<input type='submit'>" +
+                "</form>" +
+                "<br/>" +
+                result +
+                "</body>\n" +
+                "</html>");
+        pw.append(sb.toString());
+        pw.close();
     }
 }
