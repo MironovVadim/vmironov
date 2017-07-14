@@ -6,11 +6,15 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Класс для работы с БД.
  */
 public class PostgresDBController implements DBController {
+
+    private static PostgresDBController instance;
     /**
      * Server address.
      */
@@ -35,38 +39,44 @@ public class PostgresDBController implements DBController {
         basicDataSource.setPassword(PASSWORD);
     }
 
+    private PostgresDBController() {
+
+    }
+
+    public static PostgresDBController newInstance() {
+        if (instance == null) {
+            instance = new PostgresDBController();
+        }
+        return instance;
+    }
+
     @Override
-    public String get(int id) {
-        StringBuilder result = new StringBuilder("<table>");
-        result.append("<tr><th>Name</th><th>Login</th><th>Email</th><th>CreateDate</th></tr>");
+    public List<String> get(int id) {
+        List<String> result = new ArrayList<>();
         try (Connection connection = basicDataSource.getConnection()) {
             PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM public.user WHERE id = ?");
             preparedStatement.setInt(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                result.append("<tr><td>" + resultSet.getString("name") + "</td><td>" +
-                                resultSet.getString("login") + "</td><td>" +
-                                resultSet.getString("email") +
-                                "</td><td>" + resultSet.getDate("create_date") + "</td></tr>");
+                result.add(resultSet.getString("name"));
+                result.add(resultSet.getString("login"));
+                result.add(resultSet.getString("email"));
+                result.add(resultSet.getString("create_date"));
             }
-            result.append("</table>");
-            resultSet.close();
-            preparedStatement.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return result.toString();
+        return result;
     }
 
     @Override
     public void post(String name, String login, String email) {
-        try (Connection connection = basicDataSource.getConnection()) {
-            PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO public.user (name, login, email) VALUES (?, ?, ?)");
+        try (Connection connection = basicDataSource.getConnection();
+                PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO public.user (name, login, email) VALUES (?, ?, ?)")) {
             preparedStatement.setString(1, name);
             preparedStatement.setString(2, login);
             preparedStatement.setString(3, email);
             preparedStatement.executeUpdate();
-            preparedStatement.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -74,12 +84,11 @@ public class PostgresDBController implements DBController {
 
     @Override
     public void put(String email, String name) {
-        try (Connection connection = basicDataSource.getConnection()) {
-            PreparedStatement preparedStatement = connection.prepareStatement("UPDATE public.user SET email = ? WHERE name = ?");
+        try (Connection connection = basicDataSource.getConnection();
+                PreparedStatement preparedStatement = connection.prepareStatement("UPDATE public.user SET email = ? WHERE name = ?")) {
             preparedStatement.setString(1, email);
             preparedStatement.setString(2, name);
             preparedStatement.executeUpdate();
-            preparedStatement.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -87,11 +96,10 @@ public class PostgresDBController implements DBController {
 
     @Override
     public void delete(String name) {
-        try (Connection connection = basicDataSource.getConnection()) {
-            PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM public.user WHERE name = ?");
+        try (Connection connection = basicDataSource.getConnection();
+                PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM public.user WHERE name = ?")) {
             preparedStatement.setString(1, name);
             preparedStatement.executeUpdate();
-            preparedStatement.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }

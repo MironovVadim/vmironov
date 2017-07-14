@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 
 /**
  * Created by ПК on 08.07.2017.
@@ -14,14 +15,24 @@ public class DoGetServlet extends HttpServlet {
     /**
      * БД контроллер.
      */
-    private DBController dbController = new PostgresDBController();
+    private DBController dbController = PostgresDBController.newInstance();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
         int id = Integer.parseInt(req.getParameter("id"));
-        String result = this.dbController.get(id);
-        PrintWriter pw = new PrintWriter(resp.getOutputStream(), true);
+        List<String> users = this.dbController.get(id);
+        StringBuilder usersTable = new StringBuilder("<table>");
+        usersTable.append("<tr><th>Name</th><th>Login</th><th>Email</th><th>CreateDate</th></tr>");
+        while (users.size() > 0) {
+            usersTable.append("<tr>");
+            usersTable.append("<td>" + users.remove(0) + "</td>");
+            usersTable.append("<td>" + users.remove(0) + "</td>");
+            usersTable.append("<td>" + users.remove(0) + "</td>");
+            usersTable.append("<td>" + users.remove(0) + "</td>");
+            usersTable.append("</tr>");
+        }
+        usersTable.append("</table");
         StringBuilder sb = new StringBuilder("<!DOCTYPE html>\n" +
                 "<html lang=\"en\">\n" +
                 "<head>\n" +
@@ -41,10 +52,10 @@ public class DoGetServlet extends HttpServlet {
                 "<input type='submit'>" +
                 "</form>" +
                 "<br/>" +
-                result +
+                usersTable +
                 "</body>\n" +
                 "</html>");
+        PrintWriter pw = new PrintWriter(resp.getOutputStream(), true);
         pw.append(sb.toString());
-        pw.close();
     }
 }

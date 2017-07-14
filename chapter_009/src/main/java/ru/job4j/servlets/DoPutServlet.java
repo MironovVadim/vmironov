@@ -14,7 +14,7 @@ public class DoPutServlet extends HttpServlet {
     /**
      * БД контроллер.
      */
-    private DBController dbController = new PostgresDBController();
+    private DBController dbController = PostgresDBController.newInstance();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -44,7 +44,6 @@ public class DoPutServlet extends HttpServlet {
                 "</body>\n" +
                 "</html>");
         pw.append(sb.toString());
-        pw.close();
     }
 
     @Override

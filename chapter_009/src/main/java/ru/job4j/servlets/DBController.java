@@ -1,4 +1,7 @@
 package ru.job4j.servlets;
+
+import java.util.List;
+
 /**
  * Controller of DB.
  */
@@ -8,7 +11,7 @@ public interface DBController {
      * @param id user'а
      * @return строковый результат запроса
      */
-   String get(int id);
+   List<String> get(int id);
 
     /**
      * Метод добавляет нового user'a в БД.
