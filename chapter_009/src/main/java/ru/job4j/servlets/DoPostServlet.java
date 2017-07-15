@@ -8,7 +8,10 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 /**
- * Created by ПК on 08.07.2017.
+ * Post Servlet.
+ *  * @author Vadim Moronov (Mironov6292@gmail.ru/Multik6292@mail.ru)
+ * @version $Id$
+ * @since 0.1
  */
 public class DoPostServlet extends HttpServlet {
     /**

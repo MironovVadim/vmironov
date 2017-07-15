@@ -6,10 +6,13 @@ import java.util.List;
 
 /**
  * Interface for ru.job4j.storage food.
+ * @author Vadim Moronov (Mironov6292@gmail.ru/Multik6292@mail.ru)
+ * @version $Id$
+ * @since 0.1
  */
 public interface Storage {
     /**
-     * Method pull out list of food that matches conditions for current ru.job4j.storage.
+     * Method pull out list of food that matches conditions for current storage.
      * @param foodList - list with all kind of food.
      * @return list of matched food for current ru.job4j.storage.
      */

@@ -8,6 +8,9 @@ import java.util.stream.Collectors;
 
 /**
  * Shop with food.
+ * @author Vadim Moronov (Mironov6292@gmail.ru/Multik6292@mail.ru)
+ * @version $Id$
+ * @since 0.1
  */
 public class Shop implements Storage {
     /**
@@ -15,6 +18,12 @@ public class Shop implements Storage {
      */
     private List<Food> foodStorage = new ArrayList<>();
 
+    /**
+     * Method pull out list of food that matches conditions for current storage.
+     * If food have left time less then 25% method add discount to food.
+     * @param foodList - list with all kind of food.
+     * @return List of food for current storage.
+     */
     @Override
     public List<Food> getFoodForStorage(List<Food> foodList) {
         List<Food> shopFood = foodList.stream().filter(value -> {

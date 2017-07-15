@@ -11,9 +11,14 @@ import java.util.List;
 
 /**
  * Класс для работы с БД.
+ *  * @author Vadim Moronov (Mironov6292@gmail.ru/Multik6292@mail.ru)
+ * @version $Id$
+ * @since 0.1
  */
 public class PostgresDBController implements DBController {
-
+    /**
+     * Singleton DB.
+     */
     private static PostgresDBController instance;
     /**
      * Server address.
@@ -39,10 +44,15 @@ public class PostgresDBController implements DBController {
         basicDataSource.setPassword(PASSWORD);
     }
 
-    private PostgresDBController() {
+    /**
+     * Private default constructor.
+     */
+    private PostgresDBController() {}
 
-    }
-
+    /**
+     * Singleton pattern.
+     * @return DB controller.
+     */
     public static PostgresDBController newInstance() {
         if (instance == null) {
             instance = new PostgresDBController();

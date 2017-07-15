@@ -19,9 +19,12 @@ import static org.junit.Assert.assertThat;
 public class WareHouseTest {
     /**
      * Test getFoodForStorage() method.
+     * @author Vadim Moronov (Mironov6292@gmail.ru/Multik6292@mail.ru)
+     * @version $Id$
+     * @since 0.1
      */
     @Test
-    public void whenCheckFiveItemsThenGetOneItemsInStorage() {
+    public void whenCheckFiveItemsThenGetOneItemInStorage() {
         Warehouse warehouse = new Warehouse();
         long currentTime = System.currentTimeMillis();
         long oneDay = 86400000;
