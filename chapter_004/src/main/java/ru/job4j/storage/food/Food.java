@@ -8,7 +8,7 @@ import java.util.Date;
  * @version $Id$
  * @since 0.1
  */
-public class Food {
+public abstract class Food {
     /**
      * Name of food.
      */
@@ -33,6 +33,14 @@ public class Food {
      * Is food discounted.
      */
     private boolean isDiscounted = false;
+    /**
+     * Is food reproducted.
+     */
+    private boolean canReproduct;
+    /**
+     * Is food must be stored in fridge.
+     */
+    private boolean isColdStorage = true;
 
     /**
      * Default constructor.
@@ -41,13 +49,17 @@ public class Food {
      * @param expireDate - date of creation.
      * @param price - price of food.
      * @param discount - discount of food in percent.
+     * @param canReproduct - is food can reproduct after expire.
+     * @param isColdStorage - is food must be stored in fridge.
      */
-    public Food(String name, Date createDate, Date expireDate, int price, int discount) {
+    public Food(String name, Date createDate, Date expireDate, int price, int discount, boolean canReproduct, boolean isColdStorage) {
         this.name = name;
         this.createDate = createDate;
         this.expireDate = expireDate;
         this.price = price;
         this.discount = discount;
+        this.canReproduct = canReproduct;
+        this.isColdStorage = isColdStorage;
     }
 
     /**
@@ -108,6 +120,22 @@ public class Food {
         }
     }
 
+    /**
+     * Method return is food can reproduce.
+     * @return boolean - is food can reproduce.
+     */
+    public boolean isCanReproduct() {
+        return canReproduct;
+    }
+
+    /**
+     * Method return is food must be stored is fridge.
+     * @return boolean - is food must be stored is fridge.
+     */
+    public boolean isColdStorage() {
+        return isColdStorage;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -128,6 +156,12 @@ public class Food {
         if (isDiscounted != food.isDiscounted) {
             return false;
         }
+        if (canReproduct != food.canReproduct) {
+            return false;
+        }
+        if (isColdStorage != food.isColdStorage) {
+            return false;
+        }
         if (name != null ? !name.equals(food.name) : food.name != null) {
             return false;
         }
@@ -145,6 +179,8 @@ public class Food {
         result = 31 * result + price;
         result = 31 * result + discount;
         result = 31 * result + (isDiscounted ? 1 : 0);
+        result = 31 * result + (canReproduct ? 1 : 0);
+        result = 31 * result + (isColdStorage ? 1 : 0);
         return result;
     }
 }

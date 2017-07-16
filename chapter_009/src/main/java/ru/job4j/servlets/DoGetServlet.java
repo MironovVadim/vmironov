@@ -27,12 +27,12 @@ public class DoGetServlet extends HttpServlet {
         List<String> users = this.dbController.get(id);
         StringBuilder usersTable = new StringBuilder("<table>");
         usersTable.append("<tr><th>Name</th><th>Login</th><th>Email</th><th>CreateDate</th></tr>");
-        while (users.size() > 0) {
+        for (int i = 0; i < users.size();) {
             usersTable.append("<tr>");
-            usersTable.append("<td>" + users.remove(0) + "</td>");
-            usersTable.append("<td>" + users.remove(0) + "</td>");
-            usersTable.append("<td>" + users.remove(0) + "</td>");
-            usersTable.append("<td>" + users.remove(0) + "</td>");
+            usersTable.append("<td>" + users.get(i++) + "</td>");
+            usersTable.append("<td>" + users.get(i++) + "</td>");
+            usersTable.append("<td>" + users.get(i++) + "</td>");
+            usersTable.append("<td>" + users.get(i++) + "</td>");
             usersTable.append("</tr>");
         }
         usersTable.append("</table");
@@ -58,7 +58,8 @@ public class DoGetServlet extends HttpServlet {
                 usersTable +
                 "</body>\n" +
                 "</html>");
-        PrintWriter pw = new PrintWriter(resp.getOutputStream(), true);
-        pw.append(sb.toString());
+        PrintWriter pw = new PrintWriter(resp.getOutputStream());
+        pw.print(sb.toString());
+        pw.flush();
     }
 }

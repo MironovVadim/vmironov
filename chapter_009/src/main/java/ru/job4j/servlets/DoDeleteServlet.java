@@ -22,7 +22,6 @@ public class DoDeleteServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
-        PrintWriter pw = new PrintWriter(resp.getOutputStream(), true);
         StringBuilder sb = new StringBuilder("<!DOCTYPE html>\n" +
                 "<html lang=\"en\">\n" +
                 "<head>\n" +
@@ -31,21 +30,25 @@ public class DoDeleteServlet extends HttpServlet {
                 "</head>\n" +
                 "<body>\n" +
                 "<a href=\"getServ\">getServ</a>\n" +
+                "<br/>" +
                 "<a href=\"postServ\">postServ</a>\n" +
+                "<br/>" +
                 "<a href=\"putServ\">putServ</a>\n" +
                 "<p>Delete user</p>" +
-                "<form action='" + req.getContextPath() + "/delServ' method='delete'>" +
+                "<form action='" + req.getContextPath() + "/delServ' method='post'>" +
                 "Name : <input type='text' name='name' />" +
                 "<br/>" +
                 "<input type='submit'>" +
                 "</form>" +
                 "</body>\n" +
                 "</html>");
-        pw.append(sb.toString());
+        PrintWriter pw = new PrintWriter(resp.getOutputStream());
+        pw.print(sb.toString());
+        pw.flush();
     }
 
     @Override
-    protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
         String name = req.getParameter("name");
         this.dbController.delete(name);

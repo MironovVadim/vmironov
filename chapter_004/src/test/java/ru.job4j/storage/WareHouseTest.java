@@ -15,6 +15,9 @@ import static org.junit.Assert.assertThat;
 
 /**
  * Test class.
+ * @author Vadim Moronov (Mironov6292@gmail.ru/Multik6292@mail.ru)
+ * @version $Id$
+ * @since 0.1
  */
 public class WareHouseTest {
     /**
@@ -31,15 +34,15 @@ public class WareHouseTest {
         List<Food> foodList = new ArrayList<>();
         Milk milk1 = new Milk("SomeMilk",
                 new Date(currentTime - oneDay * 4),
-                new Date(currentTime + oneDay * 6), 100, 35);
+                new Date(currentTime + oneDay * 6), 100, 35, false, true);
         Milk milk2 = new Milk("SomeMilkToo",
                 new Date(currentTime - oneDay * 6),
-                new Date(currentTime + oneDay), 80, 35);
+                new Date(currentTime + oneDay), 80, 35, false, true);
         Meat meat = new Meat("SomeMeat", new Date(currentTime - oneDay),
-                new Date(currentTime + oneDay * 11), 200, 50);
+                new Date(currentTime + oneDay * 11), 200, 50, false, true);
         Fruit fruit = new Fruit("SomeFruit",
                 new Date(currentTime - oneDay * 7),
-                new Date(currentTime - oneDay), 30, 20);
+                new Date(currentTime - oneDay), 30, 20, true, false);
         foodList.add(milk1);
         foodList.add(milk2);
         foodList.add(meat);

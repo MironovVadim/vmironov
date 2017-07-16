@@ -16,8 +16,10 @@ public class Meat extends Food {
      * @param createDate - date of creation.
      * @param price - price of meat.
      * @param discount - discount of meat in percent.
+     * @param canReproduct - is food can reproduct after expire.
+     * @param isColdStorage - is food must be stored in fridge.
      */
-    public Meat(String name, Date expireDate, Date createDate, int price, int discount) {
-        super(name, expireDate, createDate, price, discount);
+    public Meat(String name, Date expireDate, Date createDate, int price, int discount, boolean canReproduct, boolean isColdStorage) {
+        super(name, expireDate, createDate, price, discount, canReproduct, isColdStorage);
     }
 }

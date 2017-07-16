@@ -16,8 +16,10 @@ public class Milk extends Food {
      * @param createDate - date of creation.
      * @param price - price of milk.
      * @param discount - discount of milk in percent.
+     * @param canReproduct - is food can reproduct after expire.
+     * @param isColdStorage - is food must be stored in fridge.
      */
-    public Milk(String name, Date expireDate, Date createDate, int price, int discount) {
-        super(name, expireDate, createDate, price, discount);
+    public Milk(String name, Date expireDate, Date createDate, int price, int discount, boolean canReproduct, boolean isColdStorage) {
+        super(name, expireDate, createDate, price, discount, canReproduct, isColdStorage);
     }
 }

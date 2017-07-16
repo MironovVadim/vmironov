@@ -22,7 +22,6 @@ public class DoPutServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
-        PrintWriter pw = new PrintWriter(resp.getOutputStream(), true);
         StringBuilder sb = new StringBuilder();
         sb.append("<!DOCTYPE html>\n" +
                 "<html lang=\"en\">\n" +
@@ -32,25 +31,28 @@ public class DoPutServlet extends HttpServlet {
                 "</head>\n" +
                 "<body>\n" +
                 "<a href=\"delServ\">delServ</a>\n" +
+                "<br/>" +
                 "<a href=\"getServ\">getServ</a>\n" +
+                "<br/>" +
                 "<a href=\"postServ\">postServ</a>\n" +
                 "<br/>" +
                 "<p>Update user</p>" +
-                "<form action='" + req.getContextPath() + "/putServ' method='put'>" +
-                "Email : <input type='text' name='email' />" +
-                "<br/>" +
+                "<form action='" + req.getContextPath() + "/putServ' method='post'>" +
                 "Name : <input type='text' name='name' />" +
                 "<br/>" +
+                "Email : <input type='text' name='email' />" +
                 "<input type='submit'>" +
                 "</form>" +
                 "<br/>" +
                 "</body>\n" +
                 "</html>");
-        pw.append(sb.toString());
+        PrintWriter pw = new PrintWriter(resp.getOutputStream());
+        pw.print(sb.toString());
+        pw.flush();
     }
 
     @Override
-    protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
         String email = req.getParameter("email");
         String name = req.getParameter("name");

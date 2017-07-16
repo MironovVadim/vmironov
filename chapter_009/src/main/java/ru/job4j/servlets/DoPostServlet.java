@@ -23,7 +23,6 @@ public class DoPostServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
         StringBuilder sb = new StringBuilder();
-        PrintWriter pw = new PrintWriter(resp.getOutputStream(), true);
         sb.append("<!DOCTYPE html>\n" +
                 "<html lang=\"en\">\n" +
                 "<head>\n" +
@@ -32,7 +31,9 @@ public class DoPostServlet extends HttpServlet {
                 "</head>\n" +
                 "<body>\n" +
                 "<a href=\"delServ\">delServ</a>\n" +
+                "<br/>" +
                 "<a href=\"getServ\">getServ</a>\n" +
+                "<br/>" +
                 "<a href=\"putServ\">putServ</a>\n" +
                 "<br/>" +
                 "<p>Add user</p>" +
@@ -48,7 +49,9 @@ public class DoPostServlet extends HttpServlet {
                 "<br/>" +
                 "</body>\n" +
                 "</html>");
-        pw.append(sb.toString());
+        PrintWriter pw = new PrintWriter(resp.getOutputStream());
+        pw.print(sb.toString());
+        pw.flush();
     }
 
     @Override
