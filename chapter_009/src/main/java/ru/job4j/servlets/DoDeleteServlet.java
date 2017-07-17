@@ -20,37 +20,10 @@ public class DoDeleteServlet extends HttpServlet {
     private DBController dbController = PostgresDBController.newInstance();
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.setContentType("text/html");
-        StringBuilder sb = new StringBuilder("<!DOCTYPE html>\n" +
-                "<html lang=\"en\">\n" +
-                "<head>\n" +
-                "    <meta charset=\"UTF-8\">\n" +
-                "    <title>Title</title>\n" +
-                "</head>\n" +
-                "<body>\n" +
-                "<a href=\"getServ\">getServ</a>\n" +
-                "<br/>" +
-                "<a href=\"postServ\">postServ</a>\n" +
-                "<br/>" +
-                "<a href=\"putServ\">putServ</a>\n" +
-                "<p>Delete user</p>" +
-                "<form action='" + req.getContextPath() + "/delServ' method='post'>" +
-                "Name : <input type='text' name='name' />" +
-                "<br/>" +
-                "<input type='submit'>" +
-                "</form>" +
-                "</body>\n" +
-                "</html>");
-        PrintWriter pw = new PrintWriter(resp.getOutputStream());
-        pw.print(sb.toString());
-        pw.flush();
-    }
-
-    @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
         String name = req.getParameter("name");
         this.dbController.delete(name);
+        resp.sendRedirect(String.format("%s/index.jsp", req.getContextPath()));
     }
 }

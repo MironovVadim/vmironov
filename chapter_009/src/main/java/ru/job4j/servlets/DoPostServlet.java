@@ -20,46 +20,12 @@ public class DoPostServlet extends HttpServlet {
     private DBController dbController = PostgresDBController.newInstance();
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.setContentType("text/html");
-        StringBuilder sb = new StringBuilder();
-        sb.append("<!DOCTYPE html>\n" +
-                "<html lang=\"en\">\n" +
-                "<head>\n" +
-                "    <meta charset=\"UTF-8\">\n" +
-                "    <title>Title</title>\n" +
-                "</head>\n" +
-                "<body>\n" +
-                "<a href=\"delServ\">delServ</a>\n" +
-                "<br/>" +
-                "<a href=\"getServ\">getServ</a>\n" +
-                "<br/>" +
-                "<a href=\"putServ\">putServ</a>\n" +
-                "<br/>" +
-                "<p>Add user</p>" +
-                "<form action='" + req.getContextPath() + "/postServ' method='post'>" +
-                "Name : <input type='text' name='name' />" +
-                "<br/>" +
-                "Login : <input type='text' name='login' />" +
-                "<br/>" +
-                "Email : <input type='text' name='email' />" +
-                "<br/>" +
-                "<input type='submit'>" +
-                "</form>" +
-                "<br/>" +
-                "</body>\n" +
-                "</html>");
-        PrintWriter pw = new PrintWriter(resp.getOutputStream());
-        pw.print(sb.toString());
-        pw.flush();
-    }
-
-    @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
         String name = req.getParameter("name");
         String login = req.getParameter("login");
         String email = req.getParameter("email");
         this.dbController.post(name, login, email);
+        resp.sendRedirect(String.format("%s/index.jsp", req.getContextPath()));
     }
 }

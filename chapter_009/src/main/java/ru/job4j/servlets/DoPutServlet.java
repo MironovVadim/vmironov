@@ -20,42 +20,11 @@ public class DoPutServlet extends HttpServlet {
     private DBController dbController = PostgresDBController.newInstance();
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.setContentType("text/html");
-        StringBuilder sb = new StringBuilder();
-        sb.append("<!DOCTYPE html>\n" +
-                "<html lang=\"en\">\n" +
-                "<head>\n" +
-                "    <meta charset=\"UTF-8\">\n" +
-                "    <title>Title</title>\n" +
-                "</head>\n" +
-                "<body>\n" +
-                "<a href=\"delServ\">delServ</a>\n" +
-                "<br/>" +
-                "<a href=\"getServ\">getServ</a>\n" +
-                "<br/>" +
-                "<a href=\"postServ\">postServ</a>\n" +
-                "<br/>" +
-                "<p>Update user</p>" +
-                "<form action='" + req.getContextPath() + "/putServ' method='post'>" +
-                "Name : <input type='text' name='name' />" +
-                "<br/>" +
-                "Email : <input type='text' name='email' />" +
-                "<input type='submit'>" +
-                "</form>" +
-                "<br/>" +
-                "</body>\n" +
-                "</html>");
-        PrintWriter pw = new PrintWriter(resp.getOutputStream());
-        pw.print(sb.toString());
-        pw.flush();
-    }
-
-    @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
         String email = req.getParameter("email");
         String name = req.getParameter("name");
         this.dbController.put(email, name);
+        resp.sendRedirect(String.format("%s/index.jsp", req.getContextPath()));
     }
 }

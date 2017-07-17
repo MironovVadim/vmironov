@@ -61,11 +61,10 @@ public class PostgresDBController implements DBController {
     }
 
     @Override
-    public List<String> get(int id) {
+    public List<String> get() {
         List<String> result = new ArrayList<>();
         try (Connection connection = basicDataSource.getConnection()) {
-            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM public.user WHERE id = ?");
-            preparedStatement.setInt(1, id);
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM public.user");
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 result.add(resultSet.getString("name"));

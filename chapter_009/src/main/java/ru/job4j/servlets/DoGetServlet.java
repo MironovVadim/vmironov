@@ -23,43 +23,6 @@ public class DoGetServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
-        int id = Integer.parseInt(req.getParameter("id"));
-        List<String> users = this.dbController.get(id);
-        StringBuilder usersTable = new StringBuilder("<table>");
-        usersTable.append("<tr><th>Name</th><th>Login</th><th>Email</th><th>CreateDate</th></tr>");
-        for (int i = 0; i < users.size();) {
-            usersTable.append("<tr>");
-            usersTable.append("<td>" + users.get(i++) + "</td>");
-            usersTable.append("<td>" + users.get(i++) + "</td>");
-            usersTable.append("<td>" + users.get(i++) + "</td>");
-            usersTable.append("<td>" + users.get(i++) + "</td>");
-            usersTable.append("</tr>");
-        }
-        usersTable.append("</table");
-        StringBuilder sb = new StringBuilder("<!DOCTYPE html>\n" +
-                "<html lang=\"en\">\n" +
-                "<head>\n" +
-                "    <meta charset=\"UTF-8\">\n" +
-                "    <title>Title</title>\n" +
-                "</head>\n" +
-                "<body>\n" +
-                "<a href=\"delServ\">delServ</a>\n" +
-                "<br/>" +
-                "<a href=\"postServ\">postServ</a>\n" +
-                "<br/>" +
-                "<a href=\"putServ\">putServ</a>\n" +
-                "<br/>" +
-                "<p>Get user</p>" +
-                "<form action='" + req.getContextPath() + "/getServ' method='get'>" +
-                "Id : <input type='text' name='id' />" +
-                "<input type='submit'>" +
-                "</form>" +
-                "<br/>" +
-                usersTable +
-                "</body>\n" +
-                "</html>");
-        PrintWriter pw = new PrintWriter(resp.getOutputStream());
-        pw.print(sb.toString());
-        pw.flush();
+        resp.sendRedirect(String.format("%s/index.jsp", req.getContextPath()));
     }
 }

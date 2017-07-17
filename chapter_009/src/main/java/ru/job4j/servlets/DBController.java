@@ -14,7 +14,7 @@ public interface DBController {
      * @param id user'а
      * @return строковый результат запроса
      */
-   List<String> get(int id);
+   List<String> get();
 
     /**
      * Метод добавляет нового user'a в БД.
