@@ -10,8 +10,7 @@ import java.util.List;
  */
 public interface DBController {
     /**
-     * Возвращает строковый результат с user'ом из БД.
-     * @param id user'а
+     * Возвращает строковый результат с user'ами из БД.
      * @return строковый результат запроса
      */
    List<String> get();

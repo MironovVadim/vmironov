@@ -47,7 +47,9 @@ public class PostgresDBController implements DBController {
     /**
      * Private default constructor.
      */
-    private PostgresDBController() {}
+    private PostgresDBController() {
+
+    }
 
     /**
      * Singleton pattern.
