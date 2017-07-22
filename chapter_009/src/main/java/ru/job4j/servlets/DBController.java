@@ -13,7 +13,7 @@ public interface DBController {
      * Возвращает строковый результат с user'ами из БД.
      * @return строковый результат запроса
      */
-   List<String> get();
+   List<User> get();
 
     /**
      * Метод добавляет нового user'a в БД.

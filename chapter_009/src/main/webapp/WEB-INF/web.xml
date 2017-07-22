@@ -25,7 +25,7 @@
 
     <servlet-mapping>
         <servlet-name>DoGetServlet</servlet-name>
-        <url-pattern>/getServ</url-pattern>
+        <url-pattern>/</url-pattern>
     </servlet-mapping>
 
     <servlet-mapping>

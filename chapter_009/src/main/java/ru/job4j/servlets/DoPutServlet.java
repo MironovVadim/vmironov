@@ -24,6 +24,6 @@ public class DoPutServlet extends HttpServlet {
         String email = req.getParameter("email");
         String name = req.getParameter("name");
         this.dbController.put(email, name);
-        resp.sendRedirect(String.format("%s/index.jsp", req.getContextPath()));
+        resp.sendRedirect(String.format("%s/", req.getContextPath()));
     }
 }

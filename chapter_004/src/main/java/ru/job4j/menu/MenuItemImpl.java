@@ -1,6 +1,8 @@
 package ru.job4j.menu;
 
 
+import java.util.Set;
+
 /**
  * Menu item implementation.
  * @author Vadim Moronov (Mironov6292@gmail.ru/Multik6292@mail.ru)
@@ -21,6 +23,7 @@ public class MenuItemImpl implements MenuItem {
         this.name = name;
     }
 
+    private Set<MenuItem> childs =
     @Override
     public String getName() {
         return name;

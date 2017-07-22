@@ -7,6 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -63,21 +64,22 @@ public class PostgresDBController implements DBController {
     }
 
     @Override
-    public List<String> get() {
-        List<String> result = new ArrayList<>();
+    public List<User> get() {
+        List<User> userList = new ArrayList<>();
         try (Connection connection = basicDataSource.getConnection()) {
             PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM public.user");
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                result.add(resultSet.getString("name"));
-                result.add(resultSet.getString("login"));
-                result.add(resultSet.getString("email"));
-                result.add(resultSet.getString("create_date"));
+                String name = resultSet.getString("name");
+                String login = resultSet.getString("login");
+                String email = resultSet.getString("email");
+                Date createDate = resultSet.getDate("create_date");
+                userList.add(new User(name, login, email, createDate));
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return result;
+        return userList;
     }
 
     @Override

@@ -25,6 +25,6 @@ public class DoPostServlet extends HttpServlet {
         String login = req.getParameter("login");
         String email = req.getParameter("email");
         this.dbController.post(name, login, email);
-        resp.sendRedirect(String.format("%s/index.jsp", req.getContextPath()));
+        resp.sendRedirect(String.format("%s/", req.getContextPath()));
     }
 }

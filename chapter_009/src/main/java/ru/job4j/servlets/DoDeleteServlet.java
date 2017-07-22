@@ -23,6 +23,6 @@ public class DoDeleteServlet extends HttpServlet {
         resp.setContentType("text/html");
         String name = req.getParameter("name");
         this.dbController.delete(name);
-        resp.sendRedirect(String.format("%s/index.jsp", req.getContextPath()));
+        resp.sendRedirect(String.format("%s/", req.getContextPath()));
     }
 }
