@@ -2,8 +2,6 @@ package menu;
 
 import org.junit.Test;
 import ru.job4j.menu.MenuController;
-import ru.job4j.menu.MenuItem;
-import ru.job4j.menu.MenuItemImpl;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
@@ -23,33 +21,26 @@ public class MenuControllerTest {
      * Test printMenu() method.
      */
     @Test
-    public void whenPrintMenuThenGetPrintSevenStrings() {
-        MenuController controller = new MenuController();
-        MenuItem item1 = new MenuItemImpl("Item1");
-        MenuItem item2 = new MenuItemImpl("Item2");
-        MenuItem item3 = new MenuItemImpl("Item3");
-        MenuItem item4 = new MenuItemImpl("Item4");
-        MenuItem item5 = new MenuItemImpl("Item5");
-        MenuItem item6 = new MenuItemImpl("Item6");
-        MenuItem item7 = new MenuItemImpl("Item7");
-        controller.addMenuItem(item6, 10);
-        controller.addMenuItem(item5, 2);
-        controller.addMenuItem(item7, 1, 1, 2);
-        controller.addMenuItem(item4, 1, 1, 1, 1);
-        controller.addMenuItem(item1, 1);
-        controller.addMenuItem(item3, 1, 1, 1);
-        controller.addMenuItem(item2, 1, 1);
+    public void whenPrintMenuThenGetFourStrings() {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(baos));
+        StringJoiner sj = new StringJoiner(System.lineSeparator());
+        MenuController controller = new MenuController();
+        String item1 = "item1";
+        String item2 = "item2";
+        String item3 = "item3";
+        int[] paragraph3 = new int[]{1};
+        String item4 = "item4";
+        int[] paragraph4 = new int[]{1, 1};
+        controller.addMenuItem(item1);
+        controller.addMenuItem(item2);
+        controller.addMenuItem(item3, paragraph3);
+        controller.addMenuItem(item4, paragraph4);
         controller.printMenu();
-        StringJoiner sj = new StringJoiner(System.lineSeparator());
-        sj.add(String.format("1 %s", item1.getName()));
-        sj.add(String.format("--- 1.1 %s", item2.getName()));
-        sj.add(String.format("------ 1.1.1 %s", item3.getName()));
-        sj.add(String.format("--------- 1.1.1.1 %s", item4.getName()));
-        sj.add(String.format("------ 1.1.2 %s", item7.getName()));
-        sj.add(String.format("2 %s", item5.getName()));
-        sj.add(String.format("10 %s", item6.getName()));
+        sj.add(String.format("%s. %s", 1, item1));
+        sj.add(String.format("--- %s. %s", "1.1", item3));
+        sj.add(String.format("------ %s. %s", "1.1.1", item4));
+        sj.add(String.format("%s. %s", 2, item2));
         sj.add("");
         String result = baos.toString();
         String expected = sj.toString();
@@ -60,19 +51,23 @@ public class MenuControllerTest {
      * Test action() method.
      */
     @Test
-    public void whenInvokeActionThenPrintTwoStrings() {
-        MenuController controller = new MenuController();
-        MenuItem item1 = new MenuItemImpl("Item1");
-        MenuItem item2 = new MenuItemImpl("Item2");
-        controller.addMenuItem(item1, 1);
-        controller.addMenuItem(item2, 1, 1, 2);
+    public void whenInvokeActionThenPrintActionString() {
+        StringJoiner sj = new StringJoiner(System.lineSeparator());
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(baos));
-        controller.action(1);
-        controller.action(1, 1, 2);
-        StringJoiner sj = new StringJoiner(System.lineSeparator());
-        sj.add(String.format("%s: action.", item1.getName()));
-        sj.add(String.format("%s: action.", item2.getName()));
+        MenuController controller = new MenuController();
+        String item1 = "item1";
+        String item2 = "item2";
+        int[] paragraph2 = new int[]{1};
+        int[] actionParagraph1 = new int[]{1};
+        int[] actionParagraph2 = new int[]{1, 1};
+
+        controller.addMenuItem(item1);
+        controller.addMenuItem(item2, paragraph2);
+        controller.action(actionParagraph1);
+        controller.action(actionParagraph2);
+        sj.add("item1: action.");
+        sj.add("item2: action.");
         sj.add("");
         String result = baos.toString();
         String expected = sj.toString();
@@ -83,17 +78,16 @@ public class MenuControllerTest {
      * Test action() method.
      */
     @Test
-    public void whenInvokeActionThenPrintStringThatCantInvokeAction() {
-        MenuController controller = new MenuController();
-        MenuItem item1 = new MenuItemImpl("Item1");
-        controller.addMenuItem(item1, 1);
+    public void whenInvokeActionThengetMenuItemExceptionMessage() {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(baos));
-        controller.action(1, 1, 2);
-        StringJoiner sj = new StringJoiner(".");
-        sj.add(Integer.toString(1)).add(Integer.toString(1)).add(Integer.toString(2));
+        MenuController controller = new MenuController();
+        String item1 = "item1";
+        int[] nonexistentParagraph = new int[]{1, 1};
+        controller.addMenuItem(item1);
+        controller.action(nonexistentParagraph);
         String result = baos.toString();
-        String expected = String.format("%s paragraph does not exist.%s", sj.toString(), System.lineSeparator());
+        String expected = String.format("MenuItem %s. is not exist.%s", "1.1", System.lineSeparator());
         assertThat(result, is(expected));
     }
 }

@@ -1,7 +1,9 @@
 package ru.job4j.menu;
 
 
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Menu item implementation.
@@ -11,22 +13,62 @@ import java.util.Set;
  */
 public class MenuItemImpl implements MenuItem {
     /**
+     * massif with numbers of MenuItem paragraph.
+     */
+    private int[] paragraph;
+    /**
      * Name of menu item.
      */
     private String name;
+    /**
+     * List with children paragraphs.
+     */
+    private List<MenuItem> children = new ArrayList<>();
 
     /**
      * Default constructor.
      * @param name - name of menu item.
+     * @param paragraph - new paragraph.
      */
-    public MenuItemImpl(String name) {
+    public MenuItemImpl(String name, int... paragraph) {
         this.name = name;
+        this.paragraph = paragraph;
     }
 
-    private Set<MenuItem> childs =
     @Override
     public String getName() {
         return name;
+    }
+
+    @Override
+    public int[] getParagraph() {
+        return this.paragraph;
+    }
+
+    @Override
+    public List<MenuItem> getChildren() {
+        return this.children;
+    }
+
+    @Override
+    public MenuItem getChild(int[] paragraph) {
+        MenuItem result = null;
+        for (MenuItem item : this.children) {
+            if (Arrays.equals(paragraph, item.getParagraph())) {
+                result = item;
+                break;
+            }
+        }
+        return result;
+    }
+
+    @Override
+    public void addChild(String itemName, int[] parentParagraph) {
+        int[] newParagraph = Arrays.copyOf(parentParagraph, parentParagraph.length + 1);
+        int lastNumberOfParagraph = this.children.size() + 1;
+        newParagraph[newParagraph.length - 1] = lastNumberOfParagraph;
+        MenuItem newMenuItem = new MenuItemImpl(itemName, newParagraph);
+        this.children.add(newMenuItem);
     }
 
     @Override
