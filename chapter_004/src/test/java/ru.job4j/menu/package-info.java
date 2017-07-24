@@ -1,5 +1,5 @@
 /**
- * Package with ru.job4j.menu classes.
+ * Package with test of ru.job4j.menu package.
  *
  * @author Vadim Moronov (Mironov6292@gmail.ru/Multik6292@mail.ru)
  * @version $Id$

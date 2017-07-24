@@ -59,7 +59,7 @@ public class StubInput implements Input {
         if (exist) {
             return key;
         } else {
-            throw new MenuOutException("Out of menu range");
+            throw new MenuOutException("Out of ru.job4j.menu range");
         }
     }
 }

@@ -1,7 +1,6 @@
-package menu;
+package ru.job4j.menu;
 
 import org.junit.Test;
-import ru.job4j.menu.MenuController;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;

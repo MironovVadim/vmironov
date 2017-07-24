@@ -13,7 +13,7 @@ import java.util.StringJoiner;
  */
 public class MenuController {
     /**
-     * ArrayList with all menu items and paragraphs.
+     * ArrayList with all ru.job4j.menu items and paragraphs.
      */
     private List<MenuItem> menuItems = new ArrayList<>();
     /**
@@ -55,7 +55,7 @@ public class MenuController {
     }
 
     /**
-     * Method print menu.
+     * Method print ru.job4j.menu.
      */
     public void printMenu() {
         for (MenuItem item : this.menuItems) {

@@ -17,7 +17,7 @@ public class MenuItemImpl implements MenuItem {
      */
     private int[] paragraph;
     /**
-     * Name of menu item.
+     * Name of ru.job4j.menu item.
      */
     private String name;
     /**
@@ -27,7 +27,7 @@ public class MenuItemImpl implements MenuItem {
 
     /**
      * Default constructor.
-     * @param name - name of menu item.
+     * @param name - name of ru.job4j.menu item.
      * @param paragraph - new paragraph.
      */
     public MenuItemImpl(String name, int... paragraph) {

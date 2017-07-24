@@ -42,7 +42,7 @@ public interface MenuItem {
     void addChild(String itemName, int[] parentParagraph);
 
     /**
-     * Action of menu item.
+     * Action of ru.job4j.menu item.
      */
     void action();
 }
