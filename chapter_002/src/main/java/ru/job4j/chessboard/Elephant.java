@@ -23,16 +23,16 @@ public class Elephant extends Figure {
 
     @Override
     public Cell[] way(Cell dist) throws ImpossibleMoveException {
-        int xLength = Math.abs(this.position.getX() - dist.getX());
-        int yLength = Math.abs(this.position.getY() - dist.getY());
+        int xLength = Math.abs(this.getPosition().getX() - dist.getX());
+        int yLength = Math.abs(this.getPosition().getY() - dist.getY());
         if (xLength != yLength) {
             throw new ImpossibleMoveException("Неправильный ход слоном.");
         }
-        int xIncrement = this.position.getX() < dist.getX() ? 1 : -1;
-        int yIncrement = this.position.getY() < dist.getY() ? 1 : -1;
+        int xIncrement = this.getPosition().getX() < dist.getX() ? 1 : -1;
+        int yIncrement = this.getPosition().getY() < dist.getY() ? 1 : -1;
         Cell[] result = new Cell[xLength];
-        int currentX = this.position.getX();
-        int currentY = this.position.getY();
+        int currentX = this.getPosition().getX();
+        int currentY = this.getPosition().getY();
         for (int i = 0; i < result.length; i++) {
             currentX += xIncrement;
             currentY += yIncrement;

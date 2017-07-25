@@ -21,10 +21,6 @@ public class StartUI {
      */
     private Input input;
     /**
-     * Tracker object.
-     */
-    private Tracker tracker;
-    /**
      * Class for managing Tracker class.
      */
     private MenuTracker menuTracker;
@@ -35,19 +31,8 @@ public class StartUI {
      */
     public StartUI(Input input, Tracker tracker) {
         this.input = input;
-        this.tracker = tracker;
         menuTracker = new MenuTracker(input, tracker);
         this.range = menuTracker.getRange();
-    }
-
-    /**
-     * Method main.
-     * @param args - args
-     */
-    public static void main(String[] args) {
-        Input input = new ValidateInput();
-        Tracker tracker = new Tracker();
-        new StartUI(input, tracker).init();
     }
 
     /**

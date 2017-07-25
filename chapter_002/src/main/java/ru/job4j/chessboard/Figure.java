@@ -16,7 +16,7 @@ public abstract class Figure {
     /**
      * Position on chess board.
      */
-    final Cell position;
+    private final Cell position;
 
     /**
      * Constructor.
@@ -33,6 +33,14 @@ public abstract class Figure {
      * @throws ImpossibleMoveException if cannot move a figure
      */
     public abstract Cell[] way(Cell dist) throws ImpossibleMoveException;
+
+    /**
+     * position getter.
+     * @return position.
+     */
+    public Cell getPosition() {
+        return position;
+    }
 
     /**
      * Method change a cell if figure.

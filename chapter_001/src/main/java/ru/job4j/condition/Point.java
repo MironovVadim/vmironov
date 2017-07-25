@@ -30,12 +30,14 @@ public class Point {
 		this.y = y;
 	}
 	/**
+	 * Getter x.
 	* @return x - first coordinate of point
 	*/
 	public int getX() {
 		return this.x;
 	}
 	/**
+	 * Getter y.
 	* @return y - second coordinate of point
 	*/
 	public int getY() {
@@ -48,6 +50,6 @@ public class Point {
 	* @return boolean - is compared points lays on the function
 	*/
 	public boolean is(int a, int b) {
-		return y == a * x + b;
+		return this.y == a * this.x + b;
 	}
 }

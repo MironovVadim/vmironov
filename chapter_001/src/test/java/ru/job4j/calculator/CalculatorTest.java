@@ -61,4 +61,15 @@ public class CalculatorTest {
 		double expected = 12D;
 		assertThat(result, is(expected));
 	}
+
+	/**
+	 * Test getAllKeys() method.
+	 */
+	@Test
+	public void whenInvokeGetAllKeysThenGetMassifWithFourElements() {
+		Calculator calculator = new Calculator();
+		int result = calculator.getAllKeys().length;
+		int expected = 4;
+		assertThat(result, is(expected));
+	}
 }

@@ -53,7 +53,12 @@ public class Tracker {
      * @param item - item for deleting
      */
     public void delete(Item item) {
-        items.remove(item);
+       for (Item currentItem : items) {
+           if (item.getId().equals(currentItem.getId())) {
+               items.remove(currentItem);
+               break;
+           }
+       }
     }
 
     /**

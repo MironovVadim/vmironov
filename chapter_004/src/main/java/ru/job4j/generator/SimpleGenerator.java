@@ -14,9 +14,13 @@ import java.util.regex.Pattern;
  */
 public class SimpleGenerator {
     /**
+     * RE template.
+     */
+    private static final String TEMPLATE = "(\\$\\{)(\\w*)(})";
+    /**
      * Template.
      */
-    private static final String TEMPLATE = "\\$\\{\\w*}";
+    private static final Pattern PATTERN = Pattern.compile(TEMPLATE);
 
     /**
      * Method replace all templates in string on words stored in map. Then print it.
@@ -25,17 +29,18 @@ public class SimpleGenerator {
      * @throws WordsAmountException if map contains extra words or there are was not some word for template.
      */
     public void replaceString(String str, Map<String, String> words) throws WordsAmountException {
-        String result = str;
-        Pattern pattern = Pattern.compile(this.TEMPLATE);
-        Matcher matcher = pattern.matcher(str);
+        StringBuffer sb = new StringBuffer();
+        Matcher matcher = PATTERN.matcher(str);
         while (matcher.find()) {
-            String key = matcher.group().substring(2, matcher.group().length() - 1);
+            String key = matcher.group(2);
             String word = words.get(key);
             if (word == null) {
                 throw new WordsAmountException();
             }
-            result = result.replace(matcher.group(), word);
+           matcher.appendReplacement(sb, word);
         }
+        matcher.appendTail(sb);
+        String result = sb.toString();
         for (String word : words.values()) {
             if (!result.contains(word)) {
                 throw new WordsAmountException();

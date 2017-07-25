@@ -27,4 +27,15 @@ public class PointTest {
 		boolean expected = true;
 		assertThat(result, is(expected));
 	}
+
+    /**
+     * Test method.
+     */
+    @Test
+    public void whenTwoWithEightAndThreeWithTwoThenFalse() {
+        Point point = new Point(2, 8);
+        boolean result = point.is(5, 5);
+        boolean expected = false;
+        assertThat(result, is(expected));
+    }
 }

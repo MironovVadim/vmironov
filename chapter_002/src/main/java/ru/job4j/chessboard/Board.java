@@ -60,7 +60,7 @@ public class Board {
     private Figure getFigureWithSpecifiedCell(Cell cell) {
         Figure figureWithCell = null;
         for (Figure figure : this.figures) {
-            if (cell.getX() == figure.position.getX() && cell.getY() == figure.position.getY()) {
+            if (cell.getX() == figure.getPosition().getX() && cell.getY() == figure.getPosition().getY()) {
                 figureWithCell = figure;
                 break;
             }
