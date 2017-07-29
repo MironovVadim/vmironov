@@ -12,7 +12,7 @@ import java.io.IOException;
  * @version $Id$
  * @since 0.1
  */
-public class DoPostServlet extends HttpServlet {
+public class UpdateUserServlet extends HttpServlet {
     /**
      * БД контроллер.
      */

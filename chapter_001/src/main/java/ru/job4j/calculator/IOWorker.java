@@ -55,7 +55,7 @@ public class IOWorker extends IOWork {
         } catch (IOException e) {
             e.printStackTrace();
         } catch (NumberFormatException e) {
-            printString("Введены не корректные данные. Попробуйте еще раз.");
+            printString("Введены некорректные данные. Попробуйте еще раз.");
             result = inputOperand(forPrint);
         }
         return result;

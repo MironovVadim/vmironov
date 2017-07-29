@@ -12,7 +12,7 @@ import java.io.IOException;
  * @version $Id$
  * @since 0.1
  */
-public class DoGetServlet extends HttpServlet {
+public class GetAllUsersServlet extends HttpServlet {
     /**
      * БД контроллер.
      */

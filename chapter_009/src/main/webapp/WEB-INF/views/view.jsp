@@ -23,28 +23,29 @@
 </table>
 </br>
 <p>Delete user</p>
-<form action="${pageContext.servletContext.contextPath}/delServ" method='post'>
-    Name:<input type='text' name='name'/>
+<form action="${pageContext.servletContext.contextPath}/DelUser" method='post'>
+    Name:<input name='name'/>
     <br/>
     <input type='submit'>
 </form>
 <br/>
 <p>Add user</p>
-<form action="${pageContext.servletContext.contextPath}/postServ" method='post'>
-    Name:<input type='text' name='name'/>
+<form action="${pageContext.servletContext.contextPath}/AddUser" method='post'>
+    Name:<input name='name'/>
     <br/>
-    Login:<input type='text' name='login'/>
+    Login:<input name='login'/>
     <br/>
-    Email:<input type='text' name='email'/>
+    Email:<input name='email'/>
     <br/>
     <input type='submit'>
 </form>
 <br/>
 <p>Update user</p>
-<form action="${pageContext.servletContext.contextPath}/putServ" method='post'>
-    Name:<input type='text' name='name'/>
+<form action="${pageContext.servletContext.contextPath}/UpdateUser" method='post'>
+    Name:<input name='name'/>
     <br/>
-    Email:<input type='text' name='email' />
+    Email:<input name='email' />
+    <br/>
     <input type='submit'>
 </form>
 </body>

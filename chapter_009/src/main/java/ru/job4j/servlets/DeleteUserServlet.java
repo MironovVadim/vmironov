@@ -7,12 +7,12 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * Put Servlet.
+ * Delete Servlet.
  *  * @author Vadim Moronov (Mironov6292@gmail.ru/Multik6292@mail.ru)
  * @version $Id$
  * @since 0.1
  */
-public class DoPutServlet extends HttpServlet {
+public class DeleteUserServlet extends HttpServlet {
     /**
      * БД контроллер.
      */
@@ -21,9 +21,8 @@ public class DoPutServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
-        String email = req.getParameter("email");
         String name = req.getParameter("name");
-        this.dbController.put(email, name);
+        this.dbController.delete(name);
         resp.sendRedirect(String.format("%s/", req.getContextPath()));
     }
 }

@@ -1,40 +1,41 @@
 <web-app>
     <servlet>
-        <servlet-name>DoDeleteServlet</servlet-name>
-        <servlet-class>ru.job4j.servlets.DoDeleteServlet</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>DoGetServlet</servlet-name>
-        <servlet-class>ru.job4j.servlets.DoGetServlet</servlet-class>
-    </servlet>
-
-    <servlet>
-        <servlet-name>DoPostServlet</servlet-name>
-        <servlet-class>ru.job4j.servlets.DoPostServlet</servlet-class>
-    </servlet>
-
-    <servlet>
-        <servlet-name>DoPutServlet</servlet-name>
-        <servlet-class>ru.job4j.servlets.DoPutServlet</servlet-class>
+        <servlet-name>DeleteUserServlet</servlet-name>
+        <servlet-class>ru.job4j.servlets.DeleteUserServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
-        <servlet-name>DoDeleteServlet</servlet-name>
-        <url-pattern>/delServ</url-pattern>
+        <servlet-name>DeleteUserServlet</servlet-name>
+        <url-pattern>/DelUser</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>GetAllUsersServlet</servlet-name>
+        <servlet-class>ru.job4j.servlets.GetAllUsersServlet</servlet-class>
+    </servlet>
+
     <servlet-mapping>
-        <servlet-name>DoGetServlet</servlet-name>
+        <servlet-name>GetAllUsersServlet</servlet-name>
         <url-pattern>/</url-pattern>
     </servlet-mapping>
 
-    <servlet-mapping>
-        <servlet-name>DoPutServlet</servlet-name>
-        <url-pattern>/putServ</url-pattern>
-    </servlet-mapping>
+    <servlet>
+        <servlet-name>UpdateUserServlet</servlet-name>
+        <servlet-class>ru.job4j.servlets.UpdateUserServlet</servlet-class>
+    </servlet>
 
     <servlet-mapping>
-        <servlet-name>DoPostServlet</servlet-name>
-        <url-pattern>/postServ</url-pattern>
+        <servlet-name>UpdateUserServlet</servlet-name>
+        <url-pattern>/UpdateUser</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>AddUserServlet</servlet-name>
+        <servlet-class>ru.job4j.servlets.AddUserServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>AddUserServlet</servlet-name>
+        <url-pattern>/AddUser</url-pattern>
     </servlet-mapping>
 </web-app>
