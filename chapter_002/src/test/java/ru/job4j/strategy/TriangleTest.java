@@ -8,9 +8,6 @@
 package ru.job4j.strategy;
 
 import org.junit.Test;
-import ru.job4j.strategy.Paint;
-import ru.job4j.strategy.Shape;
-import ru.job4j.strategy.Triangle;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;

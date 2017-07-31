@@ -1,7 +1,6 @@
 package ru.job4j.testtask;
 
 import org.junit.Test;
-import ru.job4j.testtask.Robot;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;

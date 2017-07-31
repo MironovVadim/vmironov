@@ -2,8 +2,6 @@ package ru.job4j.calculator;
 
 import org.junit.Test;
 import ru.job4j.calculator.operations.AddOperation;
-import ru.job4j.calculator.Calculator;
-import ru.job4j.calculator.IOWorker;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;

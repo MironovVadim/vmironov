@@ -3,11 +3,7 @@ package ru.job4j.chessboard;
 
 import org.junit.Test;
 import ru.job4j.chessboard.exception.FigureNotFoundException;
-import ru.job4j.chessboard.Elephant;
-import ru.job4j.chessboard.Figure;
 import ru.job4j.chessboard.exception.ImpossibleMoveException;
-import ru.job4j.chessboard.Board;
-import ru.job4j.chessboard.Cell;
 import ru.job4j.chessboard.exception.OccupiedWayException;
 
 import java.io.ByteArrayOutputStream;

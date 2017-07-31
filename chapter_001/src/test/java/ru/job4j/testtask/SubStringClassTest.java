@@ -9,7 +9,6 @@
 package ru.job4j.testtask;
 
 import org.junit.Test;
-import ru.job4j.testtask.SubStringClass;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;

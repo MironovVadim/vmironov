@@ -1,7 +1,6 @@
 package ru.job4j;
 
 import org.junit.Test;
-import ru.job4j.Calculate;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;

@@ -1,9 +1,6 @@
 package ru.job4j;
 
 import org.junit.Test;
-import ru.job4j.Doctor;
-import ru.job4j.Engineer;
-import ru.job4j.Profession;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;

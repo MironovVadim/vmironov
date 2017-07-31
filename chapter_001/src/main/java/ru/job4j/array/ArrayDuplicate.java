@@ -9,7 +9,6 @@
 package ru.job4j.array;
 
 import java.util.Arrays;
-
 /**
 * Class for removing duplicates from String array.
 */
