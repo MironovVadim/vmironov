@@ -119,4 +119,30 @@ public class TrackerTest {
         Item expected = null;
         assertThat(result, is(expected));
     }
+
+    /**
+     * Test isContains(boolean) method.
+     */
+    @Test
+    public void whenIsContainsThenGetTrue() {
+        Tracker tracker = new Tracker();
+        Item item = new Item("SomeItem", "SomeDesc");
+        tracker.add(item);
+        boolean result = tracker.isContains(item);
+        boolean expected = true;
+        assertThat(result, is(expected));
+    }
+
+    /**
+     * Test isContains(boolean) method.
+     */
+    @Test
+    public void whenIsContainsThenGetFalse() {
+        Tracker tracker = new Tracker();
+        Item item = new Item("SomeItem", "SomeDesc");
+        tracker.add(item);
+        boolean result = tracker.isContains(new Item("SomeItem", "That Item"));
+        boolean expected = false;
+        assertThat(result, is(expected));
+    }
 }

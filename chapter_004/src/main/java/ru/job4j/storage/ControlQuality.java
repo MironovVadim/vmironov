@@ -51,7 +51,7 @@ public class ControlQuality {
      * Method return food from all storages.
      * @return food from all storages.
      */
-    private List<Food> getFoodFromAllStorages() {
+    public List<Food> getFoodFromAllStorages() {
         List<Food> foodList = new ArrayList<>();
         for (Storage storage : storages) {
             foodList.addAll(storage.getFoodFromStorage());

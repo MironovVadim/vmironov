@@ -32,7 +32,9 @@ public class Shop implements Storage {
             if (25 <= leftTime && 75 > leftTime) {
                 result = true;
             } else if (75 <= leftTime && 100 > leftTime) {
-                value.considerDiscount();
+                if (!value.isDiscounted()) {
+                    value.considerDiscount();
+                }
                 result = true;
             }
             return result;

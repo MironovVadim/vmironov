@@ -22,6 +22,7 @@ public class StubInput implements Input {
     /**
      * Index of answers.
      */
+
     private int index = 0;
 
     /**

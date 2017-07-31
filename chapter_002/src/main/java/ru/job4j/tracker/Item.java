@@ -7,7 +7,6 @@
  */
 package ru.job4j.tracker;
 
-import java.util.List;
 import java.util.Random;
 
 /**
@@ -34,10 +33,6 @@ public class Item {
      * Creation time.
      */
     private long created;
-    /**
-     * Comments massif.
-     */
-    private List<String> comments;
 
     /**
      * Constructor.
@@ -92,22 +87,6 @@ public class Item {
     }
 
     /**
-     * Comments getter.
-     * @return String[] - comments
-     */
-    public List<String> getComments() {
-        return comments;
-    }
-
-    /**
-     * Set any comments.
-     * @param comments - comments of item
-     */
-    public void setComments(List<String> comments) {
-        this.comments = comments;
-    }
-
-    /**
      * Generator item id.
      * @return String - item id
      */
@@ -120,31 +99,22 @@ public class Item {
         if (this == o) {
             return true;
         }
-        if (o == null || getClass() != o.getClass())  {
+        if (o == null || getClass() != o.getClass()) {
             return false;
         }
 
         Item item = (Item) o;
 
-        if (id != null ? !id.equals(item.id) : item.id != null) {
+        if (!id.equals(item.id)) {
             return false;
         }
-        return name != null ? name.equals(item.name) : item.name == null;
+        return name.equals(item.name);
     }
 
     @Override
     public int hashCode() {
-        int result = id != null ? id.hashCode() : 0;
-        result = 31 * result + (name != null ? name.hashCode() : 0);
+        int result = id.hashCode();
+        result = 31 * result + name.hashCode();
         return result;
-    }
-
-    @Override
-    public String toString() {
-        return "Item{"
-                + "id='" + id + '\''
-                + ", name='" + name + '\''
-                + ", desc='" + desc + '\''
-                + '}';
     }
 }

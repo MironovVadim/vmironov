@@ -18,7 +18,15 @@ public class ConsoleInput implements Input {
     /**
      * Scanner.
      */
-    private Scanner scanner = new Scanner(System.in);
+    private Scanner scanner;
+
+    /**
+     * Default constructor.
+     * @param scanner - scanner.
+     */
+    public ConsoleInput(Scanner scanner) {
+        this.scanner = scanner;
+    }
 
     /**
      * Method for printing param and returning user input.

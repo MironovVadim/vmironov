@@ -22,7 +22,7 @@ public class ShopDecorator extends StorageDecorator {
 
     @Override
     public List<Food> getFoodForStorage(List<Food> foodList) {
-        List<Food> shopFood = this.getFoodForStorage(foodList);
+        List<Food> shopFood = super.getFoodForStorage(foodList);
         List<Food> reproductedFood = foodList.stream().filter(value -> 100 <= this.leftTime(value) && value.isCanReproduct()).collect(Collectors.toList());
         foodList.removeAll(reproductedFood);
         shopFood.addAll(reproductedFood);

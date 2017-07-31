@@ -115,7 +115,7 @@ public abstract class Food {
      */
     public void considerDiscount() {
         if (!isDiscounted) {
-            price = price * (100 - discount) / 100;
+            price *= (100 - discount) / 100;
             isDiscounted = true;
         }
     }
@@ -162,20 +162,20 @@ public abstract class Food {
         if (isColdStorage != food.isColdStorage) {
             return false;
         }
-        if (name != null ? !name.equals(food.name) : food.name != null) {
+        if (!name.equals(food.name)) {
             return false;
         }
-        if (createDate != null ? !createDate.equals(food.createDate) : food.createDate != null) {
+        if (!createDate.equals(food.createDate)) {
             return false;
         }
-        return expireDate != null ? expireDate.equals(food.expireDate) : food.expireDate == null;
+        return expireDate.equals(food.expireDate);
     }
 
     @Override
     public int hashCode() {
-        int result = name != null ? name.hashCode() : 0;
-        result = 31 * result + (createDate != null ? createDate.hashCode() : 0);
-        result = 31 * result + (expireDate != null ? expireDate.hashCode() : 0);
+        int result = name.hashCode();
+        result = 31 * result + createDate.hashCode();
+        result = 31 * result + expireDate.hashCode();
         result = 31 * result + price;
         result = 31 * result + discount;
         result = 31 * result + (isDiscounted ? 1 : 0);

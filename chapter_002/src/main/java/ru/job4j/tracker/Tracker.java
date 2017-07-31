@@ -33,7 +33,6 @@ public class Tracker {
     }
 
     /**
-     *
      * Update item by item.getId().
      *
      * @param item - item with update id
@@ -101,5 +100,14 @@ public class Tracker {
             }
         }
         return result;
+    }
+
+    /**
+     * Method check is List contains Item.
+     * @param item - item
+     * @return is Item contains in List.
+     */
+    public boolean isContains(Item item) {
+        return this.items.contains(item);
     }
 }

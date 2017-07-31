@@ -77,14 +77,14 @@ public class Robot {
         do {
             if (y < board.length - 1 && board[x][y + 1] == 0) {
                 if (x < board.length - 1 && board[x + 1][y] == 0) {
-                    addCell(new Cell(x, y));
+                    addCell(new Cell(x + 1, y));
                 }
                 y++;
             } else if (x < board.length - 1 && board[x + 1][y] == 0) {
                 x++;
             } else {
                 Cell cell = getCell();
-                x = cell.getX() + 1;
+                x = cell.getX();
                 y = cell.getY();
             }
             System.out.println(String.format("%d, %d", x, y));
@@ -92,35 +92,8 @@ public class Robot {
                 result = true;
                 break;
             }
-        } while (x != 0 && y != -1);
+        } while (x != -1 && y != -1);
         return result;
-    }
-
-    /**
-     * Main method.
-     * @param args String[]
-     */
-    public static void main(String[] args) {
-        int[][] square = new int[][]{
-                {0, 0, 0, 0, 0, 0, 0, 0},
-                {0, 1, 1, 1, 1, 1, 1, 0},
-                {0, 0, 0, 0, 0, 0, 1, 0},
-                {0, 1, 1, 1, 1, 1, 1, 0},
-                {0, 0, 0, 0, 0, 0, 1, 0},
-                {0, 1, 1, 1, 1, 1, 1, 0},
-                {0, 0, 0, 0, 1, 0, 1, 1},
-                {0, 0, 0, 0, 0, 0, 0, 0}};
-        int[][] square2 = new int[][]{
-                {0, 0, 1, 0, 0, 0, 0, 0},
-                {0, 0, 1, 1, 1, 1, 1, 0},
-                {1, 0, 0, 0, 1, 0, 1, 0},
-                {0, 1, 1, 0, 1, 1, 1, 0},
-                {0, 0, 0, 0, 0, 0, 1, 0},
-                {0, 1, 1, 1, 1, 0, 1, 0},
-                {0, 0, 0, 0, 1, 0, 0, 1},
-                {0, 0, 0, 0, 0, 1, 0, 0}};
-        Robot robot = new Robot(square2);
-        System.out.println(robot.start());
     }
 }
 

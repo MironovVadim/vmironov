@@ -9,10 +9,19 @@ package ru.job4j.tracker;
 
 import ru.job4j.tracker.exception.MenuOutException;
 
+import java.util.Scanner;
+
 /**
  * ValidateInput class.
  */
 public class ValidateInput extends ConsoleInput {
+    /**
+     * Default constuctor.
+     * @param scanner - new scanner.
+     */
+    public ValidateInput(Scanner scanner) {
+        super(scanner);
+    }
 
     @Override
     public int ask(String question, int[] range) {
