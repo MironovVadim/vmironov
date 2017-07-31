@@ -1,6 +1,8 @@
 package ru.job4j;
 
 import org.junit.Test;
+import ru.Calculate;
+
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import static org.hamcrest.core.Is.is;
