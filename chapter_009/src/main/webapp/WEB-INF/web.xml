@@ -1,7 +1,7 @@
 <web-app>
     <servlet>
         <servlet-name>DeleteUserServlet</servlet-name>
-        <servlet-class>ru.servlets.DeleteUserServlet</servlet-class>
+        <servlet-class>ru.job4j.servlets.DeleteUserServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -11,7 +11,7 @@
 
     <servlet>
         <servlet-name>GetAllUsersServlet</servlet-name>
-        <servlet-class>ru.servlets.GetAllUsersServlet</servlet-class>
+        <servlet-class>ru.job4j.servlets.GetAllUsersServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -21,7 +21,7 @@
 
     <servlet>
         <servlet-name>UpdateUserServlet</servlet-name>
-        <servlet-class>ru.servlets.UpdateUserServlet</servlet-class>
+        <servlet-class>ru.job4j.servlets.UpdateUserServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -31,7 +31,7 @@
 
     <servlet>
         <servlet-name>AddUserServlet</servlet-name>
-        <servlet-class>ru.servlets.AddUserServlet</servlet-class>
+        <servlet-class>ru.job4j.servlets.AddUserServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>

@@ -9,6 +9,8 @@ package ru;
 
 
 import org.junit.Test;
+import ru.job4j.User;
+import ru.job4j.UserConvert;
 
 import java.util.ArrayList;
 import java.util.HashMap;

@@ -8,6 +8,7 @@
 package ru.frog;
 
 import org.junit.Test;
+import ru.job4j.frog.Frog;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
