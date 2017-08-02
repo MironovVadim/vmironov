@@ -26,6 +26,11 @@ public class TicTacToeGame {
      * Length of symbols needed to win.
      */
     private int countToWin;
+    /**
+     * Directions of checking line of symbols.
+     */
+    private final int[] increments = new int[]{-1, 0, -1, 1, 0, 1, 1, 1, 1, 0, 1, -1, 0, -1, -1, -1};
+
 
     /**
      * Default constructor.
@@ -143,11 +148,16 @@ public class TicTacToeGame {
         boolean result = false;
         for (int i = 0; i < field.length; i++) {
             for (int j = 0; j < field.length; j++) {
-                if (this.field[i][j] != ' ') {
-                    result = this.isWin(i, j);
-                }
-                if (result) {
-                    break;
+                if (this.field[i][j] == this.symbol) {
+                    for (int numberOfInc = -1; numberOfInc < increments.length;) {
+                        result = this.isWin(i, j, ++numberOfInc, ++numberOfInc);
+                        if (result) {
+                            break;
+                        }
+                    }
+                    if (result) {
+                        break;
+                    }
                 }
             }
             if (result) {
@@ -159,86 +169,26 @@ public class TicTacToeGame {
 
     /**
      * Method checks grid of game fiend in every possible direction for existence line of symbols for win.
-     * @param height - y coordinate.
-     * @param length - x coordinate.
-     * @return if win line exists.
+     * @param height - Y of grid.
+     * @param length - X of grid.
+     * @param yInc - Y increment.
+     * @param xInc - X increment.
+     * @return is line of symbols exist.
      */
-    private boolean isWin(int height, int length) {
+    private boolean isWin(int height, int length, int yInc, int xInc) {
         boolean result = false;
-        int leftDistance = length;
-        int rightDistance = this.field.length - length;
-        int upperDistance = height;
-        int lowerDistance = this.field.length - height;
-        if (this.countToWin <= upperDistance) {
-            result = true;
-            for (int currentHeight = height; currentHeight > height - this.countToWin; currentHeight--) {
-                if (field[currentHeight][length] != this.symbol) {
-                    result = false;
+        int count = 1;
+        int currentHeight = height + yInc;
+        int currentLength = length + xInc;
+        for (; 0 <= currentHeight && field.length > currentHeight && 0 <= currentLength && field.length > currentLength; currentHeight += yInc, currentLength += xInc) {
+            if (field[currentHeight][currentLength] == this.symbol) {
+                count++;
+                if (this.countToWin == count) {
+                    result = true;
                     break;
                 }
-            }
-        }
-        if (!result && this.countToWin <= upperDistance && this.countToWin <= rightDistance) {
-            result = true;
-            for (int currentHeight = height, currentLength = length; currentHeight > height - this.countToWin; currentHeight--, currentLength++) {
-                if (field[currentHeight][currentLength] != this.symbol) {
-                    result = false;
-                    break;
-                }
-            }
-        }
-        if (!result && this.countToWin <= rightDistance) {
-            result = true;
-            for (int currentLength = length; currentLength < length + this.countToWin; currentLength++) {
-                if (field[height][currentLength] != this.symbol) {
-                    result = false;
-                    break;
-                }
-            }
-        }
-        if (!result && this.countToWin <= lowerDistance && this.countToWin <= rightDistance) {
-            result = true;
-            for (int currentHeight = height, currentLength = length; currentHeight < height + this.countToWin; currentHeight++, currentLength++) {
-                if (this.field[currentHeight][currentLength] != this.symbol) {
-                    result = false;
-                    break;
-                }
-            }
-        }
-        if (!result && this.countToWin <= lowerDistance) {
-            result = true;
-            for (int currentHeight = height; currentHeight < height + this.countToWin; currentHeight++) {
-                if (this.field[currentHeight][length] != this.symbol) {
-                    result = false;
-                    break;
-                }
-            }
-        }
-        if (!result && this.countToWin <= lowerDistance && this.countToWin <= leftDistance) {
-            result = true;
-            for (int currentHeight = height, currentLength = length; currentHeight < height + this.countToWin; currentHeight++, currentLength--) {
-                if (this.field[currentHeight][currentLength] != this.symbol) {
-                    result = false;
-                    break;
-                }
-            }
-        }
-        if (!result && this.countToWin <= leftDistance) {
-            result = true;
-            for (int currentLength = length; currentLength > length - countToWin; currentLength--) {
-                if (this.field[height][currentLength] != this.symbol) {
-                    result = false;
-                    break;
-                }
-            }
-        }
-        if (!result && this.countToWin <= upperDistance && this.countToWin <= leftDistance) {
-            result = true;
-            for (int currentHeight = height, currentLength = length; currentHeight > height - this.countToWin; currentHeight--, currentLength--) {
-                if (field[currentHeight][currentLength] != this.symbol) {
-                    result = false;
-                    break;
-                }
+            } else {
+                break;
             }
         }
         return result;

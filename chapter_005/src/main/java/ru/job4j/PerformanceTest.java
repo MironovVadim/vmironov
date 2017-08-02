@@ -57,6 +57,7 @@ public class PerformanceTest {
      * @param args - massif
      */
     public static void main(String[] args) {
+        System.out.println(new Integer(12).hashCode());
         PerformanceTest pt = new PerformanceTest();
         Collection<String> arrayList = new ArrayList<>();
         Collection<String> linkedList = new LinkedList<>();
