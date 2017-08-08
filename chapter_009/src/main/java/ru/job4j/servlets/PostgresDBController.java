@@ -22,28 +22,9 @@ public class PostgresDBController implements DBController {
      */
     private static PostgresDBController instance;
     /**
-     * Server address.
+     * DB Pool.
      */
-    private static final String URL = "jdbc:postgresql://localhost:5432/UserDB";
-    /**
-     * User password.
-     */
-    private static final String PASSWORD = "user";
-    /**
-     * User name.
-     */
-    private static final String USER = "postgres";
-    /**
-     * Pool.
-     */
-    private static BasicDataSource basicDataSource = new BasicDataSource();
-
-    static {
-        basicDataSource.setDriverClassName("org.postgresql.Driver");
-        basicDataSource.setUrl(URL);
-        basicDataSource.setUsername(USER);
-        basicDataSource.setPassword(PASSWORD);
-    }
+    private static BasicDataSource basicDataSource;
 
     /**
      * Private default constructor.
@@ -60,6 +41,7 @@ public class PostgresDBController implements DBController {
         if (instance == null) {
             instance = new PostgresDBController();
         }
+        basicDataSource = DBConnector.getBasicDataSource();
         return instance;
     }
 

@@ -5,6 +5,9 @@
     <title>Title</title>
 </head>
 <body>
+Current user:<c:out value="${login}"/>
+<br/>
+User role:<c:out value="${role}"/>
 <table style="border: 1pt solid black" cellpadding="1" cellspacing="1" border="1">
     <tr>
         <th>Name</th>
@@ -28,7 +31,6 @@
     <br/>
     <input type='submit'>
 </form>
-<br/>
 <p>Add user</p>
 <form action="${pageContext.servletContext.contextPath}/AddUser" method='post'>
     Name:<input name='name'/>
@@ -39,7 +41,6 @@
     <br/>
     <input type='submit'>
 </form>
-<br/>
 <p>Update user</p>
 <form action="${pageContext.servletContext.contextPath}/UpdateUser" method='post'>
     Name:<input name='name'/>
@@ -48,5 +49,54 @@
     <br/>
     <input type='submit'>
 </form>
+<table style="border: 1pt solid black" cellpadding="1" cellspacing="1" border="1">
+    <tr>
+        <th>Login</th>
+        <th>Password</th>
+        <th>Role</th>
+    </tr>
+    <c:forEach items="${serviceUsers}" var="user">
+        <tr>
+            <td><c:out value="${user.login}"/></td>
+            <td><c:out value="${user.password}"/></td>
+            <td><c:out value="${user.role}"/></td>
+        </tr>
+    </c:forEach>
+</table>
+<c:if test="${role == 'Administrator'}">
+    <p>Update service user</p>
+    <form action="${pageContext.servletContext.contextPath}/UpdateServiceUser" method="post">
+        Login for change:<input name='login'/>
+        <br/>
+        New Login:<input name='newLogin'/>
+        <br/>
+        New Password:<input name='password'/>
+        <br/>
+        New Role:<input name='role'/>
+        <br/>
+        <input type='submit'>
+    </form>
+    <br/>
+    <p>Add new service user</p>
+    <form action="${pageContext.servletContext.contextPath}/AddServiceUser" method="post">
+        New Login:<input name='login'/>
+        <br/>
+        New Password:<input name='password'/>
+        <br/>
+        New Role:<input name='role'/>
+        <br/>
+        <input type='submit'>
+    </form>
+</c:if>
+<c:if test="${role == 'User'}">
+    <p>Update current user</p>
+    <form action="${pageContext.servletContext.contextPath}/UpdateServiceUser" method="post">
+        New Login:<input name='newLogin'/>
+        <br/>
+        New Password:<input name='password'/>
+        <br/>
+        <input type='submit'>
+    </form>
+</c:if>
 </body>
 </html>

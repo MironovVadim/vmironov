@@ -23,6 +23,6 @@ public class DeleteUserServlet extends HttpServlet {
         resp.setContentType("text/html");
         String name = req.getParameter("name");
         this.dbController.delete(name);
-        resp.sendRedirect(String.format("%s/", req.getContextPath()));
+        req.getRequestDispatcher("/WEB-INF/views/view.jsp").forward(req, resp);
     }
 }

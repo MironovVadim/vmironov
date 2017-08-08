@@ -14,11 +14,17 @@
 </head>
 <body>
 <p>Sign In</p>
-<form action="${pageContext.servletContext.contextPath}/SignIn" method='post'>
+<c:if test="${error != ''}">
+    <div style="background-color: red">
+        <c:out value="${error}"/>
+    </div>
+</c:if>
+<form action="${pageContext.servletContext.contextPath}/signIn" method='post'>
     Login:<input name='login'/>
     <br/>
     Password:<input type='password' name='password' />
     <input type='submit'>
 </form>
+
 </body>
 </html>

@@ -113,7 +113,6 @@ public class Item {
         }
         return desc != null ? desc.equals(item.desc) : item.desc == null;
     }
-
     @Override
     public int hashCode() {
         int result = id != null ? id.hashCode() : 0;

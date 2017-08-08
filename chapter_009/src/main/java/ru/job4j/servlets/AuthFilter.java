@@ -8,10 +8,14 @@ import javax.servlet.ServletResponse;
 import javax.servlet.FilterChain;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 /**
- * Created by ПК on 28.07.2017.
+ * Filter.
+ * @author Vadim Moronov (Mironov6292@gmail.ru/Multik6292@mail.ru)
+ * @version $Id$
+ * @since 0.1
  */
 public class AuthFilter implements Filter {
 
@@ -21,10 +25,21 @@ public class AuthFilter implements Filter {
     }
 
     @Override
-    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-        HttpServletRequest req = (HttpServletRequest) request;
-        HttpServletResponse resp = (HttpServletResponse) response;
-
+    public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain) throws IOException, ServletException {
+        HttpServletRequest request = (HttpServletRequest) req;
+        HttpServletResponse response = (HttpServletResponse) resp;
+        if (request.getRequestURI().contains("/signIn")) {
+            chain.doFilter(req, resp);
+        } else {
+            HttpSession session = request.getSession();
+            synchronized (session) {
+                if (session.getAttribute("login") == null) {
+                    response.sendRedirect(String.format("%s/signIn", request.getContextPath()));
+                    return;
+                }
+            }
+            chain.doFilter(req, resp);
+        }
     }
 
     @Override

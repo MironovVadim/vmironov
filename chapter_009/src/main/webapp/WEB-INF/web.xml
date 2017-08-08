@@ -1,4 +1,54 @@
 <web-app>
+    <filter>
+        <filter-name>AuthFilter</filter-name>
+        <filter-class>ru.job4j.servlets.AuthFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>AuthFilter</filter-name>
+        <url-pattern>*</url-pattern>
+    </filter-mapping>
+
+    <servlet>
+        <servlet-name>SignInServlet</servlet-name>
+        <servlet-class>ru.job4j.servlets.SignInServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>SignInServlet</servlet-name>
+        <url-pattern>/signIn</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>UpdateServiceUserServlet</servlet-name>
+        <servlet-class>ru.job4j.servlets.UpdateServiceUserServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>UpdateServiceUserServlet</servlet-name>
+        <url-pattern>/UpdateServiceUser</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>GetUsersServlet</servlet-name>
+        <servlet-class>ru.job4j.servlets.GetAllUsersServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>GetUsersServlet</servlet-name>
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>AddServiceUserServlet</servlet-name>
+        <servlet-class>ru.job4j.servlets.AddingServiceUserServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>AddServiceUserServlet</servlet-name>
+        <url-pattern>/AddServiceUser</url-pattern>
+    </servlet-mapping>
+
     <servlet>
         <servlet-name>DeleteUserServlet</servlet-name>
         <servlet-class>ru.job4j.servlets.DeleteUserServlet</servlet-class>
@@ -7,16 +57,6 @@
     <servlet-mapping>
         <servlet-name>DeleteUserServlet</servlet-name>
         <url-pattern>/DelUser</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>GetAllUsersServlet</servlet-name>
-        <servlet-class>ru.job4j.servlets.GetAllUsersServlet</servlet-class>
-    </servlet>
-
-    <servlet-mapping>
-        <servlet-name>GetAllUsersServlet</servlet-name>
-        <url-pattern>/</url-pattern>
     </servlet-mapping>
 
     <servlet>
