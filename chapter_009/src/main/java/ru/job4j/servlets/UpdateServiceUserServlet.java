@@ -23,7 +23,7 @@ public class UpdateServiceUserServlet extends HttpServlet {
         String newLogin = req.getParameter("newLogin");
         String newPassword = req.getParameter("password");
 
-        if (session.getAttribute("role") == "User") {
+        if (("User").equals(session.getAttribute("role"))) {
             if (newLogin != null) {
                 this.controller.updateServiceUserLogin(currentUserLogin, newLogin);
                 session.setAttribute("login", newLogin);
@@ -34,22 +34,22 @@ public class UpdateServiceUserServlet extends HttpServlet {
             }
         }
 
-        if (session.getAttribute("role") == "Administrator") {
+        if (("Administrator").equals(session.getAttribute("role"))) {
             String loginForChange = req.getParameter("login");
             String newRole = req.getParameter("role");
-            if (newLogin != null) {
-                if (currentUserLogin.equals(loginForChange)) {
+            if (loginForChange != null && newLogin != null) {
+                this.controller.updateServiceUserLogin(loginForChange, newLogin);
+                if (loginForChange.equals(currentUserLogin)) {
                     session.setAttribute("login", newLogin);
                 }
-                this.controller.updateServiceUserLogin(currentUserLogin, newLogin);
-                currentUserLogin = newLogin;
+                loginForChange = newLogin;
             }
-            if (newPassword != null) {
-                this.controller.updateServiceUserPassword(currentUserLogin, newPassword);
+            if (loginForChange != null && newPassword != null) {
+                this.controller.updateServiceUserPassword(loginForChange, newPassword);
             }
-            if (newRole != null) {
-                this.controller.updateServiceUserRole(currentUserLogin, newRole);
-                if (currentUserLogin.equals(session.getAttribute("role"))) {
+            if (loginForChange != null && newRole != null) {
+                this.controller.updateServiceUserRole(loginForChange, newRole);
+                if (loginForChange.equals(currentUserLogin)) {
                     session.setAttribute("role", newRole);
                 }
             }
