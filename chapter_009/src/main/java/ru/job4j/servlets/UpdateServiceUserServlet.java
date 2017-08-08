@@ -24,12 +24,12 @@ public class UpdateServiceUserServlet extends HttpServlet {
         String newPassword = req.getParameter("password");
 
         if (("User").equals(session.getAttribute("role"))) {
-            if (newLogin != null) {
+            if (!newLogin.isEmpty()) {
                 this.controller.updateServiceUserLogin(currentUserLogin, newLogin);
                 session.setAttribute("login", newLogin);
                 currentUserLogin = newLogin;
             }
-            if (newPassword != null) {
+            if (!newPassword.isEmpty()) {
                 this.controller.updateServiceUserPassword(currentUserLogin, newPassword);
             }
         }
@@ -37,17 +37,17 @@ public class UpdateServiceUserServlet extends HttpServlet {
         if (("Administrator").equals(session.getAttribute("role"))) {
             String loginForChange = req.getParameter("login");
             String newRole = req.getParameter("role");
-            if (loginForChange != null && newLogin != null) {
+            if (!loginForChange.isEmpty() && !newLogin.isEmpty()) {
                 this.controller.updateServiceUserLogin(loginForChange, newLogin);
                 if (loginForChange.equals(currentUserLogin)) {
                     session.setAttribute("login", newLogin);
                 }
                 loginForChange = newLogin;
             }
-            if (loginForChange != null && newPassword != null) {
+            if (!loginForChange.isEmpty() && !newPassword.isEmpty()) {
                 this.controller.updateServiceUserPassword(loginForChange, newPassword);
             }
-            if (loginForChange != null && newRole != null) {
+            if (!loginForChange.isEmpty() && newRole != null && !newRole.isEmpty()) {
                 this.controller.updateServiceUserRole(loginForChange, newRole);
                 if (loginForChange.equals(currentUserLogin)) {
                     session.setAttribute("role", newRole);

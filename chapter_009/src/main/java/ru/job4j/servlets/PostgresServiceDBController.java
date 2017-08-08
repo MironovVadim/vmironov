@@ -68,8 +68,9 @@ public class PostgresServiceDBController implements ServiceDBController {
             preparedStatement.setString(1, login);
             preparedStatement.setString(2, password);
             ResultSet set = preparedStatement.executeQuery();
-            set.next();
-            userId = set.getInt("user_id");
+            while (set.next()) {
+                userId = set.getInt("user_id");
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }

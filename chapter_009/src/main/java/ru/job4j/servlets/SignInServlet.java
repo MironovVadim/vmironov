@@ -26,7 +26,6 @@ public class SignInServlet extends HttpServlet {
         String login = req.getParameter("login");
         String password = req.getParameter("password");
         int userId = controller.checkServiceUser(login, password);
-
         if (userId == 0) {
             req.setAttribute("error", "Invalid login or password");
             this.doGet(req, resp);

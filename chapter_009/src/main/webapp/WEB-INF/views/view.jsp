@@ -72,7 +72,12 @@ User role:<c:out value="${role}"/>
         <br/>
         New Password:<input name='password'/>
         <br/>
-        New Role:<input name='role'/>
+        New Role:<select size="2" multiple name="role">
+        <option disabled>Choose new role</option>
+        <option value="">Don't change</option>
+        <option value="Administrator">Administrator</option>
+        <option value="User">User</option>
+    </select>
         <br/>
         <input type='submit'>
     </form>
@@ -83,7 +88,12 @@ User role:<c:out value="${role}"/>
         <br/>
         New Password:<input name='password'/>
         <br/>
-        New Role:<input name='role'/>
+        New Role:<select size="2" multiple name="role">
+        <option disabled>Choose new role</option>
+        <option value="">Don't change</option>
+        <option value="Administrator">Administrator</option>
+        <option value="User">User</option>
+    </select>
         <br/>
         <input type='submit'>
     </form>
