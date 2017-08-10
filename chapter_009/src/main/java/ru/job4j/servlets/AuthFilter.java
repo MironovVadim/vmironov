@@ -32,11 +32,9 @@ public class AuthFilter implements Filter {
             chain.doFilter(req, resp);
         } else {
             HttpSession session = request.getSession();
-            synchronized (session) {
-                if (session.getAttribute("login") == null) {
-                    response.sendRedirect(String.format("%s/signIn", request.getContextPath()));
-                    return;
-                }
+            if (session.getAttribute("login") == null) {
+                response.sendRedirect(String.format("%s/signIn", request.getContextPath()));
+                return;
             }
             chain.doFilter(req, resp);
         }
