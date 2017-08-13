@@ -1,4 +1,4 @@
-INSERT INTO public.service_users (LOGIN, PASSWORD, ) VALUES (
+INSERT INTO public.service_users (LOGIN, PASSWORD) VALUES (
   'Admin', 'Admin'
 );
 INSERT INTO public.service_users (LOGIN, PASSWORD) VALUES (

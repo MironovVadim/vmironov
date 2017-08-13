@@ -1,6 +1,6 @@
 CREATE TABLE public.role
 (
-  role_id SEREAL,
+  role_id SERIAL,
   role character varying(200),
   PRIMARY KEY (role_id)
 );

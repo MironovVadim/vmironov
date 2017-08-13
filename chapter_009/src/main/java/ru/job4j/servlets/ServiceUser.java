@@ -52,4 +52,24 @@ public class ServiceUser {
     public String getRole() {
         return role;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        ServiceUser that = (ServiceUser) o;
+
+        if (!login.equals(that.login)) return false;
+        if (!password.equals(that.password)) return false;
+        return role.equals(that.role);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = login.hashCode();
+        result = 31 * result + password.hashCode();
+        result = 31 * result + role.hashCode();
+        return result;
+    }
 }

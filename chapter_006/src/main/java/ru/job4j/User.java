@@ -3,13 +3,14 @@ package ru.job4j;
 import java.util.Date;
 
 public class User {
-    int i = 4;
-    int j = 3;
-    String l = "a";
+    //CHECKSTYLE:OFF
+    private int i = 4;
+    private int j = 3;
+    private String l = "a";
     private static boolean isFin = false;
 
     private static int count = 0;
-
+    //CHECKSTYLE:ON
     public static void main(String[] args) {
         Date date = new Date();
         for (int i = 0; i < 20000; i++) {

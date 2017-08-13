@@ -21,7 +21,7 @@ public class PostgresServiceDBController implements ServiceDBController {
     /**
      * DB Pool.
      */
-    private static BasicDataSource basicDataSource;
+    private static BasicDataSource basicDataSource = DBConnector.getBasicDataSource();
 
     /**
      * Private default constructor.
@@ -34,11 +34,10 @@ public class PostgresServiceDBController implements ServiceDBController {
      * Singleton pattern.
      * @return DB controller.
      */
-    public static PostgresServiceDBController newInstance() {
+    public static synchronized PostgresServiceDBController newInstance() {
         if (instance == null) {
             instance = new PostgresServiceDBController();
         }
-        basicDataSource = DBConnector.getBasicDataSource();
         return instance;
     }
 
