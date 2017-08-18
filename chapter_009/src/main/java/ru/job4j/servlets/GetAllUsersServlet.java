@@ -20,7 +20,7 @@ public class GetAllUsersServlet extends HttpServlet {
     /**
      * Service user DB Controller.
      */
-    private ServiceDBController serviceUsersController = PostgresServiceDBController.newInstance();
+    private Service serviceUsersController = PostgresService.newInstance();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

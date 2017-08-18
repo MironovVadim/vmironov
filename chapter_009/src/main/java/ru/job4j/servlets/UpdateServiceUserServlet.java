@@ -14,7 +14,7 @@ public class UpdateServiceUserServlet extends HttpServlet {
     /**
      * DB Controller.
      */
-    private ServiceDBController controller = PostgresServiceDBController.newInstance();
+    private Service controller = PostgresService.newInstance();
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

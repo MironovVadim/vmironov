@@ -12,12 +12,12 @@ import java.util.List;
 /**
  * Service users DB Controller.
  */
-public class PostgresServiceDBController implements ServiceDBController {
+public class PostgresService implements Service {
 
     /**
      * Singleton DB Controller.
      */
-    private static PostgresServiceDBController instance;
+    private static PostgresService instance;
     /**
      * DB Pool.
      */
@@ -26,7 +26,7 @@ public class PostgresServiceDBController implements ServiceDBController {
     /**
      * Private default constructor.
      */
-    private PostgresServiceDBController() {
+    private PostgresService() {
 
     }
 
@@ -34,9 +34,9 @@ public class PostgresServiceDBController implements ServiceDBController {
      * Singleton pattern.
      * @return DB controller.
      */
-    public static synchronized PostgresServiceDBController newInstance() {
+    public static synchronized PostgresService newInstance() {
         if (instance == null) {
-            instance = new PostgresServiceDBController();
+            instance = new PostgresService();
         }
         return instance;
     }

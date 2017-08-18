@@ -14,7 +14,7 @@ public class SignInServlet extends HttpServlet {
     /**
      * DB Controller.
      */
-    private ServiceDBController controller = PostgresServiceDBController.newInstance();
+    private Service controller = PostgresService.newInstance();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

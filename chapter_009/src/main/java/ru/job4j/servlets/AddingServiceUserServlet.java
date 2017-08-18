@@ -13,14 +13,14 @@ public class AddingServiceUserServlet extends HttpServlet {
     /**
      * DB Controller.
      */
-    private ServiceDBController controller = PostgresServiceDBController.newInstance();
+    private static Service controller = PostgresService.newInstance();
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String login = req.getParameter("login");
         String password = req.getParameter("password");
         String role = req.getParameter("role");
-        this.controller.addNewUser(login, password, role);
+        controller.addNewUser(login, password, role);
         resp.sendRedirect(String.format("%s/", req.getContextPath()));
     }
 }

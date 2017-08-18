@@ -5,7 +5,7 @@ import java.util.List;
 /**
  * ServiceUser tables controller.
  */
-public interface ServiceDBController {
+public interface Service {
     /**
      * Method return service users.
      * @return service users.
