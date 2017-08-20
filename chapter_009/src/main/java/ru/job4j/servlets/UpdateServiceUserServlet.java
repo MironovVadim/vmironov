@@ -14,7 +14,7 @@ public class UpdateServiceUserServlet extends HttpServlet {
     /**
      * DB Controller.
      */
-    private Service controller = PostgresService.newInstance();
+    private static Service controller = PostgresService.newInstance();
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -23,7 +23,10 @@ public class UpdateServiceUserServlet extends HttpServlet {
         String newLogin = req.getParameter("newLogin");
         String newPassword = req.getParameter("password");
 
-        if (("User").equals(session.getAttribute("role"))) {
+        String userRole = "User";
+        String administratorRole = "Administrator";
+
+        if ((userRole).equals(session.getAttribute("role"))) {
             if (!newLogin.isEmpty()) {
                 this.controller.updateServiceUserLogin(currentUserLogin, newLogin);
                 session.setAttribute("login", newLogin);
@@ -34,7 +37,7 @@ public class UpdateServiceUserServlet extends HttpServlet {
             }
         }
 
-        if (("Administrator").equals(session.getAttribute("role"))) {
+        if ((administratorRole).equals(session.getAttribute("role"))) {
             String loginForChange = req.getParameter("login");
             String newRole = req.getParameter("role");
             if (!loginForChange.isEmpty() && !newLogin.isEmpty()) {

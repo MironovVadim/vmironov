@@ -16,13 +16,13 @@ public class DeleteUserServlet extends HttpServlet {
     /**
      * БД контроллер.
      */
-    private DBController dbController = PostgresDBController.newInstance();
+    private static DBController dbController = PostgresDBController.newInstance();
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
         String name = req.getParameter("name");
-        this.dbController.delete(name);
+        dbController.delete(name);
         req.getRequestDispatcher("/WEB-INF/views/view.jsp").forward(req, resp);
     }
 }
