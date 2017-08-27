@@ -1,0 +1,7 @@
+CREATE TABLE public.tasks
+(
+    id SERIAL PRIMARY KEY,
+    description CHARACTER(200) NOT NULL,
+    create_date TIMESTAMP DEFAULT now() NOT NULL,
+    isDone BOOLEAN DEFAULT FALSE NOT NULL
+);

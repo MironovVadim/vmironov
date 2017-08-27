@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SighIn</title>
+    <style type="text/css">
+        body {
+            background-color: lightgray;
+            font-family: sans-serif;
+        }
+        .sign_in {
+            text-align: center;
+        }
+        table {
+            width: 300px;
+            margin: auto;
+        }
+        .left_grids {
+            text-align: right;
+        }
+        .right_grids {
+            text-align: left;
+        }
+    </style>
+    <script>
+        function validate () {
+            var result = true;
+            if (document.getElementsByName("login")[0].value === "") {
+                result = false;
+            }
+            if (!result) {
+                alert("Please input correct data");
+            }
+            return result;
+        }
+    </script>
+</head>
+<body>
+<div class="sign_in">
+<h2>Sign In</h2>
+</c:if>
+<form action="${pageContext.servletContext.contextPath}/signIn" method='post' onsubmit="return validate();">
+    <table>
+        <tr>
+            <td class="left_grids">Login:</td>
+            <td class="right_grids"><input name="login"/></td>
+        </tr>
+        <tr>
+            <td class="left_grids">Password:</td>
+            <td class="right_grids"><input type="password" name="password"/></td>
+        </tr>
+    </table>
+    <input type='submit'>
+</form>
+</div>
+</body>
+</html>

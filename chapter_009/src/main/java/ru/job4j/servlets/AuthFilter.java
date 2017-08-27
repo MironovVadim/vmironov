@@ -28,12 +28,12 @@ public class AuthFilter implements Filter {
     public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain) throws IOException, ServletException {
         HttpServletRequest request = (HttpServletRequest) req;
         HttpServletResponse response = (HttpServletResponse) resp;
-        if (request.getRequestURI().contains("/signIn")) {
+        if (request.getRequestURI().contains("/login.html")) {
             chain.doFilter(req, resp);
         } else {
             HttpSession session = request.getSession();
             if (session.getAttribute("login") == null) {
-                response.sendRedirect(String.format("%s/signIn", request.getContextPath()));
+                response.sendRedirect(String.format("/login.html", request.getContextPath()));
                 return;
             }
             chain.doFilter(req, resp);

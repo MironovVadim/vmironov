@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * Servlet returns users as attribute.
+ * servlets returns users as attribute.
  * @author Vadim Moronov (Mironov6292@gmail.ru/Multik6292@mail.ru)
  * @version $Id$
  * @since 0.1

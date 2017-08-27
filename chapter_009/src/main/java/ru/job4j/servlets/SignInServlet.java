@@ -8,7 +8,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 /**
- * SignIn Servlet.
+ * SignIn servlets.
  */
 public class SignInServlet extends HttpServlet {
     /**
@@ -18,7 +18,7 @@ public class SignInServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher("/WEB-INF/views/login.jsp").forward(req, resp);
+        req.getRequestDispatcher("/login.html").forward(req, resp);
     }
 
     @Override

@@ -1,5 +1,5 @@
 /**
- * Package with Mockito test servlet.
+ * Package with Mockito test servlets.
  *
  * @author Vadim Moronov (Mironov6292@gmail.ru/Multik6292@mail.ru)
  * @version $Id$

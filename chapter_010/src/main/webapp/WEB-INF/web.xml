@@ -1,0 +1,11 @@
+<web-app>
+    <servlet>
+        <servlet-name>Controller</servlet-name>
+        <servlet-url>ru.job4j.todolist.servlets.ControlServlet</servlet-url>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>Controller</servlet-name>
+        <url-pattern>/manage</url-pattern>
+    </servlet-mapping>
+</web-app>
