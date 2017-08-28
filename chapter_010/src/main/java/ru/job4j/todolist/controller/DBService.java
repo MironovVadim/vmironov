@@ -58,7 +58,7 @@ public class DBService {
      */
     public List<Task> getItems() {
         Session session = factory.openSession();
-        List items = session.createQuery("from Item").list();
+        List items = session.createQuery("from Task").list();
         session.close();
         return items;
     }
