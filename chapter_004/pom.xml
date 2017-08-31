@@ -17,7 +17,7 @@
                 <configuration>
                     <instrumentation>
                         <excludes>
-                            <exclude>ru/job4j/storage/food/F</exclude>
+                            <exclude>ru/job4j/Storage/food/F</exclude>
                         </excludes>
                     </instrumentation>
                     <check/>

@@ -9,7 +9,7 @@ import static org.junit.Assert.assertNotNull;
 /**
  * UserStorage.
  */
-public class UserStorageTest {
+public class UserSomeStorageTest {
     /**
      * Spring test.
      */
@@ -18,5 +18,15 @@ public class UserStorageTest {
         ApplicationContext context = new ClassPathXmlApplicationContext("spring-context.xml");
         UserStorage storage = context.getBean(UserStorage.class);
         assertNotNull(storage.getStorage());
+    }
+
+    /**
+     * Spring test.
+     */
+    @Test
+    public void whenCreateStorageThenGetName() {
+        ApplicationContext context = new ClassPathXmlApplicationContext("spring-context.xml");
+        UserStorage storage = context.getBean(UserStorage.class);
+        assertNotNull(storage.getName());
     }
 }

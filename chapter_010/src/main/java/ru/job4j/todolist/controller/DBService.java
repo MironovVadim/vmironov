@@ -62,4 +62,8 @@ public class DBService {
         session.close();
         return items;
     }
+
+    public static void main(String[] args) {
+        DBService.newInstance();
+    }
 }
