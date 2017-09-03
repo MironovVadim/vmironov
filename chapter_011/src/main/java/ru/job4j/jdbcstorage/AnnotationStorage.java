@@ -1,12 +1,14 @@
 package ru.job4j.jdbcstorage;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 /**
  * AnnotationStorage.
  */
-@Service("Storage")
+@Component("storage")
 public class AnnotationStorage implements Storage {
     /**
      * Inner storage.
@@ -17,7 +19,8 @@ public class AnnotationStorage implements Storage {
      * Default constructor.
      * @param storage - inner storage.
      */
-    public AnnotationStorage(Storage storage) {
+    @Autowired
+    public AnnotationStorage(@Qualifier("innerStorage") Storage storage) {
         this.storage = storage;
     }
 
@@ -25,7 +28,6 @@ public class AnnotationStorage implements Storage {
      * storage getter.
      * @return inner storage.
      */
-    @Autowired
     public Storage getStorage() {
         return storage;
     }

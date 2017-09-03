@@ -1,11 +1,10 @@
-package ru.job4j.annotation;
+package ru.job4j.jdbcstorage;
 
 
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Component;
-import ru.job4j.jdbcstorage.AnnotationStorage;
 
 import static org.junit.Assert.assertNotNull;
 
@@ -19,8 +18,8 @@ public class AnnotationSomeStorageTest {
      */
     @Test
     public void whenCreateStorageThenGetInnerStorage() {
-        ApplicationContext context = new ClassPathXmlApplicationContext("spring-context-annotation.xml");
-        AnnotationStorage storage = context.getBean(AnnotationStorage.class);
+        ApplicationContext context = new ClassPathXmlApplicationContext("spring-context.xml");
+        AnnotationStorage storage = (AnnotationStorage) context.getBean("storage");
         assertNotNull(storage.getStorage());
     }
 }

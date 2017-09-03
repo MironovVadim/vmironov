@@ -1,14 +1,13 @@
 package ru.job4j.jdbcstorage;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
 
-import javax.annotation.Resource;
 
 /**
  * ImportUser program.
  */
-@Resource(name = "importUser")
+@Component("importUser")
 public class ImportUser {
     /**
      * Storage.
@@ -16,7 +15,7 @@ public class ImportUser {
     private Storage storage;
 
     @Autowired
-    public ImportUser(@Qualifier("JdbcStorage") Storage storage) {
+    public ImportUser(Storage storage) {
         this.storage = storage;
     }
 
@@ -28,5 +27,9 @@ public class ImportUser {
      */
     public boolean addUser(String name, String secondName) {
          return storage.addUser(name, secondName);
+    }
+
+    public Storage getStorage() {
+        return storage;
     }
 }

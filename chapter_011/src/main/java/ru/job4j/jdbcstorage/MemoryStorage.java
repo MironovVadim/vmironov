@@ -1,13 +1,15 @@
 package ru.job4j.jdbcstorage;
 
-import javax.annotation.Resource;
+import org.springframework.context.annotation.Profile;
+import org.springframework.stereotype.Component;
+
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Memory storage.
  */
-@Resource(name = "memoryStorage")
+@Component("memory")
 public class MemoryStorage implements Storage {
     /**
      * User storage.

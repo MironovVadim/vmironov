@@ -2,8 +2,8 @@ package ru.job4j.jdbcstorage;
 
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
-import javax.annotation.Resource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -11,7 +11,7 @@ import java.sql.SQLException;
 /**
  * JDBC storage.
  */
-@Resource(name = "jdbcStorage")
+@Component("jdbc")
 public class JdbcStorage implements Storage {
     /**
      * Connection pool.
@@ -28,21 +28,22 @@ public class JdbcStorage implements Storage {
     public JdbcStorage(@Value("postgres") String user, @Value("user") String password,
                        @Value("org.postgresql.Driver") String driverClass,
                        @Value("jdbc:postgresql://localhost:5432/Spring_chapter") String url) {
+        basicDataSource.setDriverClassName(driverClass);
         basicDataSource.setUsername(user);
         basicDataSource.setPassword(password);
-        basicDataSource.setDriverClassName(driverClass);
         basicDataSource.setUrl(url);
     }
 
     @Override
     public boolean addUser(String name, String secondName) {
-        boolean result = false;
+        boolean result = true;
         try (Connection connection = basicDataSource.getConnection();
-             PreparedStatement statement = connection.prepareStatement("INSERT INTO public.user (name, secondName) VALUES (?, ?)")) {
+             PreparedStatement statement = connection.prepareStatement("INSERT INTO public.user (name, second_name) VALUES (?, ?)")) {
             statement.setString(1, name);
             statement.setString(2, secondName);
-            result = statement.execute();
+            statement.execute();
         } catch (SQLException e) {
+            result = false;
             e.printStackTrace();
         }
         return result;
