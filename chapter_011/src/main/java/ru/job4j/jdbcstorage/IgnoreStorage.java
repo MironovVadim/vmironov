@@ -1,4 +1,4 @@
-package ru.job4j.annotationstorage;
+package ru.job4j.jdbcstorage;
 
 /**
  * Class to ignore.

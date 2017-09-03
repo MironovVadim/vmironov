@@ -1,0 +1,6 @@
+CREATE TABLE public.user
+(
+    id SERIAL PRIMARY KEY NOT NULL,
+    name CHARACTER(50) NOT NULL,
+    second_name CHARACTER(50) NOT NULL
+);

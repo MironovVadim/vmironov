@@ -5,7 +5,7 @@ import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Component;
-import ru.job4j.annotationstorage.AnnotationStorage;
+import ru.job4j.jdbcstorage.AnnotationStorage;
 
 import static org.junit.Assert.assertNotNull;
 

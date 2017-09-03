@@ -1,8 +1,7 @@
-package ru.job4j.annotationstorage;
+package ru.job4j.jdbcstorage;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ru.job4j.Storage;
 
 /**
  * AnnotationStorage.
@@ -29,5 +28,10 @@ public class AnnotationStorage implements Storage {
     @Autowired
     public Storage getStorage() {
         return storage;
+    }
+
+    @Override
+    public boolean addUser(String name, String secondName) {
+        return false;
     }
 }
