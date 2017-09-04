@@ -31,7 +31,7 @@ public class DBService {
      * Method return instance of singleton.
      * @return instance of class.
      */
-    public static synchronized DBService newInstance() {
+    public static synchronized DBService newInstance() throws Exception {
         if (instance == null) {
             instance = new DBService();
         }
@@ -56,14 +56,18 @@ public class DBService {
      * Method return List of tasks.
      * @return tasks.
      */
-    public List<Task> getItems() {
+    public List<Task> getTasks() {
         Session session = factory.openSession();
-        List items = session.createQuery("from Task").list();
+        List tasks = session.createQuery("FROM Task").list();
         session.close();
-        return items;
+        return tasks;
     }
 
     public static void main(String[] args) {
-        DBService.newInstance();
+        try {
+            DBService.newInstance();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

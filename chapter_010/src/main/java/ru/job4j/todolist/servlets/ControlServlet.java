@@ -18,14 +18,14 @@ public class ControlServlet extends HttpServlet {
     /**
      * DB service class.
      */
-    private static DBService service = DBService.newInstance();
+    private static DBService service = getService();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/json");
         StringWriter writer = new StringWriter();
         ObjectMapper mapper = new ObjectMapper();
-        mapper.writeValue(writer, service.getItems());
+        mapper.writeValue(writer, service.getTasks());
         PrintWriter printWriter = resp.getWriter();
         printWriter.print(writer.toString());
         printWriter.flush();
@@ -35,5 +35,15 @@ public class ControlServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String desc = req.getParameter("description");
         service.addNewTask(desc);
+    }
+
+    private static DBService getService() {
+        DBService service = null;
+        try {
+            service = DBService.newInstance();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return service;
     }
 }
