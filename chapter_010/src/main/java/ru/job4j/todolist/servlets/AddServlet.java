@@ -12,9 +12,9 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 
 /**
- * Controller servlet.
+ * Adding servlet.
  */
-public class ControlServlet extends HttpServlet {
+public class AddServlet extends HttpServlet {
     /**
      * DB service class.
      */

@@ -1,26 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+    <script src="scripts/table.js"></script>
     <meta charset="UTF-8">
     <title>ToDoList</title>
     <link href="style/style.css" rel="stylesheet">
-    <script src="scripts/table.js"></script>
 </head>
 <body>
     <h2>ToDoList</h2>
     Скрыть выполненые задания:<input type="checkbox" id="isHide">
     <table id="toDoList" style="border: 1pt solid black" cellpadding="1" cellspacing="1" border="1">
-        <tr>
-            <th>Id</th>
-            <th>Description</th>
-            <th>Create date</th>
-            <th>Is done</th>
-        </tr>
+
     </table>
-    <p>Add new task.</p>
-<form action="http://localhost:8080/items/manage" method="POST">
+    <p>Add new task</p>
+<form action="http://localhost:8080/items/adding" method="POST">
     Add description:<input type="text" name="description" id="description"/>
-    <input type="submit" id="addNewTask" value="Add task"/>
+    <input type="submit" value="Add task"/>
 </form>
+<p>Task completion</p>
+    <form action="http://localhost:8080/items/complete" method="POST">
+        Task with id:<select name="id" id="selectList">
+        </select>
+        <input type="submit" value="Is done">
+    </form>
 </body>
 </html>

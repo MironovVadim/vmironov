@@ -64,4 +64,19 @@ public class DBService {
         session.close();
         return tasks;
     }
+
+    /**
+     * Method completes task.
+     * @param id of task which completed.
+     */
+    public void completeTask(String id) {
+        Session session = factory.openSession();
+        session.beginTransaction();
+        session.createQuery("update Task set done = :isDone where id = :currentId")
+                .setParameter("isDone", true)
+                .setParameter("currentId", Integer.parseInt(id))
+                .executeUpdate();
+        session.getTransaction().commit();
+        session.close();
+    }
 }

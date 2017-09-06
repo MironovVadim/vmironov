@@ -1,11 +1,21 @@
 <web-app>
     <servlet>
-        <servlet-name>Controller</servlet-name>
-        <servlet-class>ru.job4j.todolist.servlets.ControlServlet</servlet-class>
+        <servlet-name>Adding</servlet-name>
+        <servlet-class>ru.job4j.todolist.servlets.AddServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
-        <servlet-name>Controller</servlet-name>
-        <url-pattern>/manage</url-pattern>
+        <servlet-name>Adding</servlet-name>
+        <url-pattern>/adding</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+    <servlet-name>Completion</servlet-name>
+    <servlet-class>ru.job4j.todolist.servlets.CompleteServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>Completion</servlet-name>
+        <url-pattern>/complete</url-pattern>
     </servlet-mapping>
 </web-app>
