@@ -8,6 +8,7 @@
 </head>
 <body>
     <h2>ToDoList</h2>
+    Скрыть выполненые задания:<input type="checkbox" id="isHide">
     <table id="toDoList" style="border: 1pt solid black" cellpadding="1" cellspacing="1" border="1">
         <tr>
             <th>Id</th>
@@ -16,7 +17,6 @@
             <th>Is done</th>
         </tr>
     </table>
-    Скрыть выполненые задания:<input type="checkbox" id="isHide" checked>
     <p>Add new task.</p>
 <form action="http://localhost:8080/items/manage" method="POST">
     Add description:<input type="text" name="description" id="description"/>

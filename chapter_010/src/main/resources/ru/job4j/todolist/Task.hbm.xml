@@ -6,6 +6,6 @@
         </id>
         <property name="desc" column="description"/>
         <property name="created" column="create_date"/>
-        <property name="done" column="done"/>
+        <property name="done" column="isdone"/>
     </class>
 </hibernate-mapping>

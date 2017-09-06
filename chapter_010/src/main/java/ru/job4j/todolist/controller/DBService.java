@@ -5,6 +5,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import ru.job4j.todolist.Task;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -31,7 +32,7 @@ public class DBService {
      * Method return instance of singleton.
      * @return instance of class.
      */
-    public static synchronized DBService newInstance() throws Exception {
+    public static synchronized DBService newInstance() {
         if (instance == null) {
             instance = new DBService();
         }
@@ -47,6 +48,7 @@ public class DBService {
         session.beginTransaction();
         Task task = new Task();
         task.setDesc(desc);
+        task.setCreated(new Date());
         session.save(task);
         session.getTransaction().commit();
         session.close();
@@ -61,13 +63,5 @@ public class DBService {
         List tasks = session.createQuery("FROM Task").list();
         session.close();
         return tasks;
-    }
-
-    public static void main(String[] args) {
-        try {
-            DBService.newInstance();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 }

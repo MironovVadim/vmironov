@@ -1,7 +1,7 @@
 <web-app>
     <servlet>
         <servlet-name>Controller</servlet-name>
-        <servlet-url>ru.job4j.todolist.servlets.ControlServlet</servlet-url>
+        <servlet-class>ru.job4j.todolist.servlets.ControlServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
