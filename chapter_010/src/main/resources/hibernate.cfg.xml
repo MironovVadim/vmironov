@@ -11,5 +11,9 @@
         <property name="dialect">org.hibernate.dialect.PostgreSQL95Dialect</property>
 
         <mapping resource="ru/job4j/todolist/Task.hbm.xml"/>
+
+        <mapping resource="ru/job4j/carstorage/Car.hbm.xml"/>
+        <mapping resource="ru/job4j/carstorage/Comment.hbm.xml"/>
+        <mapping resource="ru/job4j/carstorage/User.hbm.xml"/>
     </session-factory>
 </hibernate-configuration>
