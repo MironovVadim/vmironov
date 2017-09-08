@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping>
+    <class name="ru.job4j.carstorage.Comment" table="public.comments">
+
+        <id name="id" column="id">
+            <generator class="identity"/>
+        </id>
+
+        <one-to-many name="userId" column="user_id"
+                     class="ru.job4j.carstorage.User"/>
+
+        <one-to-many name="carId" column="car_id"
+                     class="ru.job4j.carstorage.Car"/>
+
+        <property name="description" column="description"/>
+        <property name="created" column="created_date"/>
+    </class>
+</hibernate-mapping>
