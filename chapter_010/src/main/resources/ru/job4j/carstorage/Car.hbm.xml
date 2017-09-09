@@ -18,8 +18,8 @@
         <property name="engineCapacity" column="engine_capacity"/>
         <property name="engineType" column="engine_type"/>
         <property name="power" column="power"/>
-        <bag name="comments" inverse="true">
 
+        <bag name="comments" inverse="true">
             <key column="user_id" not-null="true"/>
             <one-to-many class="ru.job4j.carstorage.Comment"/>
         </bag>
