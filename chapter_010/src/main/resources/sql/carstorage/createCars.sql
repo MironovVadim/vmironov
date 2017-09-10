@@ -11,5 +11,7 @@ CREATE TABLE public.cars
     engine_capacity DOUBLE PRECISION NOT NULL,
     engine_type VARCHAR(50) NOT NULL,
     power INT NOT NULL,
+    cost  INT NOT NULL,
+    is_sold BOOLEAN DEFAULT FALSE,
     created_date TIMESTAMP DEFAULT now()
 );

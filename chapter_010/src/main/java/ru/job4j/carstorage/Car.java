@@ -51,6 +51,14 @@ public class Car {
      */
     private int power;
     /**
+     * Cost.
+     */
+    private int cost;
+    /**
+     * Is car sold.
+     */
+    private boolean sold;
+    /**
      * Comments.
      */
     private List<Comment> comments;
@@ -229,6 +237,30 @@ public class Car {
      */
     public void setPower(int power) {
         this.power = power;
+    }
+
+    /**
+     * Cost getter.
+     * @return cost.
+     */
+    public int getCost() {
+        return cost;
+    }
+
+    /**
+     * Cost setter.
+     * @param cost - cost.
+     */
+    public void setCost(int cost) {
+        this.cost = cost;
+    }
+
+    public boolean isSold() {
+        return sold;
+    }
+
+    public void setSold(boolean sold) {
+        this.sold = sold;
     }
 
     /**

@@ -18,6 +18,8 @@
         <property name="engineCapacity" column="engine_capacity"/>
         <property name="engineType" column="engine_type"/>
         <property name="power" column="power"/>
+        <property name="cost" column="cost"/>
+        <property name="sold" column="is_sold"/>
 
         <bag name="comments" inverse="true">
             <key column="user_id" not-null="true"/>
