@@ -13,5 +13,6 @@ CREATE TABLE public.cars
     power INT NOT NULL,
     cost  INT NOT NULL,
     is_sold BOOLEAN DEFAULT FALSE,
+    description VARCHAR(1000),
     created_date TIMESTAMP DEFAULT now()
 );

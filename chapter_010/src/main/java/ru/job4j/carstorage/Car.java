@@ -1,6 +1,7 @@
 package ru.job4j.carstorage;
 
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Car.
@@ -11,9 +12,9 @@ public class Car {
      */
     private int id;
     /**
-     * User id.
+     * Car owner.
      */
-    private int userId;
+    private User user;
     /**
      * Mark.
      */
@@ -59,9 +60,13 @@ public class Car {
      */
     private boolean sold;
     /**
+     * Description.
+     */
+    private String description;
+    /**
      * Comments.
      */
-    private List<Comment> comments;
+    private Set<Comment> comments = new HashSet<>();
 
     /**
      * Id getter.
@@ -80,19 +85,19 @@ public class Car {
     }
 
     /**
-     * User id getter.
-     * @return user id.
+     * User getter.
+     * @return user.
      */
-    public int getUserId() {
-        return userId;
+    public User getUser() {
+        return user;
     }
 
     /**
-     * User id setter.
-     * @param userId - user id.
+     * User setter.
+     * @param user - user.
      */
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     /**
@@ -264,10 +269,26 @@ public class Car {
     }
 
     /**
+     * Description getter.
+     * @return description.
+     */
+    public String getDescription() {
+        return description;
+    }
+
+    /**
+     * Description setter.
+     * @param description - description.
+     */
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    /**
      * Comments getter.
      * @return comments.
      */
-    public List<Comment> getComments() {
+    public Set<Comment> getComments() {
         return comments;
     }
 
@@ -275,7 +296,52 @@ public class Car {
      * Comments setter.
      * @param comments - comments.
      */
-    public void setComments(List<Comment> comments) {
+    public void setComments(Set<Comment> comments) {
         this.comments = comments;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Car car = (Car) o;
+
+        if (id != car.id) return false;
+        if (releaseYear != car.releaseYear) return false;
+        if (mileage != car.mileage) return false;
+        if (Double.compare(car.engineCapacity, engineCapacity) != 0) return false;
+        if (power != car.power) return false;
+        if (cost != car.cost) return false;
+        if (sold != car.sold) return false;
+        if (!user.equals(car.user)) return false;
+        if (!mark.equals(car.mark)) return false;
+        if (!model.equals(car.model)) return false;
+        if (!bodyType.equals(car.bodyType)) return false;
+        if (!color.equals(car.color)) return false;
+        if (!engineType.equals(car.engineType)) return false;
+        return comments.equals(car.comments);
+    }
+
+    @Override
+    public int hashCode() {
+        int result;
+        long temp;
+        result = id;
+        result = 31 * result + user.hashCode();
+        result = 31 * result + mark.hashCode();
+        result = 31 * result + model.hashCode();
+        result = 31 * result + releaseYear;
+        result = 31 * result + mileage;
+        result = 31 * result + bodyType.hashCode();
+        result = 31 * result + color.hashCode();
+        temp = Double.doubleToLongBits(engineCapacity);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        result = 31 * result + engineType.hashCode();
+        result = 31 * result + power;
+        result = 31 * result + cost;
+        result = 31 * result + (sold ? 1 : 0);
+        result = 31 * result + comments.hashCode();
+        return result;
     }
 }

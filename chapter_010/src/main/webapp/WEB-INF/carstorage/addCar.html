@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Adding car</title>
+</head>
+<body>
+<form action="carStorage">
+    <input type="submit" value="Go to car storage"/>
+</form>
+<h2>Adding new car</h2>
+<form action="addCar" method="post">
+    <p>Car mark:</p><input type="text" name="mark" required/>
+    <p>Car model:</p><input type="text" name="model" required/>
+    <p>Release year:</p><select name="releaseYear" required>
+        <option>1990</option>
+        <option>1991</option>
+        <option>1992</option>
+        <option>1993</option>
+        <option>1994</option>
+        <option>1995</option>
+        <option>1996</option>
+        <option>1997</option>
+        <option>1998</option>
+        <option>1999</option>
+        <option>2000</option>
+        <option>2001</option>
+        <option>2002</option>
+        <option>2003</option>
+        <option>2004</option>
+        <option>2005</option>
+        <option>2006</option>
+        <option>2007</option>
+        <option>2008</option>
+        <option>2009</option>
+        <option>2010</option>
+        <option>2011</option>
+        <option>2012</option>
+        <option>2013</option>
+        <option>2014</option>
+        <option>2015</option>
+        <option>2016</option>
+        <option>2017</option>
+    </select>
+    <p>Mileage:</p><input type="text" name="mileage" pattern="\d" value="0" required/>
+    <p>Engine capacity:</p><input type="text" name="engineCapacity" required/>
+    <p>Engine type:</p><input type="text" name="engineType" required/>
+    <p>Engine power:</p><input type="text" name="power" required/>
+    <p>Cost:</p><input type="text" name="cost" pattern="\d" required/>
+    <p>Description:</p><textarea type="text" name="description"></textarea></br>
+    <input type="submit" value="add car to car storage"/>
+</form>
+</body>
+</html>

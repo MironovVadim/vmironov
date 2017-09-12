@@ -3,10 +3,15 @@ package ru.job4j.todolist.controller;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
+import ru.job4j.carstorage.Car;
+import ru.job4j.carstorage.Comment;
+import ru.job4j.carstorage.User;
 import ru.job4j.todolist.Task;
 
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Class managing the Data Base.
@@ -19,7 +24,7 @@ public class DBService {
     /**
      * Singleton.
      */
-    private static DBService instance;
+    private static DBService instance = new DBService();
 
     /**
      * Private default constructor.
@@ -32,7 +37,7 @@ public class DBService {
      * Method return instance of singleton.
      * @return instance of class.
      */
-    public static synchronized DBService newInstance() {
+    public static DBService newInstance() {
         if (instance == null) {
             instance = new DBService();
         }
@@ -78,5 +83,20 @@ public class DBService {
                 .executeUpdate();
         session.getTransaction().commit();
         session.close();
+    }
+
+    public static void main(String[] args) {
+        Session session = factory.openSession();
+        session.beginTransaction();
+        Car car = session.get(Car.class, 1);
+        Comment comment = new Comment();
+        comment.setUser(car.getUser());
+        comment.setDescription("nu kupi yge");
+        comment.setCreated(new Date());
+        car.getComments().add(comment);
+        session.update(car);
+        session.getTransaction().commit();
+        session.close();
+        factory.close();
     }
 }

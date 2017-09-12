@@ -6,11 +6,10 @@
             <generator class="identity"/>
         </id>
 
-        <one-to-many name="userId" column="user_id"
+        <many-to-one name="user" column="user"
                      class="ru.job4j.carstorage.User"/>
 
-        <one-to-many name="carId" column="car_id"
-                     class="ru.job4j.carstorage.Car"/>
+        <property name="carId" column="car_id"/>
 
         <property name="description" column="description"/>
         <property name="created" column="created_date"/>

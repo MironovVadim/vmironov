@@ -13,11 +13,7 @@ public class User {
     /**
      * Name.
      */
-    private String name;
-    /**
-     * Second name.
-     */
-    private String secondName;
+    private String nickname;
     /**
      * Login.
      */
@@ -51,32 +47,16 @@ public class User {
      * Name getter.
      * @return name;
      */
-    public String getName() {
-        return name;
+    public String getNickname() {
+        return nickname;
     }
 
     /**
-     * Name setter.
-     * @param name - name.
+     * nickname setter.
+     * @param nickname - nickname.
      */
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    /**
-     * Second name getter.
-     * @return second name.
-     */
-    public String getSecondName() {
-        return secondName;
-    }
-
-    /**
-     * Second name setter.
-     * @param secondName - second name.
-     */
-    public void setSecondName(String secondName) {
-        this.secondName = secondName;
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
     }
 
     /**
@@ -125,5 +105,29 @@ public class User {
      */
     public void setCreated(Date created) {
         this.created = created;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        User user = (User) o;
+
+        if (id != user.id) return false;
+        if (!nickname.equals(user.nickname)) return false;
+        if (!login.equals(user.login)) return false;
+        if (!password.equals(user.password)) return false;
+        return created.equals(user.created);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id;
+        result = 31 * result + nickname.hashCode();
+        result = 31 * result + login.hashCode();
+        result = 31 * result + password.hashCode();
+        result = 31 * result + created.hashCode();
+        return result;
     }
 }

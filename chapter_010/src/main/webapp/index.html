@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="scripts/table.js"></script>
     <meta charset="UTF-8">
     <title>ToDoList</title>
@@ -14,9 +14,9 @@
 
     </table>
     <p>Add new task</p>
-<form action="http://localhost:8080/items/adding" method="POST">
+<form>
     Add description:<input type="text" name="description" id="description"/>
-    <input type="submit" value="Add task"/>
+    <input type="submit" value="Add task" id="addTask"/>
 </form>
 <p>Task completion</p>
     <form action="http://localhost:8080/items/complete" method="POST">

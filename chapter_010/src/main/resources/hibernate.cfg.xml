@@ -13,7 +13,7 @@
         <mapping resource="ru/job4j/todolist/Task.hbm.xml"/>
 
         <mapping resource="ru/job4j/carstorage/User.hbm.xml"/>
-        <mapping resource="ru/job4j/carstorage/Comment.hbm.xml"/>
+        <mapping resource="ru/job4j/carstorage/Car.hbm.xml"/>
         <mapping resource="ru/job4j/carstorage/Comment.hbm.xml"/>
     </session-factory>
 </hibernate-configuration>

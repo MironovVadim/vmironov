@@ -5,7 +5,7 @@ import java.util.Date;
 /**
  * Car comment.
  */
-public class Comment {
+public class Comment implements Comparable {
     /**
      * Comment id.
      */
@@ -13,7 +13,7 @@ public class Comment {
     /**
      * Comment of user id.
      */
-    private int userId;
+    private User user;
     /**
      * Comment of car id.
      */
@@ -44,19 +44,19 @@ public class Comment {
     }
 
     /**
-     * User id getter.
-     * @return user id.
+     * User getter.
+     * @return user.
      */
-    public int getUserId() {
-        return userId;
+    public User getUser() {
+        return user;
     }
 
     /**
-     * User id setter.
-     * @param userId - user id.
+     * User setter.
+     * @param user - user.
      */
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     /**
@@ -105,5 +105,34 @@ public class Comment {
      */
     public void setCreated(Date created) {
         this.created = created;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Comment comment = (Comment) o;
+
+        if (id != comment.id) return false;
+        if (carId != comment.carId) return false;
+        if (!user.equals(comment.user)) return false;
+        if (!description.equals(comment.description)) return false;
+        return created.equals(comment.created);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id;
+        result = 31 * result + user.hashCode();
+        result = 31 * result + carId;
+        result = 31 * result + description.hashCode();
+        result = 31 * result + created.hashCode();
+        return result;
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        return (int) (this.getCreated().getTime() - ((Comment) o).getCreated().getTime());
     }
 }

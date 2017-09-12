@@ -13,19 +13,22 @@ timeOptions = {
     day: 'numeric',
     timezone: 'UTC',
     hour: 'numeric',
-    minute: 'numeric',
+    minute: 'numeric'
 };
 
 window.onload = function () {
     var checkbox = document.getElementById("isHide");
     checkbox.onclick = changeTaskView;
     fillPage();
+    var addTask = document.getElementById("addTask");
+    addTask.onclick = addNewTask;
 };
 
 function fillPage() {
     $.ajax(url, {
         method: "GET",
         complete: function(data) {
+            console.log(data);
             var tasks = JSON.parse(data.responseText);
             fillTable(tasks);
             fillSelect(tasks);
@@ -89,4 +92,14 @@ function showTask(tasks) {
     for (var i = 1; i < tasks.length; i++) {
         tasks[i].removeAttribute("hidden");
     }
+}
+
+function addNewTask() {
+    var desc = document.getElementById("description");
+    $.post(url, {
+            description: desc
+        },
+        function () {
+            fillPage();
+        });
 }

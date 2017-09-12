@@ -6,8 +6,8 @@
             <generator class="identity"/>
         </id>
 
-        <one-to-many name="userId" column="user_id"
-                     class="ru.job4j.carstorage.User"/>
+        <many-to-one name="user" column="user_id"
+                     class="ru.job4j.carstorage.User" not-null="true"/>
 
         <property name="mark" column="mark"/>
         <property name="model" column="model"/>
@@ -20,11 +20,12 @@
         <property name="power" column="power"/>
         <property name="cost" column="cost"/>
         <property name="sold" column="is_sold"/>
+        <property name="description" column="description"/>
 
-        <bag name="comments" inverse="true">
-            <key column="user_id" not-null="true"/>
-            <one-to-many class="ru.job4j.carstorage.Comment"/>
-        </bag>
+        <set name="comments" cascade="all" table="public.comments">
+            <key column="car_id" not-null="true"/>
+            <many-to-many column="user_id" class="ru.job4j.carstorage.User"/>
+        </set>
 
     </class>
 </hibernate-mapping>
