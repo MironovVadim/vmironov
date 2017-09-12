@@ -21,6 +21,5 @@ public class CompleteServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String id = req.getParameter("id");
         service.completeTask(id);
-        resp.sendRedirect("http://localhost:8080/items/index.html");
     }
 }

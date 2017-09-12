@@ -36,6 +36,5 @@ public class AddServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String desc = req.getParameter("description");
         service.addNewTask(desc);
-        resp.sendRedirect("http://localhost:8080/items/index.html");
     }
 }
