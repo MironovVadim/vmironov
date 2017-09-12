@@ -5,7 +5,9 @@ title = "<tr>"
     + "<th>Is done</th>"
     + "</tr>";
 
-url = "http://localhost:8080/items/adding";
+addUrl = "http://localhost:8080/items/adding";
+
+completeUrl = "http://localhost:8080/items/complete";
 
 timeOptions = {
     year: 'numeric',
@@ -22,13 +24,14 @@ window.onload = function () {
     fillPage();
     var addTask = document.getElementById("addTask");
     addTask.onclick = addNewTask;
+    var endTask = document.getElementById("completeTask");
+    endTask.onclick = completeTask;
 };
 
 function fillPage() {
-    $.ajax(url, {
+    $.ajax(addUrl, {
         method: "GET",
         complete: function(data) {
-            console.log(data);
             var tasks = JSON.parse(data.responseText);
             fillTable(tasks);
             fillSelect(tasks);
@@ -96,8 +99,20 @@ function showTask(tasks) {
 
 function addNewTask() {
     var desc = document.getElementById("description");
-    $.post(url, {
-            description: desc
+    if (desc.value !== "") {
+        $.post(addUrl, {
+                description: desc.value
+            },
+            function () {
+                fillPage();
+            });
+    }
+}
+
+function completeTask() {
+    var id = document.getElementById("selectList");
+    $.post(completeUrl, {
+            id: id.options[id.selectedIndex].text
         },
         function () {
             fillPage();

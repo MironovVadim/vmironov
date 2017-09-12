@@ -15,14 +15,14 @@
     </table>
     <p>Add new task</p>
 <form>
-    Add description:<input type="text" name="description" id="description"/>
+    Add description:<input type="text" name="description" id="description" required/>
     <input type="submit" value="Add task" id="addTask"/>
 </form>
 <p>Task completion</p>
-    <form action="http://localhost:8080/items/complete" method="POST">
+    <form>
         Task with id:<select name="id" id="selectList">
         </select>
-        <input type="submit" value="Is done">
+        <input type="submit" value="complete task" id="completeTask">
     </form>
 </body>
 </html>
