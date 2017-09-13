@@ -84,19 +84,4 @@ public class DBService {
         session.getTransaction().commit();
         session.close();
     }
-
-    public static void main(String[] args) {
-        Session session = factory.openSession();
-        session.beginTransaction();
-        Car car = session.get(Car.class, 1);
-        Comment comment = new Comment();
-        comment.setUser(car.getUser());
-        comment.setDescription("nu kupi yge");
-        comment.setCreated(new Date());
-        car.getComments().add(comment);
-        session.update(car);
-        session.getTransaction().commit();
-        session.close();
-        factory.close();
-    }
 }

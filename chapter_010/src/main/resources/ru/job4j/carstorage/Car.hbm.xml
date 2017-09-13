@@ -24,7 +24,7 @@
 
         <set name="comments" cascade="all" table="public.comments">
             <key column="car_id" not-null="true"/>
-            <many-to-many column="user_id" class="ru.job4j.carstorage.User"/>
+            <many-to-many column="user_id" class="ru.job4j.carstorage.Comment"/>
         </set>
 
     </class>
