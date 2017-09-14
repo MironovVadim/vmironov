@@ -1,7 +1,7 @@
 package ru.job4j.todolist.servlets;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import ru.job4j.todolist.controller.DBService;
+import ru.job4j.controller.DBService;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;

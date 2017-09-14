@@ -1,5 +1,6 @@
 package ru.job4j.carstorage;
 
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -63,6 +64,10 @@ public class Car {
      * Description.
      */
     private String description;
+    /**
+     * Created date.
+     */
+    private Date created;
     /**
      * Comments.
      */
@@ -260,10 +265,18 @@ public class Car {
         this.cost = cost;
     }
 
+    /**
+     * Is car sold.
+     * @return is car sold.
+     */
     public boolean isSold() {
         return sold;
     }
 
+    /**
+     * Set is car sold.
+     * @param sold - is car sold.
+     */
     public void setSold(boolean sold) {
         this.sold = sold;
     }
@@ -285,6 +298,22 @@ public class Car {
     }
 
     /**
+     * Created date getter.
+     * @return date created.
+     */
+    public Date getCreated() {
+        return created;
+    }
+
+    /**
+     * Created date setter.
+     * @param created date.
+     */
+    public void setCreated(Date created) {
+        this.created = created;
+    }
+
+    /**
      * Comments getter.
      * @return comments.
      */
@@ -302,24 +331,60 @@ public class Car {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
 
         Car car = (Car) o;
 
-        if (id != car.id) return false;
-        if (releaseYear != car.releaseYear) return false;
-        if (mileage != car.mileage) return false;
-        if (Double.compare(car.engineCapacity, engineCapacity) != 0) return false;
-        if (power != car.power) return false;
-        if (cost != car.cost) return false;
-        if (sold != car.sold) return false;
-        if (!user.equals(car.user)) return false;
-        if (!mark.equals(car.mark)) return false;
-        if (!model.equals(car.model)) return false;
-        if (!bodyType.equals(car.bodyType)) return false;
-        if (!color.equals(car.color)) return false;
-        if (!engineType.equals(car.engineType)) return false;
+        if (id != car.id) {
+            return false;
+        }
+        if (releaseYear != car.releaseYear) {
+            return false;
+        }
+        if (mileage != car.mileage) {
+            return false;
+        }
+        if (Double.compare(car.engineCapacity, engineCapacity) != 0) {
+            return false;
+        }
+        if (power != car.power) {
+            return false;
+        }
+        if (cost != car.cost) {
+            return false;
+        }
+        if (sold != car.sold) {
+            return false;
+        }
+        if (!user.equals(car.user)) {
+            return false;
+        }
+        if (!mark.equals(car.mark)) {
+            return false;
+        }
+        if (!model.equals(car.model)) {
+            return false;
+        }
+        if (!bodyType.equals(car.bodyType)) {
+            return false;
+        }
+        if (!color.equals(car.color)) {
+            return false;
+        }
+        if (!engineType.equals(car.engineType)) {
+            return false;
+        }
+        if (!description.equals(car.description)) {
+            return false;
+        }
+        if (!created.equals(car.created)) {
+            return false;
+        }
         return comments.equals(car.comments);
     }
 
@@ -341,6 +406,8 @@ public class Car {
         result = 31 * result + power;
         result = 31 * result + cost;
         result = 31 * result + (sold ? 1 : 0);
+        result = 31 * result + description.hashCode();
+        result = 31 * result + created.hashCode();
         result = 31 * result + comments.hashCode();
         return result;
     }

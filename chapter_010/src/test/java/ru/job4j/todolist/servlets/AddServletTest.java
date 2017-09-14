@@ -4,7 +4,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.powermock.modules.junit4.PowerMockRunner;
 import org.powermock.reflect.Whitebox;
-import ru.job4j.todolist.controller.DBService;
+import ru.job4j.controller.DBService;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;

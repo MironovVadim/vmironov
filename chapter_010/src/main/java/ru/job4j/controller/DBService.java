@@ -1,17 +1,12 @@
-package ru.job4j.todolist.controller;
+package ru.job4j.controller;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
-import ru.job4j.carstorage.Car;
-import ru.job4j.carstorage.Comment;
-import ru.job4j.carstorage.User;
 import ru.job4j.todolist.Task;
 
 import java.util.Date;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 /**
  * Class managing the Data Base.

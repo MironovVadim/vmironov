@@ -14,10 +14,7 @@ public class Comment implements Comparable {
      * Comment of user id.
      */
     private User user;
-    /**
-     * Comment of car id.
-     */
-    private int carId;
+
     /**
      * Description.
      */
@@ -60,22 +57,6 @@ public class Comment implements Comparable {
     }
 
     /**
-     * Car id getter.
-     * @return car id.
-     */
-    public int getCarId() {
-        return carId;
-    }
-
-    /**
-     * Car setter.
-     * @param carId - car id.
-     */
-    public void setCarId(int carId) {
-        this.carId = carId;
-    }
-
-    /**
      * Description getter.
      * @return description.
      */
@@ -109,15 +90,24 @@ public class Comment implements Comparable {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
 
         Comment comment = (Comment) o;
 
-        if (id != comment.id) return false;
-        if (carId != comment.carId) return false;
-        if (!user.equals(comment.user)) return false;
-        if (!description.equals(comment.description)) return false;
+        if (id != comment.id) {
+            return false;
+        }
+        if (!user.equals(comment.user)) {
+            return false;
+        }
+        if (!description.equals(comment.description)) {
+            return false;
+        }
         return created.equals(comment.created);
     }
 
@@ -125,7 +115,6 @@ public class Comment implements Comparable {
     public int hashCode() {
         int result = id;
         result = 31 * result + user.hashCode();
-        result = 31 * result + carId;
         result = 31 * result + description.hashCode();
         result = 31 * result + created.hashCode();
         return result;
