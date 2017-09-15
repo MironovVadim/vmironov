@@ -34,6 +34,7 @@ function fillPage() {
         complete: function(data) {
             var tasks = JSON.parse(data.responseText);
             fillTable(tasks);
+            changeTaskView();
             fillSelect(tasks);
         }
     });
@@ -61,6 +62,7 @@ function fillTable(tasks) {
 
 function fillSelect(tasks) {
     var select = document.getElementById("selectList");
+    select.innerHTML = "";
     for (var i = 0; i < tasks.length; i++) {
         if (tasks[i]["done"] === false) {
             var option = document.createElement("option");

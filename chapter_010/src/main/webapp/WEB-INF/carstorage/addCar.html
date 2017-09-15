@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Adding car</title>
+    <link href="../../style/style.css" rel="stylesheet">
 </head>
 <body>
 <form action="carStorage">
@@ -43,11 +44,11 @@
         <option>2017</option>
     </select>
     <p>Mileage:</p><input type="text" name="mileage" pattern="\d" value="0" required/>
-    <p>Engine capacity:</p><input type="text" name="engineCapacity" required/>
+    <p>Engine capacity:</p><input type="text" name="engineCapacity" pattern="\d+(\.\d)?" required/>
     <p>Engine type:</p><input type="text" name="engineType" required/>
-    <p>Engine power:</p><input type="text" name="power" required/>
+    <p>Engine power:</p><input type="text" name="power" pattern="\d" required/>
     <p>Cost:</p><input type="text" name="cost" pattern="\d" required/>
-    <p>Description:</p><textarea type="text" name="description"></textarea></br>
+    <p>Description:</p><textarea type="text" pattern="\D{,1000}" name="description"></textarea></br>
     <input type="submit" value="add car to car storage"/>
 </form>
 </body>
