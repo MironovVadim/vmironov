@@ -20,12 +20,32 @@
     </servlet-mapping>
 
     <servlet>
-        <servlet-name>AddingCar</servlet-name>
-        <servlet-class>ru.job4j.carstorage.servlets.AddCarServlet</servlet-class>
+        <servlet-name>manageCars</servlet-name>
+        <servlet-class>ru.job4j.carstorage.servlets.ManageCarsServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
-        <servlet-name>AddingCar</servlet-name>
-        <url-pattern>/addNewCar</url-pattern>
+        <servlet-name>manageCars</servlet-name>
+        <url-pattern>/getUnsoldCars</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>currentCarGetter</servlet-name>
+        <servlet-class>ru.job4j.carstorage.servlets.CarGetterServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>currentCarGetter</servlet-name>
+        <url-pattern>/getCar</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>CommentAdding</servlet-name>
+        <servlet-class>ru.job4j.carstorage.servlets.CommentManageServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>CommentAdding</servlet-name>
+        <url-pattern>/addComment</url-pattern>
     </servlet-mapping>
 </web-app>

@@ -1,7 +1,13 @@
 package ru.job4j.carstorage;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+
 import java.util.Arrays;
 
+/**
+ * Car image.
+ */
+@JsonAutoDetect
 public class CarImage {
     /**
      * Id.
@@ -11,6 +17,20 @@ public class CarImage {
      * Image.
      */
     private byte[] image;
+
+    /**
+     * Default constructor.
+     */
+    public CarImage() {
+    }
+
+    /**
+     * Second constructor with initialization fields.
+     * @param image of car.
+     */
+    public CarImage(byte[] image) {
+        this.image = image;
+    }
 
     /**
      * Id getter.

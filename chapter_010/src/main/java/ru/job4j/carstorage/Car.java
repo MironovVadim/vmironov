@@ -1,10 +1,13 @@
 package ru.job4j.carstorage;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+
 import java.util.*;
 
 /**
  * Car.
  */
+@JsonAutoDetect
 public class Car {
     /**
      * Id.
@@ -74,11 +77,15 @@ public class Car {
      * Images.
      */
     private List<CarImage> images = new ArrayList<>();
+    /**
+     * Addition field to know is current user of car storage a owner of current car.
+     */
+    private boolean IsOwner;
 
     public Car() {
     }
 
-    public Car(User user, String mark, String model, int releaseYear, int mileage, String bodyType, String color, double engineCapacity, String engineType, int power, int cost, boolean sold, String description, Date created, List<CarImage> images) {
+    public Car(User user, String mark, String model, int releaseYear, int mileage, String bodyType, String color, double engineCapacity, String engineType, int power, int cost, String description, Date created, List<CarImage> images) {
         this.user = user;
         this.mark = mark;
         this.model = model;
@@ -90,7 +97,6 @@ public class Car {
         this.engineType = engineType;
         this.power = power;
         this.cost = cost;
-        this.sold = sold;
         this.description = description;
         this.created = created;
         this.images = images;
@@ -366,6 +372,22 @@ public class Car {
      */
     public void setImages(List<CarImage> images) {
         this.images = images;
+    }
+
+    /**
+     * IsOwner getter.
+     * @return is curr user is owner.
+     */
+    public boolean isOwner() {
+        return IsOwner;
+    }
+
+    /**
+     * IsOwner setter.
+     * @param owner of current car.
+     */
+    public void setOwner(boolean owner) {
+        IsOwner = owner;
     }
 
     @Override

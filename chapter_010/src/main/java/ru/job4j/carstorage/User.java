@@ -1,10 +1,13 @@
 package ru.job4j.carstorage;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+
 import java.util.Date;
 
 /**
  * User.
  */
+@JsonAutoDetect
 public class User {
     /**
      * Id.
@@ -26,6 +29,26 @@ public class User {
      * Created Date.
      */
     private Date created;
+
+    /**
+     * Default constructor.
+     */
+    public User() {
+    }
+
+    /**
+     * Second constructor with initialization fields.
+     * @param nickname of user.
+     * @param login of user.
+     * @param password of user.
+     * @param created date of user.
+     */
+    public User(String nickname, String login, String password, Date created) {
+        this.nickname = nickname;
+        this.login = login;
+        this.password = password;
+        this.created = created;
+    }
 
     /**
      * Id getter.

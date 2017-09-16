@@ -1,10 +1,13 @@
 package ru.job4j.carstorage;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+
 import java.util.Date;
 
 /**
  * Car comment.
  */
+@JsonAutoDetect
 public class Comment implements Comparable {
     /**
      * Comment id.
@@ -23,6 +26,24 @@ public class Comment implements Comparable {
      * time of creating.
      */
     private Date created;
+
+    /**
+     * Default constructor.
+     */
+    public Comment() {
+    }
+
+    /**
+     * Second constructor with initialization fields.
+     * @param user of comment.
+     * @param description of comment.
+     * @param created date of comment.
+     */
+    public Comment(User user, String description, Date created) {
+        this.user = user;
+        this.description = description;
+        this.created = created;
+    }
 
     /**
      * Id getter.

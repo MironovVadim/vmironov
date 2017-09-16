@@ -5,6 +5,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import ru.job4j.carstorage.Car;
 import ru.job4j.carstorage.CarImage;
+import ru.job4j.carstorage.Comment;
 import ru.job4j.carstorage.User;
 import ru.job4j.todolist.Task;
 
@@ -29,7 +30,6 @@ public class DBService {
      * Private default constructor.
      */
     private DBService() {
-
     }
 
     /**
@@ -41,6 +41,11 @@ public class DBService {
             instance = new DBService();
         }
         return instance;
+    }
+
+    public static void removePrivateInformation(User user) {
+        user.setLogin(null);
+        user.setPassword(null);
     }
 
     /**
@@ -96,23 +101,81 @@ public class DBService {
      * @param engineCapacity of car.
      * @param engineType of car.
      * @param power of car.
-     * @param cost of car.
      * @param description of car.
      * @param images of car.
      */
     public void addNewCar(int userId, String mark, String model, int releaseYear, int mileage, String bodyType, String color, double engineCapacity, String engineType, int power, int cost, String description, List<CarImage> images) {
-        boolean sold = false;
-        Date date = new Date();
         Session session = factory.openSession();
         session.beginTransaction();
         User user = session.get(User.class, userId);
-        Car car = new Car(user, mark, model, releaseYear, mileage, bodyType, color, engineCapacity, engineType, power, cost, sold, description, date, images);
+        Date createdDate = new Date();
+        Car car = new Car(user, mark, model, releaseYear, mileage, bodyType, color, engineCapacity, engineType, power, cost, description, createdDate, images);
         session.save(car);
         session.getTransaction().commit();
         session.close();
     }
 
-    public int addNewUser() {
-        return 0;
+    /**
+     * Method adds new User in DB.
+     * @param nickname of user.
+     * @param login of user.
+     * @param password of user.
+     * @return user id.
+     */
+    public int addNewUser(String nickname, String login, String password) {
+        Session session = factory.openSession();
+        session.beginTransaction();
+        Date createdDate = new Date();
+        User user = new User(nickname, login, password, createdDate);
+        session.save(user);
+        session.getTransaction().commit();
+        session.close();
+        return user.getId();
+    }
+
+    /**
+     * Method adds new comment in DB.
+     * @param userId of user which do comment.
+     * @param carId of car which contains comment.
+     * @param description of comment.
+     * @return created comment.
+     */
+    public Comment addNewComment(int userId, int carId, String description) {
+        Session session = factory.openSession();
+        session.beginTransaction();
+        Car car = session.get(Car.class, carId);
+        User user = session.get(User.class, userId);
+        Date createdDate = new Date();
+        Comment comment = new Comment(user, description, createdDate);
+        car.getComments().add(comment);
+        session.update(car);
+        return comment;
+    }
+
+    /**
+     * Method returns List of all unsold cars.
+     * @return List of all unsold cars.
+     */
+    public List<Car> getUnsoldCars() {
+        Session session = factory.openSession();
+        session.beginTransaction();
+        List<Car> carList = session.createQuery("FROM Car WHERE sold = false ORDER BY created").list();
+        session.getTransaction().commit();
+        session.close();
+        return carList;
+    }
+
+    /**
+     * Method returns car by car id.
+     * @param carId of car.
+     * @return car with specified id.
+     */
+    public Car getSpecifiedCar(int carId) {
+        Session session = factory.openSession();
+        session.beginTransaction();
+        Car car = session.get(Car.class, carId);
+        session.getTransaction().commit();
+        session.close();
+        return car;
     }
 }
