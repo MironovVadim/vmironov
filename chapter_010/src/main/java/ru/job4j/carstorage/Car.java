@@ -1,8 +1,6 @@
 package ru.job4j.carstorage;
 
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Car.
@@ -72,6 +70,31 @@ public class Car {
      * Comments.
      */
     private Set<Comment> comments = new HashSet<>();
+    /**
+     * Images.
+     */
+    private List<CarImage> images = new ArrayList<>();
+
+    public Car() {
+    }
+
+    public Car(User user, String mark, String model, int releaseYear, int mileage, String bodyType, String color, double engineCapacity, String engineType, int power, int cost, boolean sold, String description, Date created, List<CarImage> images) {
+        this.user = user;
+        this.mark = mark;
+        this.model = model;
+        this.releaseYear = releaseYear;
+        this.mileage = mileage;
+        this.bodyType = bodyType;
+        this.color = color;
+        this.engineCapacity = engineCapacity;
+        this.engineType = engineType;
+        this.power = power;
+        this.cost = cost;
+        this.sold = sold;
+        this.description = description;
+        this.created = created;
+        this.images = images;
+    }
 
     /**
      * Id getter.
@@ -329,63 +352,46 @@ public class Car {
         this.comments = comments;
     }
 
+    /**
+     * Images getter.
+     * @return images.
+     */
+    public List<CarImage> getImages() {
+        return images;
+    }
+
+    /**
+     * Images setter.
+     * @param images of car.
+     */
+    public void setImages(List<CarImage> images) {
+        this.images = images;
+    }
+
     @Override
     public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
 
         Car car = (Car) o;
 
-        if (id != car.id) {
-            return false;
-        }
-        if (releaseYear != car.releaseYear) {
-            return false;
-        }
-        if (mileage != car.mileage) {
-            return false;
-        }
-        if (Double.compare(car.engineCapacity, engineCapacity) != 0) {
-            return false;
-        }
-        if (power != car.power) {
-            return false;
-        }
-        if (cost != car.cost) {
-            return false;
-        }
-        if (sold != car.sold) {
-            return false;
-        }
-        if (!user.equals(car.user)) {
-            return false;
-        }
-        if (!mark.equals(car.mark)) {
-            return false;
-        }
-        if (!model.equals(car.model)) {
-            return false;
-        }
-        if (!bodyType.equals(car.bodyType)) {
-            return false;
-        }
-        if (!color.equals(car.color)) {
-            return false;
-        }
-        if (!engineType.equals(car.engineType)) {
-            return false;
-        }
-        if (!description.equals(car.description)) {
-            return false;
-        }
-        if (!created.equals(car.created)) {
-            return false;
-        }
-        return comments.equals(car.comments);
+        if (id != car.id) return false;
+        if (releaseYear != car.releaseYear) return false;
+        if (mileage != car.mileage) return false;
+        if (Double.compare(car.engineCapacity, engineCapacity) != 0) return false;
+        if (power != car.power) return false;
+        if (cost != car.cost) return false;
+        if (sold != car.sold) return false;
+        if (!user.equals(car.user)) return false;
+        if (!mark.equals(car.mark)) return false;
+        if (!model.equals(car.model)) return false;
+        if (!bodyType.equals(car.bodyType)) return false;
+        if (!color.equals(car.color)) return false;
+        if (!engineType.equals(car.engineType)) return false;
+        if (!description.equals(car.description)) return false;
+        if (!created.equals(car.created)) return false;
+        if (!comments.equals(car.comments)) return false;
+        return images.equals(car.images);
     }
 
     @Override
@@ -409,6 +415,7 @@ public class Car {
         result = 31 * result + description.hashCode();
         result = 31 * result + created.hashCode();
         result = 31 * result + comments.hashCode();
+        result = 31 * result + images.hashCode();
         return result;
     }
 }

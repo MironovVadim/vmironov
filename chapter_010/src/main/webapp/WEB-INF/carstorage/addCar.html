@@ -10,7 +10,10 @@
     <input type="submit" value="Go to car storage"/>
 </form>
 <h2>Adding new car</h2>
-<form action="addCar" method="post">
+<div id="success">
+
+</div>
+<form action="addCar" enctype="multipart/form-data" method="post">
     <p>Car mark:</p><input type="text" name="mark" required/>
     <p>Car model:</p><input type="text" name="model" required/>
     <p>Release year:</p><select name="releaseYear" required>
@@ -49,6 +52,9 @@
     <p>Engine power:</p><input type="text" name="power" pattern="\d" required/>
     <p>Cost:</p><input type="text" name="cost" pattern="\d" required/>
     <p>Description:</p><textarea type="text" pattern="\D{,1000}" name="description"></textarea></br>
+    <p>Photo upload</p><input type="file" multiple accept="image/jpeg,image/png"/>
+    </br>
+    </br>
     <input type="submit" value="add car to car storage"/>
 </form>
 </body>

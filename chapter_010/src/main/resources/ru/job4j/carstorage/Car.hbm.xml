@@ -28,5 +28,10 @@
             <one-to-many class="ru.job4j.carstorage.Comment"/>
         </set>
 
+        <bag name="images" cascade="save-update" table="public.images">
+            <key column="car_id" not-null="true"/>
+            <one-to-many class="ru.job4j.carstorage.CarImage"/>
+        </bag>
+
     </class>
 </hibernate-mapping>

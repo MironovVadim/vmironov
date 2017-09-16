@@ -18,4 +18,14 @@
         <servlet-name>Completion</servlet-name>
         <url-pattern>/complete</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>AddingCar</servlet-name>
+        <servlet-class>ru.job4j.carstorage.servlets.AddCarServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>AddingCar</servlet-name>
+        <url-pattern>/addNewCar</url-pattern>
+    </servlet-mapping>
 </web-app>
