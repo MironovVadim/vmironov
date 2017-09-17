@@ -24,7 +24,6 @@ public class CarGetterServlet extends HttpServlet {
         int carId = Integer.parseInt(req.getParameter("carId"));
         Car car = service.getSpecifiedCar(carId);
         User carUser = car.getUser();
-        DBService.removePrivateInformation(carUser);
         int userId = (int) req.getSession().getAttribute("currentUserId");
         if (userId == carUser.getId()) {
             car.setOwner(true);

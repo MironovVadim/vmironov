@@ -25,8 +25,6 @@ public class CommentManageServlet extends HttpServlet {
         int carId = Integer.parseInt(req.getParameter("carId"));
         String description = req.getParameter("description");
         Comment comment = service.addNewComment(userId, carId, description);
-        User userOfComment = comment.getUser();
-        DBService.removePrivateInformation(userOfComment);
         StringWriter writer = new StringWriter();
         ObjectMapper mapper = new ObjectMapper();
         mapper.writeValue(writer, comment);

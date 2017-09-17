@@ -43,11 +43,6 @@ public class DBService {
         return instance;
     }
 
-    public static void removePrivateInformation(User user) {
-        user.setLogin(null);
-        user.setPassword(null);
-    }
-
     /**
      * Method adds new Task.
      * @param desc - description of task.
@@ -69,7 +64,7 @@ public class DBService {
      */
     public List<Task> getTasks() {
         Session session = factory.openSession();
-        List tasks = session.createQuery("FROM Task").list();
+        List tasks = session.createQuery("FROM Task ORDER BY created").list();
         session.close();
         return tasks;
     }
@@ -133,6 +128,22 @@ public class DBService {
         return user.getId();
     }
 
+    public int checkUser(String userLogin, String userPassword) {
+        int result;
+        Session session = factory.openSession();
+        session.beginTransaction();
+        List<Integer> userId = session.createQuery("SELECT User.id FROM User WHERE login =:currLogin AND password =:currPassword")
+                .setParameter("currLogin", userLogin)
+                .setParameter("currPassword", userPassword)
+                .list();
+        if (userId.isEmpty()) {
+            result = -1;
+        } else {
+            result = userId.get(0);
+        }
+        return result;
+    }
+
     /**
      * Method adds new comment in DB.
      * @param userId of user which do comment.
@@ -149,6 +160,7 @@ public class DBService {
         Comment comment = new Comment(user, description, createdDate);
         car.getComments().add(comment);
         session.update(car);
+        this.removePrivateInformation(comment.getUser());
         return comment;
     }
 
@@ -162,6 +174,9 @@ public class DBService {
         List<Car> carList = session.createQuery("FROM Car WHERE sold = false ORDER BY created").list();
         session.getTransaction().commit();
         session.close();
+        for (Car car : carList) {
+            this.removePrivateInformation(car);
+        }
         return carList;
     }
 
@@ -176,6 +191,21 @@ public class DBService {
         Car car = session.get(Car.class, carId);
         session.getTransaction().commit();
         session.close();
+        this.removePrivateInformation(car);
         return car;
+    }
+
+    private void removePrivateInformation(Car car) {
+        User carOwner = car.getUser();
+        this.removePrivateInformation(carOwner);
+        for (Comment comment : car.getComments()) {
+            User userOfComment = comment.getUser();
+            this.removePrivateInformation(userOfComment);
+        }
+    }
+
+    private void removePrivateInformation(User user) {
+        user.setLogin(null);
+        user.setPassword(null);
     }
 }

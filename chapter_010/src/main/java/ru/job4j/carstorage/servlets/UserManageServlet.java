@@ -8,6 +8,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * Servlet registers new User.
+ */
 public class UserManageServlet extends HttpServlet {
     /**
      * Data Base Service.
@@ -20,6 +23,7 @@ public class UserManageServlet extends HttpServlet {
         String login = req.getParameter("login");
         String password = req.getParameter("password");
 
-        service.addNewUser(nickname, login, password);
+        int userId = service.addNewUser(nickname, login, password);
+        req.getSession().setAttribute("id", userId);
     }
 }

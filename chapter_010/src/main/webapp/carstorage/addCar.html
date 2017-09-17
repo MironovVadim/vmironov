@@ -1,19 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <meta charset="UTF-8">
     <title>Adding car</title>
-    <link href="../../style/style.css" rel="stylesheet">
+    <link href="../style/carstorage/style.css" rel="stylesheet">
 </head>
 <body>
-<form action="carStorage">
+<form action="http://localhost:8080/items/carStorage">
     <input type="submit" value="Go to car storage"/>
 </form>
 <h2>Adding new car</h2>
 <div id="success">
 
 </div>
-<form action="addCar" enctype="multipart/form-data" method="post">
+<form action="http://localhost:8080/items/carManager" enctype="multipart/form-data" method="post">
     <p>Car mark:</p><input type="text" name="mark" required/>
     <p>Car model:</p><input type="text" name="model" required/>
     <p>Release year:</p><select name="releaseYear" required>
@@ -47,15 +48,15 @@
         <option>2017</option>
     </select>
     <p>Mileage:</p><input type="text" name="mileage" pattern="\d" value="0" required/>
-    <p>Engine capacity:</p><input type="text" name="engineCapacity" pattern="\d+(\.\d)?" required/>
+    <p>Engine capacity:</p><input type="text" name="engineCapacity" pattern="\d+(\.\d)?" value="0.0" required/>
     <p>Engine type:</p><input type="text" name="engineType" required/>
     <p>Engine power:</p><input type="text" name="power" pattern="\d" required/>
     <p>Cost:</p><input type="text" name="cost" pattern="\d" required/>
     <p>Description:</p><textarea type="text" pattern="\D{,1000}" name="description"></textarea></br>
-    <p>Photo upload</p><input type="file" multiple accept="image/jpeg,image/png"/>
+    <p>Photo upload</p><input type="file" accept="image/jpeg,image/png" multiple/>
     </br>
     </br>
-    <input type="submit" value="add car to car storage"/>
+    <input type="submit" value="Add car to car storage"/>
 </form>
 </body>
 </html>

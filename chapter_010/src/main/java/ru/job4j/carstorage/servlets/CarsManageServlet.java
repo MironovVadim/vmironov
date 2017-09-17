@@ -20,7 +20,7 @@ import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ManageCarsServlet extends HttpServlet {
+public class CarsManageServlet extends HttpServlet {
     /**
      * Data Base Service.
      */
@@ -29,7 +29,6 @@ public class ManageCarsServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         List<Car> carList = service.getUnsoldCars();
-        this.removePrivateInformation(carList);
         StringWriter writer = new StringWriter();
         ObjectMapper mapper = new ObjectMapper();
         mapper.writeValue(writer, carList);
@@ -60,21 +59,6 @@ public class ManageCarsServlet extends HttpServlet {
             service.addNewCar(userId, mark, model, releaseYear, mileage, bodyType, color, engineCapacity, engineType, power, cost, description, images);
         } catch (FileUploadException e) {
             e.printStackTrace();
-        }
-    }
-
-    /**
-     * Method removes private information about users.
-     * @param carList with car owners and users comments.
-     */
-    private void removePrivateInformation(List<Car> carList) {
-        for (Car car : carList) {
-            User carUser = car.getUser();
-            DBService.removePrivateInformation(carUser);
-            for (Comment comment : car.getComments()) {
-                User userOfComment = comment.getUser();
-                DBService.removePrivateInformation(userOfComment);
-            }
         }
     }
 }
