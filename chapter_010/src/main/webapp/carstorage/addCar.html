@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="../scripts/carstorage/carScript.js"></script>
     <meta charset="UTF-8">
     <title>Adding car</title>
     <link href="../style/carstorage/style.css" rel="stylesheet">
@@ -14,11 +15,11 @@
 <div id="success">
 
 </div>
-<form action="http://localhost:8080/items/carManager" enctype="multipart/form-data" method="post">
+<form action="carManager"  method="post">
     <p>Car mark:</p><input type="text" name="mark" required/>
     <p>Car model:</p><input type="text" name="model" required/>
     <p>Release year:</p><select name="releaseYear" required>
-        <option>1990</option>
+        <option value="1990">1990</option>
         <option>1991</option>
         <option>1992</option>
         <option>1993</option>
@@ -47,16 +48,16 @@
         <option>2016</option>
         <option>2017</option>
     </select>
-    <p>Mileage:</p><input type="text" name="mileage" pattern="\d" value="0" required/>
-    <p>Engine capacity:</p><input type="text" name="engineCapacity" pattern="\d+(\.\d)?" value="0.0" required/>
+    <p>Mileage:</p><input type="text" name="mileage" pattern="\d{1,}" value="0" id="mil" required/>
+    <p>Engine capacity:</p><input type="text" name="engineCapacity" pattern="\d+(\.\d)?" value="0.0"  id="engCap" required/>
     <p>Engine type:</p><input type="text" name="engineType" required/>
-    <p>Engine power:</p><input type="text" name="power" pattern="\d" required/>
-    <p>Cost:</p><input type="text" name="cost" pattern="\d" required/>
+    <p>Engine power:</p><input type="text" name="power" pattern="\d{1,}" required/>
+    <p>Cost:</p><input type="text" name="cost" pattern="\d{1,}" required/>
     <p>Description:</p><textarea type="text" pattern="\D{,1000}" name="description"></textarea></br>
     <p>Photo upload</p><input type="file" accept="image/jpeg,image/png" multiple/>
     </br>
     </br>
-    <input type="submit" value="Add car to car storage"/>
+    <input type="submit" value="Add car to car storage" id="submit"/>
 </form>
 </body>
 </html>

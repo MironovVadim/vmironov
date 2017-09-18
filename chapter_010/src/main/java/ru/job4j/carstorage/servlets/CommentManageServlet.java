@@ -21,7 +21,7 @@ public class CommentManageServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        int userId = (int) req.getSession().getAttribute("currentUserId");
+        int userId = (int) req.getSession().getAttribute("id");
         int carId = Integer.parseInt(req.getParameter("carId"));
         String description = req.getParameter("description");
         Comment comment = service.addNewComment(userId, carId, description);

@@ -128,14 +128,22 @@ public class DBService {
         return user.getId();
     }
 
+    /**
+     * Method checks existence of user.
+     * @param userLogin of user.
+     * @param userPassword of user.
+     * @return user id.
+     */
     public int checkUser(String userLogin, String userPassword) {
         int result;
         Session session = factory.openSession();
         session.beginTransaction();
-        List<Integer> userId = session.createQuery("SELECT User.id FROM User WHERE login =:currLogin AND password =:currPassword")
+        List<Integer> userId = session.createQuery("SELECT id FROM User WHERE login = :currLogin AND password = :currPassword")
                 .setParameter("currLogin", userLogin)
                 .setParameter("currPassword", userPassword)
                 .list();
+        session.getTransaction().commit();
+        session.close();
         if (userId.isEmpty()) {
             result = -1;
         } else {
@@ -160,6 +168,8 @@ public class DBService {
         Comment comment = new Comment(user, description, createdDate);
         car.getComments().add(comment);
         session.update(car);
+        session.getTransaction().commit();
+        session.close();
         this.removePrivateInformation(comment.getUser());
         return comment;
     }
@@ -193,6 +203,20 @@ public class DBService {
         session.close();
         this.removePrivateInformation(car);
         return car;
+    }
+
+    public boolean isUserLoginExist(String userLogin) {
+        Session session = factory.openSession();
+        session.beginTransaction();
+        List<Long> count = session.createQuery("SELECT count(login) FROM User WHERE login = :currLogin")
+                .setParameter("currLogin", userLogin).list();
+        session.getTransaction().commit();
+        session.close();
+        return count.get(0) != 0;
+    }
+
+    public void closeFactory() {
+        factory.close();
     }
 
     private void removePrivateInformation(Car car) {

@@ -36,10 +36,10 @@ public class CarsManageServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        int userId = (int) req.getSession().getAttribute("userId");
+        int userId = (int) req.getSession().getAttribute("id");
         String mark =  req.getParameter("mark");
         String model = req.getParameter("model");
-        int releaseYear = Integer.parseInt(req.getParameter("releaseYear"));
+        int releaseYear = 1990; //Integer.parseInt(req.getParameter("releaseYear"));
         int mileage = Integer.parseInt(req.getParameter("mileage"));
         String bodyType = req.getParameter("bodyType");
         String color = req.getParameter("color");

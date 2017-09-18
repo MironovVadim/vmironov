@@ -1,5 +1,7 @@
 package ru.job4j.carstorage.servlets;
 
+import ru.job4j.controller.DBService;
+
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -19,20 +21,23 @@ public class AuthFilter implements Filter {
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse resp = (HttpServletResponse) response;
+        HttpSession session = req.getSession();
         String requestURI = req.getRequestURI();
-        if (requestURI.matches(".*(todolist.html|login.html|signUp.html|index.html|adding|complete|css|jpg|png|gif|js|)")) {
-            chain.doFilter(req, resp);
+        if (session.getAttribute("id") != null && requestURI.matches(".*(login|signUp)\\.html$")) {
+            resp.sendRedirect(String.format("%s/carstorage/carStorage.html", req.getContextPath()));
+        } else if (requestURI.matches(".*(index\\.html|login\\.html|signUp\\.html|signIn|createUser|todolist\\.html|adding|complete|css|js)$")) {
+            chain.doFilter(request, response);
         } else {
-            HttpSession session = req.getSession();
             if (session.getAttribute("id") == null) {
-                (resp).sendRedirect(String.format("/carstorage/login.html", req.getContextPath()));
+                resp.sendRedirect(String.format("%s/carstorage/login.html", req.getContextPath()));
                 return;
             }
-            chain.doFilter(req, resp);
+            chain.doFilter(request, response);
         }
     }
 
     @Override
     public void destroy() {
+        DBService.newInstance().closeFactory();
     }
 }
