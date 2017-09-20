@@ -36,7 +36,7 @@ public class UserManageServlet extends HttpServlet {
         } else {
             int userId = service.addNewUser(nickname, login, password);
             req.getSession().setAttribute("id", userId);
-            resp.sendRedirect(String.format("%s/carstorage/carStorage.html", req.getContextPath()));
+            resp.sendRedirect(String.format("%s/carstorage/login.html", req.getContextPath()));
         }
     }
 }
