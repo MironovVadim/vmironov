@@ -4,12 +4,11 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import ru.job4j.carstorage.Car;
-import ru.job4j.carstorage.CarImage;
+import ru.job4j.carstorage.Image;
 import ru.job4j.carstorage.Comment;
 import ru.job4j.carstorage.User;
 import ru.job4j.todolist.Task;
 
-import java.io.*;
 import java.util.Date;
 import java.util.List;
 
@@ -99,7 +98,7 @@ public class DBService {
      * @param description of car.
      * @param images of car.
      */
-    public void addNewCar(int userId, String mark, String model, int releaseYear, int mileage, String bodyType, String color, double engineCapacity, String engineType, int power, int cost, String description, List<CarImage> images) {
+    public void addNewCar(int userId, String mark, String model, int releaseYear, int mileage, String bodyType, String color, double engineCapacity, String engineType, int power, int cost, String description, List<Image> images) {
         Session session = factory.openSession();
         session.beginTransaction();
         User user = session.get(User.class, userId);

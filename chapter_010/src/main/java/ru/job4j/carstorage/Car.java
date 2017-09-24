@@ -76,7 +76,7 @@ public class Car {
     /**
      * Images.
      */
-    private List<CarImage> images = new ArrayList<>();
+    private List<Image> images = new ArrayList<>();
     /**
      * Addition field to know is current user of car storage a owner of current car.
      */
@@ -85,7 +85,7 @@ public class Car {
     public Car() {
     }
 
-    public Car(User user, String mark, String model, int releaseYear, int mileage, String bodyType, String color, double engineCapacity, String engineType, int power, int cost, String description, Date created, List<CarImage> images) {
+    public Car(User user, String mark, String model, int releaseYear, int mileage, String bodyType, String color, double engineCapacity, String engineType, int power, int cost, String description, Date created, List<Image> images) {
         this.user = user;
         this.mark = mark;
         this.model = model;
@@ -362,7 +362,7 @@ public class Car {
      * Images getter.
      * @return images.
      */
-    public List<CarImage> getImages() {
+    public List<Image> getImages() {
         return images;
     }
 
@@ -370,7 +370,7 @@ public class Car {
      * Images setter.
      * @param images of car.
      */
-    public void setImages(List<CarImage> images) {
+    public void setImages(List<Image> images) {
         this.images = images;
     }
 

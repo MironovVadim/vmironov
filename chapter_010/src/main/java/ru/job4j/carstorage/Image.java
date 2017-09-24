@@ -1,14 +1,19 @@
 package ru.job4j.carstorage;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import sun.misc.BASE64Encoder;
 
+import java.io.IOException;
+import java.io.StringWriter;
 import java.util.Arrays;
 
 /**
  * Car image.
  */
 @JsonAutoDetect
-public class CarImage {
+public class Image {
     /**
      * Id.
      */
@@ -21,14 +26,14 @@ public class CarImage {
     /**
      * Default constructor.
      */
-    public CarImage() {
+    public Image() {
     }
 
     /**
      * Second constructor with initialization fields.
      * @param image of car.
      */
-    public CarImage(byte[] image) {
+    public Image(byte[] image) {
         this.image = image;
     }
 
@@ -57,6 +62,16 @@ public class CarImage {
     }
 
     /**
+     * Base64 image format getter.
+     * @return Base64 image.
+     */
+    @JsonProperty("image")
+    public String get64BaseImage() {
+        BASE64Encoder encoder = new BASE64Encoder();
+        return encoder.encode(image);
+    }
+
+    /**
      * Image setter.
      * @param image - image.
      */
@@ -73,12 +88,12 @@ public class CarImage {
             return false;
         }
 
-        CarImage carImage = (CarImage) o;
+        Image image = (Image) o;
 
-        if (id != carImage.id) {
+        if (id != image.id) {
             return false;
         }
-        return Arrays.equals(image, carImage.image);
+        return Arrays.equals(this.image, image.image);
     }
 
     @Override

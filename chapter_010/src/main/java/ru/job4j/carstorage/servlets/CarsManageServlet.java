@@ -2,13 +2,13 @@ package ru.job4j.carstorage.servlets;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.FileItemIterator;
+import org.apache.commons.fileupload.FileItemStream;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import ru.job4j.carstorage.Car;
-import ru.job4j.carstorage.CarImage;
-import ru.job4j.carstorage.Comment;
-import ru.job4j.carstorage.User;
+import ru.job4j.carstorage.Image;
 import ru.job4j.controller.DBService;
 
 import javax.servlet.ServletException;
@@ -17,8 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.StringWriter;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class CarsManageServlet extends HttpServlet {
     /**
@@ -36,29 +35,35 @@ public class CarsManageServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        int userId = (int) req.getSession().getAttribute("id");
-        String mark =  req.getParameter("mark");
-        String model = req.getParameter("model");
-        int releaseYear = 1990; //Integer.parseInt(req.getParameter("releaseYear"));
-        int mileage = Integer.parseInt(req.getParameter("mileage"));
-        String bodyType = req.getParameter("bodyType");
-        String color = req.getParameter("color");
-        double engineCapacity = Double.parseDouble(req.getParameter("engineCapacity"));
-        String engineType = req.getParameter("engineType");
-        int power = Integer.parseInt(req.getParameter("power"));
-        int cost = Integer.parseInt(req.getParameter("cost"));
-        String description = req.getParameter("description");
-
         ServletFileUpload fileUpload = new ServletFileUpload(new DiskFileItemFactory());
+        Map<String, String> fields = new HashMap<>();
+        List<Image> images = new ArrayList<>();
+
         try {
             List<FileItem> fileItemList = fileUpload.parseRequest(req);
-            List<CarImage> images = new ArrayList<>();
             for (FileItem fileItem: fileItemList) {
-                images.add(new CarImage(fileItem.get()));
+                if (fileItem.isFormField()) {
+                    fields.put(fileItem.getName(), fileItem.getString());
+                } else {
+                    images.add(new Image(fileItem.get()));
+                }
             }
-            service.addNewCar(userId, mark, model, releaseYear, mileage, bodyType, color, engineCapacity, engineType, power, cost, description, images);
         } catch (FileUploadException e) {
             e.printStackTrace();
         }
+
+        int userId = (int) req.getSession().getAttribute("id");
+        String mark =  fields.get("mark");
+        String model = fields.get("model");
+        int releaseYear = Integer.parseInt(fields.get("releaseYear"));
+        int mileage = Integer.parseInt(fields.get("mileage"));
+        String bodyType = fields.get("bodyType");
+        String color = fields.get("color");
+        double engineCapacity = Double.parseDouble(fields.get("engineCapacity"));
+        String engineType = fields.get("engineType");
+        int power = Integer.parseInt(fields.get("power"));
+        int cost = Integer.parseInt(fields.get("cost"));
+        String description = fields.get("description");
+        service.addNewCar(userId, mark, model, releaseYear, mileage, bodyType, color, engineCapacity, engineType, power, cost, description, images);
     }
 }

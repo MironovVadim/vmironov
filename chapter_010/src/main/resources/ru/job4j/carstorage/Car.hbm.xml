@@ -30,7 +30,7 @@
 
         <bag name="images" cascade="save-update" table="public.images">
             <key column="car_id" not-null="true"/>
-            <one-to-many class="ru.job4j.carstorage.CarImage"/>
+            <one-to-many class="ru.job4j.carstorage.Image"/>
         </bag>
 
     </class>
