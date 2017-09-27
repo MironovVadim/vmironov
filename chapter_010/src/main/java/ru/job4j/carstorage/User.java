@@ -1,6 +1,7 @@
 package ru.job4j.carstorage;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.util.Date;
 
@@ -20,10 +21,12 @@ public class User {
     /**
      * Login.
      */
+    @JsonIgnore
     private String login;
     /**
      * Password.
      */
+    @JsonIgnore
     private String password;
     /**
      * Created Date.

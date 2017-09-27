@@ -12,10 +12,7 @@
     <input type="submit" value="Go to car storage"/>
 </form>
 <h2>Adding new car</h2>
-<div id="success">
-
-</div>
-<form action="carManager" enctype="multipart/form-data" method="POST">
+<form onsubmit="return false" enctype="multipart/form-data" id="addCarForm">
     <p>Car mark:</p><input name="mark" required/>
     <p>Car model:</p><input name="model" required/>
     <p>Release year:</p><select name="releaseYear" required>
@@ -56,7 +53,7 @@
     <p>Engine power:</p><input name="power" pattern="\d{1,}" required/>
     <p>Cost:</p><input name="cost" pattern="\d{1,}" required/>
     <p>Description:</p><textarea type="text" pattern="\D{,1000}" name="description"></textarea></br>
-    <p>Photo upload</p><input type="file" accept="image/jpeg,image/png" multiple id="images"/>
+    <p>Photo upload</p><input type="file" accept="image/jpeg,image/png" multiple/>
     </br>
     </br>
     <input type="submit" value="Add car to car storage" id="submit"/>

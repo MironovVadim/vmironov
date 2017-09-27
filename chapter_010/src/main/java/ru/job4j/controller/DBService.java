@@ -169,7 +169,6 @@ public class DBService {
         session.update(car);
         session.getTransaction().commit();
         session.close();
-        this.removePrivateInformation(comment.getUser());
         return comment;
     }
 
@@ -183,9 +182,6 @@ public class DBService {
         List<Car> carList = session.createQuery("FROM Car WHERE sold = false ORDER BY created").list();
         session.getTransaction().commit();
         session.close();
-        for (Car car : carList) {
-            this.removePrivateInformation(car);
-        }
         return carList;
     }
 
@@ -200,7 +196,6 @@ public class DBService {
         Car car = session.get(Car.class, carId);
         session.getTransaction().commit();
         session.close();
-        this.removePrivateInformation(car);
         return car;
     }
 
@@ -216,19 +211,5 @@ public class DBService {
 
     public void closeFactory() {
         factory.close();
-    }
-
-    private void removePrivateInformation(Car car) {
-        User carOwner = car.getUser();
-        this.removePrivateInformation(carOwner);
-        for (Comment comment : car.getComments()) {
-            User userOfComment = comment.getUser();
-            this.removePrivateInformation(userOfComment);
-        }
-    }
-
-    private void removePrivateInformation(User user) {
-        user.setLogin(null);
-        user.setPassword(null);
     }
 }
