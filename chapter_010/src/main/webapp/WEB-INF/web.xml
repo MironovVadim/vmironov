@@ -88,4 +88,14 @@
         <servlet-name>Exit</servlet-name>
         <url-pattern>/carstorage/exit</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>AddingImage</servlet-name>
+        <servlet-class>ru.job4j.carstorage.servlets.AddingImageServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>AddingImage</servlet-name>
+        <url-pattern>/carstorage/addImage</url-pattern>
+    </servlet-mapping>
 </web-app>

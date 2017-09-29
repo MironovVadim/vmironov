@@ -4,8 +4,8 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import ru.job4j.carstorage.Car;
-import ru.job4j.carstorage.Image;
 import ru.job4j.carstorage.Comment;
+import ru.job4j.carstorage.Image;
 import ru.job4j.carstorage.User;
 import ru.job4j.todolist.Task;
 
@@ -55,17 +55,6 @@ public class DBService {
         session.save(task);
         session.getTransaction().commit();
         session.close();
-    }
-
-    /**
-     * Method return List of tasks.
-     * @return tasks.
-     */
-    public List<Task> getTasks() {
-        Session session = factory.openSession();
-        List tasks = session.createQuery("FROM Task ORDER BY created").list();
-        session.close();
-        return tasks;
     }
 
     /**
@@ -211,5 +200,26 @@ public class DBService {
 
     public void closeFactory() {
         factory.close();
+    }
+
+    /**
+     * Method return List of tasks.
+     * @return tasks.
+     */
+    public List<Task> getTasks() {
+        Session session = factory.openSession();
+        List tasks = session.createQuery("FROM Task ORDER BY created").list();
+        session.close();
+        return tasks;
+    }
+
+    public void addImagesToCar(int id, List<Image> images) {
+        Session session = factory.openSession();
+        session.beginTransaction();
+        Car car = session.get(Car.class, id);
+        car.getImages().addAll(images);
+        session.update(car);
+        session.getTransaction().commit();
+        session.close();
     }
 }

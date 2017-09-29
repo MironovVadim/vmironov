@@ -1,0 +1,1 @@
+INSERT INTO public.cars (user_id, mark, model, release_year, mileage, body_type, color, engine_capacity, engine_type, power, cost, description) VALUES ((SELECT id FROM public.users WHERE login = 'root'), 'Toyota', 'Prius', 2014, 2000, 'NT3-K7', 'Red', 0.0, 'Electric', 300, 7000, 'Custom Toyota Prius');

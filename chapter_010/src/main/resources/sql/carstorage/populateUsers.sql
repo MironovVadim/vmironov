@@ -1,0 +1,1 @@
+INSERT INTO public.users (nickname, login, password) VALUES ('root', 'root', 'root');
