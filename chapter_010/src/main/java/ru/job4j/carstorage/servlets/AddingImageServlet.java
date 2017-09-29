@@ -11,7 +11,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,13 +22,23 @@ public class AddingImageServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         ServletFileUpload fileUpload = new ServletFileUpload(new DiskFileItemFactory());
-        List<Image> images = new ArrayList<>();
+//        List<Image> images = new ArrayList<>();
         try {
             List<FileItem> fileItemList = fileUpload.parseRequest(req);
+            int count = 0;
             for (FileItem fileItem: fileItemList) {
-                images.add(new Image(fileItem.get()));
+                InputStream in = fileItem.getInputStream();
+                byte[] buffer = new byte[in.available()];
+                in.read(buffer);
+                File target = new File("C:/image.jpg" + count++);
+                OutputStream out = new FileOutputStream(target);
+                out.write(buffer);
+                in.close();
+                out.close();
             }
-            service.addImagesToCar(1, images);
+//                images.add(new Image(fileItem.get()));
+//            }
+//            service.addImagesToCar(1, images);
         } catch (FileUploadException e) {
             e.printStackTrace();
         }
