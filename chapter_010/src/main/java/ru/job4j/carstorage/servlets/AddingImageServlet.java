@@ -12,12 +12,33 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
-import java.util.ArrayList;
 import java.util.List;
 
 public class AddingImageServlet extends HttpServlet {
 
     private static DBService service = DBService.newInstance();
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        ServletFileUpload fileUpload = new ServletFileUpload(new DiskFileItemFactory());
+//        List<Image> images = new ArrayList<>();
+        resp.setContentType("text/html");
+        PrintWriter writer = resp.getWriter();
+        try {
+            List<FileItem> fileItemList = fileUpload.parseRequest(req);
+            int count = 0;
+            for (FileItem fileItem: fileItemList) {
+                writer.println(fileItem.getSize());
+                writer.println(fileItem.getName());
+                writer.println("---------------------");
+
+            }
+//                images.add(new Image(fileItem.get()));
+//            }
+//            service.addImagesToCar(1, images);
+        } catch (FileUploadException e) {
+            e.printStackTrace();
+        }    }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -42,6 +63,7 @@ public class AddingImageServlet extends HttpServlet {
         } catch (FileUploadException e) {
             e.printStackTrace();
         }
-        resp.sendRedirect(String.format("%s/carstorage/addCar.html", req.getContextPath()));
+        this.doGet(req, resp);
+//        resp.sendRedirect(String.format("%s/carstorage/addCar.html", req.getContextPath()));
     }
 }
