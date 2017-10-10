@@ -46,7 +46,7 @@
 
     <servlet-mapping>
         <servlet-name>currentCarGetter</servlet-name>
-        <url-pattern>/getCar</url-pattern>
+        <url-pattern>/carstorage/getCar</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -97,5 +97,25 @@
     <servlet-mapping>
         <servlet-name>AddingImage</servlet-name>
         <url-pattern>/carstorage/addImage</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>AddingComment</servlet-name>
+        <servlet-class>ru.job4j.carstorage.servlets.AddingCommentServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>AddingComment</servlet-name>
+        <url-pattern>/carstorage/sendComment</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>SellingCar</servlet-name>
+        <servlet-class>ru.job4j.carstorage.servlets.SellingCarServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>SellingCar</servlet-name>
+        <url-pattern>/carstorage/sellCar</url-pattern>
     </servlet-mapping>
 </web-app>

@@ -2,24 +2,63 @@
 <html lang="en">
 <head>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="../scripts/carstorage/carStorage.js"></script>
     <meta charset="UTF-8">
     <title>Car storage</title>
-    <link href="../style/carstorage/style.css" rel="stylesheet">
+    <link href="../style/carstorage/style.css" rel="stylesheet"/>
+    <link href="../style/carstorage/carStorage.css" rel="stylesheet"/>
 </head>
 <body>
-car storage
-<form action="exit" method="POST">
-    <input type="submit" value="Exit"/>
-</form>
-
-<a href="addCar.html"><button>Add car image</button></a>
 <div id="left">
- <div id="flexBox">
-
- </div>
+    <a href="addCar.html"><button>Add car image</button></a>
+    <h4 style="text-align: center">Cars to cell</h4>
+    <hr>
+    <div id="carFlexBox">
+    </div>
+</div>
+<div id="center">
+    <button id="sellButton" hidden>Sell Car</button>
+    <h4 style="text-align: center">Car information</h4>
+    <hr>
+    <div id="title">
+        <h3></h3>
+        <small></small>
+    </div>
+    <hr>
+    <img id="mainPhoto"/>
+    <hr>
+    <div id="carPhotosFlexBox">
+    </div>
+    <hr>
+    <div id="fullTextInfo">
+        <ul id="features" type="none">
+            <li><span class="prefix">Mark:</span><span id="mark"></span></li>
+            <li><span class="prefix">Model:</span><span id="model"></span></li>
+            <li><span class="prefix">Release year:</span><span id="releaseYear"></span></li>
+            <li><span class="prefix">Mileage:</span><span id="mileage"></span></li>
+            <li><span class="prefix">Body type:</span><span id="bodyType"></span></li>
+            <li><span class="prefix">Color:</span><span id="color"></span></li>
+            <li><span class="prefix">Engine capacity:</span><span id="engineCapacity"></span></li>
+            <li><span class="prefix">Engine type:</span><span id="engineType"></span></li>
+            <li><span class="prefix">Power:</span><span id="power"></span></li>
+            <li><span class="prefix">Cost:</span><span id="cost"></span></li>
+        </ul>
+    </div>
+    <hr>
+    <div id="description">
+    </div>
+    <hr>
+    <div id="comments" class="restrictions">
+    </div>
+    <textarea rows="3" cols="65" name="description" placeholder="Add comment here" id="addComment" class="restrictions"></textarea>
+    <input type="submit" value="Add new comment" id="sendComment" class="restrictions">
 </div>
 <div id="right">
-
+    <form action="exit" method="POST" style="text-align: right">
+        <input type="submit" value="Exit"/>
+    </form>
+    <h4 style="text-align: center">Filters</h4>
+    <hr>
 </div>
 </body>
 </html>

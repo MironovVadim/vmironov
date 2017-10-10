@@ -1,8 +1,7 @@
 package ru.job4j.carstorage.servlets;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import ru.job4j.carstorage.Car;
-import ru.job4j.carstorage.User;
+import ru.job4j.carstorage.Comment;
 import ru.job4j.controller.DBService;
 
 import javax.servlet.ServletException;
@@ -12,29 +11,28 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.util.List;
 
-public class CarGetterServlet extends HttpServlet {
+public class AddingCommentServlet extends HttpServlet {
     /**
-     * Data Base Service.
+     * Data base service.
      */
     private static DBService service = DBService.newInstance();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("application/json");
-        int carId = Integer.parseInt(req.getParameter("carId"));
-        Car car = service.getSpecifiedCar(carId);
-        User carUser = car.getUser();
+
         int userId = (int) req.getSession().getAttribute("id");
-        if (userId == carUser.getId()) {
-            car.setOwner(true);
-        }
-        StringWriter writer = new StringWriter();
+        int carId = Integer.parseInt(req.getParameter("carId"));
+        String description = req.getParameter("description");
+
+        Comment newComment = service.addNewComment(userId, carId, description);
+
+        PrintWriter out = resp.getWriter();
         ObjectMapper mapper = new ObjectMapper();
-        mapper.writeValue(writer, car);
-        PrintWriter printWriter = resp.getWriter();
-        printWriter.println(writer.toString());
-        printWriter.flush();
+        StringWriter writer = new StringWriter();
+        mapper.writeValue(writer, newComment);
+        out.print(writer.toString());
+        out.flush();
     }
 }

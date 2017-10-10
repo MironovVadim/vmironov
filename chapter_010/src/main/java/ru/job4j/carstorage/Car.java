@@ -440,4 +440,28 @@ public class Car {
         result = 31 * result + images.hashCode();
         return result;
     }
+
+    @Override
+    public String toString() {
+        return "Car{" +
+                "id=" + id +
+                ", user=" + user +
+                ", mark='" + mark + '\'' +
+                ", model='" + model + '\'' +
+                ", releaseYear=" + releaseYear +
+                ", mileage=" + mileage +
+                ", bodyType='" + bodyType + '\'' +
+                ", color='" + color + '\'' +
+                ", engineCapacity=" + engineCapacity +
+                ", engineType='" + engineType + '\'' +
+                ", power=" + power +
+                ", cost=" + cost +
+                ", sold=" + sold +
+                ", description='" + description + '\'' +
+                ", created=" + created +
+                ", comments=" + comments +
+                ", images=" + images +
+                ", IsOwner=" + IsOwner +
+                '}';
+    }
 }

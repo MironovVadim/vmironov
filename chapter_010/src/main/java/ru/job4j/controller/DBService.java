@@ -1,5 +1,7 @@
 package ru.job4j.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -168,7 +170,13 @@ public class DBService {
     public List<Car> getUnsoldCars() {
         Session session = factory.openSession();
         session.beginTransaction();
-        List<Car> carList = session.createQuery("FROM Car WHERE sold = false ORDER BY created").list();
+        List<Car> carList = session.createQuery("FROM Car WHERE sold = false ORDER BY created DESC")
+                .list();
+        for (Car car : carList) {
+            Hibernate.initialize(car.getUser());
+            Hibernate.initialize(car.getComments());
+            Hibernate.initialize(car.getImages());
+        }
         session.getTransaction().commit();
         session.close();
         return carList;
@@ -183,6 +191,9 @@ public class DBService {
         Session session = factory.openSession();
         session.beginTransaction();
         Car car = session.get(Car.class, carId);
+        Hibernate.initialize(car.getUser());
+        Hibernate.initialize(car.getComments());
+        Hibernate.initialize(car.getImages());
         session.getTransaction().commit();
         session.close();
         return car;
@@ -192,7 +203,8 @@ public class DBService {
         Session session = factory.openSession();
         session.beginTransaction();
         List<Long> count = session.createQuery("SELECT count(login) FROM User WHERE login = :currLogin")
-                .setParameter("currLogin", userLogin).list();
+                .setParameter("currLogin", userLogin)
+                .list();
         session.getTransaction().commit();
         session.close();
         return count.get(0) != 0;
@@ -219,6 +231,16 @@ public class DBService {
         Car car = session.get(Car.class, id);
         car.getImages().addAll(images);
         session.update(car);
+        session.getTransaction().commit();
+        session.close();
+    }
+
+    public void sellCar(int carId, int userId) {
+        Session session = factory.openSession();
+        session.beginTransaction();
+        session.createQuery("UPDATE Car SET sold = true WHERE id = :currId AND user.id = :currUserId")
+                .setParameter("currId", carId)
+                .setParameter("currUserId", userId).executeUpdate();
         session.getTransaction().commit();
         session.close();
     }

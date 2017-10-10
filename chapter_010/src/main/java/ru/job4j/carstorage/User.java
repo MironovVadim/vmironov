@@ -2,6 +2,7 @@ package ru.job4j.carstorage;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import java.util.Date;
 
@@ -9,6 +10,7 @@ import java.util.Date;
  * User.
  */
 @JsonAutoDetect
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class User {
     /**
      * Id.
@@ -155,5 +157,17 @@ public class User {
         result = 31 * result + password.hashCode();
         result = 31 * result + created.hashCode();
         return result;
+    }
+
+    @Override
+    public String toString() {
+
+        return "User{" +
+                "id=" + id +
+                ", nickname='" + nickname + '\'' +
+                ", login='" + login + '\'' +
+                ", password='" + password + '\'' +
+                ", created=" + created +
+                '}';
     }
 }

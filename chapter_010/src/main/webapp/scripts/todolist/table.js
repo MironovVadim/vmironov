@@ -5,9 +5,9 @@ title = "<tr>"
     + "<th>Is done</th>"
     + "</tr>";
 
-addUrl = "http://localhost:8080/items/adding";
+addUrl = "/items/adding";
 
-completeUrl = "http://localhost:8080/items/complete";
+completeUrl = "/items/complete";
 
 timeOptions = {
     year: 'numeric',

@@ -145,4 +145,14 @@ public class Comment implements Comparable {
     public int compareTo(Object o) {
         return (int) (this.getCreated().getTime() - ((Comment) o).getCreated().getTime());
     }
+
+    @Override
+    public String toString() {
+        return "Comment{" +
+                "id=" + id +
+                ", user=" + user +
+                ", description='" + description + '\'' +
+                ", created=" + created +
+                '}';
+    }
 }
