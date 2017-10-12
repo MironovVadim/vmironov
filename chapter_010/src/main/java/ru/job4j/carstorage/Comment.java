@@ -1,6 +1,7 @@
 package ru.job4j.carstorage;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.util.Date;
 
@@ -12,6 +13,7 @@ public class Comment implements Comparable {
     /**
      * Comment id.
      */
+    @JsonIgnore
     private int id;
     /**
      * Comment of user id.
@@ -148,11 +150,11 @@ public class Comment implements Comparable {
 
     @Override
     public String toString() {
-        return "Comment{" +
-                "id=" + id +
-                ", user=" + user +
-                ", description='" + description + '\'' +
-                ", created=" + created +
-                '}';
+        return "Comment{"
+                + "id=" + id
+                + ", user=" + user
+                + ", description='" + description + '\''
+                + ", created=" + created
+                + '}';
     }
 }

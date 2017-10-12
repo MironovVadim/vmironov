@@ -2,13 +2,14 @@
 <html lang="en">
 <head>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="../scripts/carstorage/signUp.js"></script>
     <meta charset="UTF-8">
     <title>Sign up</title>
     <link href="../style/carstorage/style.css" rel="stylesheet">
 </head>
 <body>
 <h2>Sign Up</h2>
-<form action="createUser" method="POST">
+<form action="createUser" method="POST" id="createUserForm">
     <p>Nickname:</p><input type="text" name="nickname" required/>
     <p>Login:</p><input type="text" name="login" required/>
     <p>Password:</p><input type="password" name="password" required/>
@@ -16,5 +17,6 @@
     </br>
     <input type="submit" value="Sign up">
 </form>
+<span id="error"></span>
 </body>
 </html>

@@ -1,8 +1,6 @@
 package ru.job4j.carstorage;
 
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.*;
 
 import java.util.Date;
 
@@ -10,11 +8,13 @@ import java.util.Date;
  * User.
  */
 @JsonAutoDetect
+@JsonFilter("userFilter")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class User {
     /**
      * Id.
      */
+    @JsonIgnore
     private int id;
     /**
      * Name.
@@ -23,12 +23,12 @@ public class User {
     /**
      * Login.
      */
-    @JsonIgnore
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String login;
     /**
      * Password.
      */
-    @JsonIgnore
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
     /**
      * Created Date.

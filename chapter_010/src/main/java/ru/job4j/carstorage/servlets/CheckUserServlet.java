@@ -7,20 +7,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
 
+/**
+ * Servlet check existence of user.
+ */
 public class CheckUserServlet extends HttpServlet {
-
+    /**
+     * Data base service.
+     */
     private static DBService service = DBService.newInstance();
-
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.setContentType("html/text");
-        PrintWriter writer = resp.getWriter();
-        writer.print("incorrectInfo");
-        writer.flush();
-        writer.close();
-    }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -29,9 +24,8 @@ public class CheckUserServlet extends HttpServlet {
         int id = service.checkUser(login, password);
         if (id > 0) {
             req.getSession().setAttribute("id", id);
-            resp.sendRedirect(String.format("%s/carstorage/login.html", req.getContextPath()));
         } else {
-            this.doGet(req, resp);
+            resp.sendError(400, "Wrong login or password.");
         }
     }
 }

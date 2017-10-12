@@ -1,12 +1,11 @@
 package ru.job4j.carstorage;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import sun.misc.BASE64Encoder;
 
-import java.io.IOException;
-import java.io.StringWriter;
+
 import java.util.Arrays;
 
 /**
@@ -17,6 +16,7 @@ public class Image {
     /**
      * Id.
      */
+    @JsonIgnore
     private int id;
     /**
      * Image.
@@ -46,7 +46,7 @@ public class Image {
     }
 
     /**
-     * Id setter
+     * Id setter.
      * @param id - id
      */
     public void setId(int id) {

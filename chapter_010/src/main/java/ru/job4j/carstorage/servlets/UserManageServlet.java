@@ -19,20 +19,13 @@ public class UserManageServlet extends HttpServlet {
     private static DBService service = DBService.newInstance();
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.setContentType("html/text");
-        PrintWriter writer = resp.getWriter();
-        writer.print("wrongLogin");
-    }
-
-    @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String nickname = req.getParameter("nickname");
         String login = req.getParameter("login");
         String password = req.getParameter("password");
 
         if (service.isUserLoginExist(login)) {
-            doGet(req, resp);
+            resp.sendError(400, "This login already exist!");
         } else {
             int userId = service.addNewUser(nickname, login, password);
             req.getSession().setAttribute("id", userId);

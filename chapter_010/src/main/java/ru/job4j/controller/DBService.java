@@ -1,6 +1,5 @@
 package ru.job4j.controller;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -86,6 +85,7 @@ public class DBService {
      * @param engineCapacity of car.
      * @param engineType of car.
      * @param power of car.
+     * @param cost of car.
      * @param description of car.
      * @param images of car.
      */
@@ -174,7 +174,6 @@ public class DBService {
                 .list();
         for (Car car : carList) {
             Hibernate.initialize(car.getUser());
-            Hibernate.initialize(car.getComments());
             Hibernate.initialize(car.getImages());
         }
         session.getTransaction().commit();
@@ -199,6 +198,11 @@ public class DBService {
         return car;
     }
 
+    /**
+     * Method checks existence of user login.
+     * @param userLogin in data base.
+     * @return is login exist.
+     */
     public boolean isUserLoginExist(String userLogin) {
         Session session = factory.openSession();
         session.beginTransaction();
@@ -210,6 +214,9 @@ public class DBService {
         return count.get(0) != 0;
     }
 
+    /**
+     * Method closes hibernate factory.
+     */
     public void closeFactory() {
         factory.close();
     }
@@ -225,16 +232,26 @@ public class DBService {
         return tasks;
     }
 
-    public void addImagesToCar(int id, List<Image> images) {
+    /**
+     * Method add image to car.
+     * @param carId of car.
+     * @param images of car.
+     */
+    public void addImagesToCar(int carId, List<Image> images) {
         Session session = factory.openSession();
         session.beginTransaction();
-        Car car = session.get(Car.class, id);
+        Car car = session.get(Car.class, carId);
         car.getImages().addAll(images);
         session.update(car);
         session.getTransaction().commit();
         session.close();
     }
 
+    /**
+     * Method set field sold equals true.
+     * @param carId of car.
+     * @param userId of user.
+     */
     public void sellCar(int carId, int userId) {
         Session session = factory.openSession();
         session.beginTransaction();

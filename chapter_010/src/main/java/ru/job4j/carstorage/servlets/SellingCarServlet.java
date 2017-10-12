@@ -8,8 +8,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * Servlet set car sold.
+ */
 public class SellingCarServlet extends HttpServlet {
-
+    /**
+     * Data base service.
+     */
     private static DBService service = DBService.newInstance();
 
     @Override

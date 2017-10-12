@@ -1,12 +1,17 @@
 package ru.job4j.carstorage;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonFilter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import java.util.*;
+import java.util.Date;
+import java.util.List;
+import java.util.Set;
 
 /**
  * Car.
  */
+@JsonFilter("carFilter")
 @JsonAutoDetect
 public class Car {
     /**
@@ -60,6 +65,7 @@ public class Car {
     /**
      * Is car sold.
      */
+    @JsonIgnore
     private boolean sold;
     /**
      * Description.
@@ -72,19 +78,39 @@ public class Car {
     /**
      * Comments.
      */
-    private Set<Comment> comments = new HashSet<>();
+    private Set<Comment> comments;
     /**
      * Images.
      */
-    private List<Image> images = new ArrayList<>();
+    private List<Image> images;
     /**
      * Addition field to know is current user of car storage a owner of current car.
      */
-    private boolean IsOwner;
+    private boolean isOwner;
 
+    /**
+     * Default constructor.
+     */
     public Car() {
     }
 
+    /**
+     * Constructor with initialization fields.
+     * @param user of car
+     * @param mark of car
+     * @param model of car
+     * @param releaseYear of car
+     * @param mileage of car
+     * @param bodyType of car
+     * @param color of car
+     * @param engineCapacity of car
+     * @param engineType of car
+     * @param power of car
+     * @param cost of car
+     * @param description of car
+     * @param created of car
+     * @param images of car
+     */
     public Car(User user, String mark, String model, int releaseYear, int mileage, String bodyType, String color, double engineCapacity, String engineType, int power, int cost, String description, Date created, List<Image> images) {
         this.user = user;
         this.mark = mark;
@@ -375,44 +401,80 @@ public class Car {
     }
 
     /**
-     * IsOwner getter.
+     * isOwner getter.
      * @return is curr user is owner.
      */
     public boolean isOwner() {
-        return IsOwner;
+        return isOwner;
     }
 
     /**
-     * IsOwner setter.
+     * isOwner setter.
      * @param owner of current car.
      */
     public void setOwner(boolean owner) {
-        IsOwner = owner;
+        isOwner = owner;
     }
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
 
         Car car = (Car) o;
 
-        if (id != car.id) return false;
-        if (releaseYear != car.releaseYear) return false;
-        if (mileage != car.mileage) return false;
-        if (Double.compare(car.engineCapacity, engineCapacity) != 0) return false;
-        if (power != car.power) return false;
-        if (cost != car.cost) return false;
-        if (sold != car.sold) return false;
-        if (!user.equals(car.user)) return false;
-        if (!mark.equals(car.mark)) return false;
-        if (!model.equals(car.model)) return false;
-        if (!bodyType.equals(car.bodyType)) return false;
-        if (!color.equals(car.color)) return false;
-        if (!engineType.equals(car.engineType)) return false;
-        if (!description.equals(car.description)) return false;
-        if (!created.equals(car.created)) return false;
-        if (!comments.equals(car.comments)) return false;
+        if (id != car.id) {
+            return false;
+        }
+        if (releaseYear != car.releaseYear) {
+            return false;
+        }
+        if (mileage != car.mileage) {
+            return false;
+        }
+        if (Double.compare(car.engineCapacity, engineCapacity) != 0) {
+            return false;
+        }
+        if (power != car.power) {
+            return false;
+        }
+        if (cost != car.cost) {
+            return false;
+        }
+        if (sold != car.sold) {
+            return false;
+        }
+        if (!user.equals(car.user)) {
+            return false;
+        }
+        if (!mark.equals(car.mark)) {
+            return false;
+        }
+        if (!model.equals(car.model)) {
+            return false;
+        }
+        if (!bodyType.equals(car.bodyType)) {
+            return false;
+        }
+        if (!color.equals(car.color)) {
+            return false;
+        }
+        if (!engineType.equals(car.engineType)) {
+            return false;
+        }
+        if (!description.equals(car.description)) {
+            return false;
+        }
+        if (!created.equals(car.created)) {
+            return false;
+        }
+        if (!comments.equals(car.comments)) {
+            return false;
+        }
         return images.equals(car.images);
     }
 
@@ -443,25 +505,25 @@ public class Car {
 
     @Override
     public String toString() {
-        return "Car{" +
-                "id=" + id +
-                ", user=" + user +
-                ", mark='" + mark + '\'' +
-                ", model='" + model + '\'' +
-                ", releaseYear=" + releaseYear +
-                ", mileage=" + mileage +
-                ", bodyType='" + bodyType + '\'' +
-                ", color='" + color + '\'' +
-                ", engineCapacity=" + engineCapacity +
-                ", engineType='" + engineType + '\'' +
-                ", power=" + power +
-                ", cost=" + cost +
-                ", sold=" + sold +
-                ", description='" + description + '\'' +
-                ", created=" + created +
-                ", comments=" + comments +
-                ", images=" + images +
-                ", IsOwner=" + IsOwner +
-                '}';
+        return "Car{"
+                + "id=" + id
+                + ", user=" + user
+                + ", mark='" + mark + '\''
+                + ", model='" + model + '\''
+                + ", releaseYear=" + releaseYear
+                + ", mileage=" + mileage
+                + ", bodyType='" + bodyType + '\''
+                + ", color='" + color + '\''
+                + ", engineCapacity=" + engineCapacity
+                + ", engineType='" + engineType + '\''
+                + ", power=" + power
+                + ", cost=" + cost
+                + ", sold=" + sold
+                + ", description='" + description + '\''
+                + ", created=" + created
+                + ", comments=" + comments
+                + ", images=" + images
+                + ", isOwner=" + isOwner
+                + '}';
     }
 }

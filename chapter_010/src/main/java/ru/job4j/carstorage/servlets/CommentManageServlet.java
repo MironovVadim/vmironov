@@ -2,7 +2,6 @@ package ru.job4j.carstorage.servlets;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import ru.job4j.carstorage.Comment;
-import ru.job4j.carstorage.User;
 import ru.job4j.controller.DBService;
 
 import javax.servlet.ServletException;
@@ -13,6 +12,9 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
+/**
+ * Servlet adds new comment to car.
+ */
 public class CommentManageServlet extends HttpServlet {
     /**
      * Data Base Service.
@@ -25,11 +27,22 @@ public class CommentManageServlet extends HttpServlet {
         int carId = Integer.parseInt(req.getParameter("carId"));
         String description = req.getParameter("description");
         Comment comment = service.addNewComment(userId, carId, description);
+        PrintWriter out = resp.getWriter();
+        this.writeJSON(comment, out);
+
+    }
+
+    /**
+     * Method write comment to PrintWriter.
+     * @param comment - POJO object.
+     * @param out - target.
+     * @throws IOException if POJO object could not be written.
+     */
+    private void writeJSON(Comment comment, PrintWriter out) throws IOException {
         StringWriter writer = new StringWriter();
         ObjectMapper mapper = new ObjectMapper();
         mapper.writeValue(writer, comment);
-        PrintWriter printWriter = resp.getWriter();
-        printWriter.print(writer.toString());
-        printWriter.flush();
+        out.print(writer.toString());
+        out.flush();
     }
 }
