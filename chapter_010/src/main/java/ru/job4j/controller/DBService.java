@@ -108,6 +108,8 @@ public class DBService {
      * @return user id.
      */
     public int addNewUser(String nickname, String login, String password) {
+
+
         Session session = factory.openSession();
         session.beginTransaction();
         Date createdDate = new Date();

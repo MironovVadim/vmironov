@@ -262,9 +262,12 @@ function sendComment(comment, carId) {
 
 function settingCommentFormOptions(car) {
     var carId = car["id"];
+    $("#sendComment").off();
     $("#sendComment").click(function () {
         var comment = $("#addComment").val();
-        sendComment(comment, carId);
+        if (comment !== "") {
+            sendComment(comment, carId);
+        }
     });
 }
 
