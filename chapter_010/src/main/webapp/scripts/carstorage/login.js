@@ -15,7 +15,7 @@ window.onload = function () {
                 }
             },
             success: function () {
-                window.location.replace("/items/carstorage/login.html");
+                window.location.replace("/items/carstorage/carStorage.html");
             }
         });
     })

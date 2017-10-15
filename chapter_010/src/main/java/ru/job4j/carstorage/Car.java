@@ -86,7 +86,7 @@ public class Car {
     /**
      * Addition field to know is current user of car storage a owner of current car.
      */
-    private boolean isOwner;
+    private boolean owner;
 
     /**
      * Default constructor.
@@ -401,19 +401,19 @@ public class Car {
     }
 
     /**
-     * isOwner getter.
+     * owner getter.
      * @return is curr user is owner.
      */
     public boolean isOwner() {
-        return isOwner;
+        return owner;
     }
 
     /**
-     * isOwner setter.
+     * owner setter.
      * @param owner of current car.
      */
     public void setOwner(boolean owner) {
-        isOwner = owner;
+        this.owner = owner;
     }
 
     @Override
@@ -523,7 +523,7 @@ public class Car {
                 + ", created=" + created
                 + ", comments=" + comments
                 + ", images=" + images
-                + ", isOwner=" + isOwner
+                + ", owner=" + owner
                 + '}';
     }
 }

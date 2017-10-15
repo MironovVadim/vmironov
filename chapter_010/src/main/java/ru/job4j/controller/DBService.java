@@ -206,12 +206,12 @@ public class DBService {
     public boolean isUserLoginExist(String userLogin) {
         Session session = factory.openSession();
         session.beginTransaction();
-        List<Long> count = session.createQuery("SELECT count(login) FROM User WHERE login = :currLogin")
+        Long count = (Long) session.createQuery("SELECT count(login) FROM User WHERE login = :currLogin")
                 .setParameter("currLogin", userLogin)
-                .list();
+                .uniqueResult();
         session.getTransaction().commit();
         session.close();
-        return count.get(0) != 0;
+        return count != null;
     }
 
     /**
@@ -230,21 +230,6 @@ public class DBService {
         List tasks = session.createQuery("FROM Task ORDER BY created").list();
         session.close();
         return tasks;
-    }
-
-    /**
-     * Method add image to car.
-     * @param carId of car.
-     * @param images of car.
-     */
-    public void addImagesToCar(int carId, List<Image> images) {
-        Session session = factory.openSession();
-        session.beginTransaction();
-        Car car = session.get(Car.class, carId);
-        car.getImages().addAll(images);
-        session.update(car);
-        session.getTransaction().commit();
-        session.close();
     }
 
     /**

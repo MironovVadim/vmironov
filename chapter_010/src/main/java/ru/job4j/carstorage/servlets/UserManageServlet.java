@@ -7,7 +7,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
 
 /**
  * Servlet registers new User.
@@ -29,7 +28,6 @@ public class UserManageServlet extends HttpServlet {
         } else {
             int userId = service.addNewUser(nickname, login, password);
             req.getSession().setAttribute("id", userId);
-            resp.sendRedirect(String.format("%s/carstorage/signUp.html", req.getContextPath()));
         }
     }
 }

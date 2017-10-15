@@ -28,6 +28,8 @@ window.onload = function() {
             addShortCarInfo(value);
         })
     });
+    var checkBox = document.getElementById("showCars");
+    checkBox.onclick = showCars;
 };
 
 function addShortCarInfo(car) {
@@ -35,6 +37,9 @@ function addShortCarInfo(car) {
     $(shortCarInfo)
         .addClass("carInfo")
         .attr("id", car["id"]);
+    if (car["owner"]) {
+        $(shortCarInfo).addClass("owner");
+    }
 
     var carTextInfo = getTextInfo(car);
     var carImage = getImage(car);
@@ -250,6 +255,7 @@ function sendComment(comment, carId) {
         complete: function (data) {
             var newComment = JSON.parse(data.responseText);
             addComment(newComment);
+            $("#addComment").val("");
         }
     });
 }
@@ -299,4 +305,28 @@ function removeCarFromStorage(car) {
     $("#" + car["id"]).remove();
     var carId = $(".carInfo")[0]["id"];
     addFullCarInfo(carId);
+}
+
+function showCars() {
+    if ($("#showCars").is(":checked")) {
+        showOnlyMyCars();
+    } else {
+        showAllCars();
+    }
+}
+
+function showOnlyMyCars() {
+    var cars = $(".carInfo");
+    $.each(cars, function (index, carInfo) {
+        if (!$(carInfo).hasClass("owner")) {
+            $(carInfo).attr("hidden", "true");
+        }
+    })
+}
+
+function showAllCars() {
+    var cars = $(".carInfo");
+    $.each(cars, function (index, carInfo) {
+        $(carInfo).removeAttr("hidden");
+    })
 }

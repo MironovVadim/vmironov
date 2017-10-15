@@ -30,7 +30,7 @@ public class AuthFilter implements Filter {
         String requestURI = req.getRequestURI();
         if (session.getAttribute("id") != null && requestURI.matches(".*(login|signUp)\\.html$")) {
             resp.sendRedirect(String.format("%s/carstorage/carStorage.html", req.getContextPath()));
-        } else if (requestURI.matches(".*(index\\.html|login\\.html|signUp\\.html|signIn|createUser|todolist\\.html|adding|complete|css|js)$")) {
+        } else if (requestURI.matches(".*(index\\.html|login\\.html|signUp\\.html|signIn|createUser)$")) {
             chain.doFilter(request, response);
         } else {
             if (session.getAttribute("id") == null) {
