@@ -1,4 +1,4 @@
-addNewCar = "/items/carstorage/carManager";
+addNewCar = "carManager";
 
 window.onload = function () {
     $("#addCarForm").submit(function(event) {

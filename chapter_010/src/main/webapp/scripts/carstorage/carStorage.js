@@ -7,30 +7,38 @@ timeOptions = {
     minute: 'numeric'
 };
 
-getAllUnsoldedCar = "/items/carstorage/carManager";
+getAllUnsoldedCar = "carManager";
 
-getCar = "/items/carstorage/getCar";
+getCar = "getCar";
 
-getCurrentUser = "/items/carstorage/getUser";
+getCurrentUser = "getUser";
 
 noPhoto = "http://mercedesdealers.co.in/images/no_car_image.jpg";
 
-sendNewComment = "/items/carstorage/sendComment";
+sendNewComment = "sendComment";
 
-sellCurrentCar = "/items/carstorage/sellCar";
+sellCurrentCar = "sellCar";
+
+sendFilters = "filterCars";
 
 window.onload = function() {
     $.getJSON(getAllUnsoldedCar, function(data) {
-        if (data.length > 0) {
-            addFullCarInfo(data[0]["id"]);
-        }
-        $.each(data, function (key, value) {
-            addShortCarInfo(value);
-        })
+        fillPage(data);
     });
-    var checkBox = document.getElementById("showCars");
-    checkBox.onclick = showCars;
+    $("#showCars").click(function() {
+        showCars();
+    });
+    setFilterOptions();
 };
+
+function fillPage(cars) {
+    if (cars.length > 0) {
+        addFullCarInfo(cars[0]["id"]);
+    }
+    $.each(cars, function (key, value) {
+        addShortCarInfo(value);
+    })
+}
 
 function addShortCarInfo(car) {
     var shortCarInfo = document.createElement("div");
@@ -331,5 +339,52 @@ function showAllCars() {
     var cars = $(".carInfo");
     $.each(cars, function (index, carInfo) {
         $(carInfo).removeAttr("hidden");
+    })
+}
+
+function setFilterOptions() {
+    setFilterButton();
+    setDropFiltersButton();
+}
+
+function setFilterButton() {
+    $("#addFilters").submit(function (event) {
+        event.preventDefault();
+        var mark = $("#filterMark").val();
+        var model = $("#filterModel").val();
+        var costFrom = $("#filterCostFrom").val();
+        var costTo = $("#filterCostTo").val();
+        if (mark !== "" || model !== "" || costFrom !== "" || costTo !== "") {
+            $.ajax({
+                type: 'GET',
+                url: sendFilters,
+                cache: false,
+                dataType: "application/json",
+                data: {
+                    mark: mark,
+                    model: model,
+                    costFrom: costFrom,
+                    costTo: costTo
+                },
+                complete: function (data) {
+                    $("#carFlexBox").empty();
+                    var cars = JSON.parse(data.responseText);
+                    fillPage(cars);
+                    showCars();
+                }
+            });
+        }
+    })
+}
+
+function setDropFiltersButton() {
+    $("#dropFilters").submit(function (event) {
+        event.preventDefault();
+        $("#addFilters").trigger("reset");
+        $.getJSON(getAllUnsoldedCar, function(data) {
+            $("#carFlexBox").empty();
+            fillPage(data);
+            showCars();
+        });
     })
 }

@@ -108,4 +108,14 @@
         <servlet-name>SellingCar</servlet-name>
         <url-pattern>/carstorage/sellCar</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>FilterCars</servlet-name>
+        <servlet-class>ru.job4j.carstorage.servlets.FilterViewServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>FilterCars</servlet-name>
+        <url-pattern>/carstorage/filterCars</url-pattern>
+    </servlet-mapping>
 </web-app>

@@ -9,7 +9,7 @@ import java.util.Date;
  * Car comment.
  */
 @JsonAutoDetect
-public class Comment implements Comparable<Comment> {
+public class Comment {
     /**
      * Comment id.
      */
@@ -141,11 +141,6 @@ public class Comment implements Comparable<Comment> {
         result = 31 * result + description.hashCode();
         result = 31 * result + created.hashCode();
         return result;
-    }
-
-    @Override
-    public int compareTo(Comment o) {
-        return (int) (this.getCreated().getTime() - o.getCreated().getTime());
     }
 
     @Override

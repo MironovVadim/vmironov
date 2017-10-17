@@ -13,6 +13,7 @@
 #right {
     width: 19.2%;
     float: right;
+    text-align: center;
 }
 
 #carFlexBox {

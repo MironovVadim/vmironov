@@ -1,11 +1,11 @@
-createUser = "/items/carstorage/signIn";
+checkUser = "/items/carstorage/signIn";
 
 window.onload = function () {
     $("#loginForm").on("submit", function (e) {
         e.preventDefault();
         $.ajax({
             type: "POST",
-            url: createUser,
+            url: checkUser,
             data: $("#loginForm").serialize(),
             statusCode: {
                 400: function (jqXHR, textStatus, errorThrown) {

@@ -1,17 +1,25 @@
 package ru.job4j.controller;
 
+import org.hibernate.Criteria;
 import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.criterion.Restrictions;
 import ru.job4j.carstorage.Car;
 import ru.job4j.carstorage.Comment;
 import ru.job4j.carstorage.Image;
 import ru.job4j.carstorage.User;
 import ru.job4j.todolist.Task;
 
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Class managing the Data Base.
@@ -247,5 +255,63 @@ public class DBService {
                 .setParameter("currUserId", userId).executeUpdate();
         session.getTransaction().commit();
         session.close();
+    }
+
+    public List<Car> getFilterCars(Map<String, String> filters) {
+        Session session = factory.openSession();
+        session.beginTransaction();
+        CriteriaBuilder builder = factory.getCriteriaBuilder();
+        CriteriaQuery<Car> criteria = builder.createQuery(Car.class);
+        Root<Car> rootCar = criteria.from(Car.class);
+        criteria.select(rootCar);
+        this.addFilters(builder, criteria, rootCar, filters);
+        TypedQuery<Car> query = session.createQuery(criteria);
+        List<Car> filterCars = query.getResultList();
+        for (Car car : filterCars) {
+            Hibernate.initialize(car.getUser());
+            Hibernate.initialize(car.getImages());
+        }
+        session.getTransaction().commit();
+        session.close();
+        return filterCars;
+    }
+
+    private void addFilters(CriteriaBuilder builder, CriteriaQuery<Car> criteria, Root<Car> rootCar, Map<String, String> filters) {
+        Predicate searchPattern = builder.equal(rootCar.get("sold"), false);
+
+        String mark = filters.get("mark");
+        String model = filters.get("model");
+        String costFrom = filters.get("costFrom");
+        String costTo = filters.get("costTo");
+
+        if (mark != null) {
+            mark = "%" + mark.toLowerCase() + "%";
+            searchPattern = builder.and(searchPattern,
+                    builder.like(builder.lower(rootCar.get("mark")),
+                    mark));
+        }
+        if (model != null) {
+            model = "%" + model.toLowerCase() + "%";
+            searchPattern = builder.and(searchPattern,
+                    builder.like(builder.lower(rootCar.get("model")),
+                    model));
+        }
+        if (costFrom != null && costTo != null) {
+            int from = Integer.parseInt(costFrom);
+            int to = Integer.parseInt(costTo);
+            if (from <= to) {
+                searchPattern = builder.and(searchPattern, builder.between(
+                        rootCar.get("cost"), from, to));
+            }
+        } else if (costFrom != null) {
+            int from = Integer.parseInt(costFrom);
+            searchPattern = builder.and(searchPattern, builder.greaterThanOrEqualTo(
+                    rootCar.get("cost"), from));
+        } else if (costTo != null) {
+            int to = Integer.parseInt(costTo);
+            searchPattern = builder.and(searchPattern, builder.lessThanOrEqualTo(
+                    rootCar.get("cost"), to));
+        }
+        criteria.where(searchPattern);
     }
 }

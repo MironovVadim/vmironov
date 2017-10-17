@@ -23,7 +23,7 @@
         <property name="description" column="description"/>
         <property name="created" column="created_date"/>
 
-        <set name="comments" cascade="save-update" table="public.comments">
+        <set name="comments" cascade="save-update" order-by="created_date asc" table="public.comments">
             <key column="car_id" not-null="true"/>
             <one-to-many class="ru.job4j.carstorage.Comment"/>
         </set>

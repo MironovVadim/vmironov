@@ -38,19 +38,19 @@ public class CarGetterServlet extends HttpServlet {
     }
 
     /**
-     * Method write JSON to PrintWriter.
+     * Method write json to PrintWriter.
      * @param car - POJO object.
-     * @param printWriter - target for writing.
+     * @param out - target for writing.
      * @throws IOException if POJO object could not be written.
      */
-    private void writeJSON(Car car, PrintWriter printWriter) throws IOException {
+    private void writeJSON(Car car, PrintWriter out) throws IOException {
         StringWriter writer = new StringWriter();
         ObjectMapper mapper = new ObjectMapper();
         SimpleFilterProvider provider = new SimpleFilterProvider();
         provider.setFailOnUnknownId(false);
         mapper.setFilterProvider(provider);
         mapper.writeValue(writer, car);
-        printWriter.println(writer.toString());
-        printWriter.flush();
+        out.println(writer.toString());
+        out.flush();
     }
 }

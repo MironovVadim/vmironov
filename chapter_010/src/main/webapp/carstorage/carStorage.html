@@ -33,16 +33,46 @@
     <hr>
     <div id="fullTextInfo">
         <ul id="features" type="none">
-            <li><span class="prefix">Mark:</span><span id="mark"></span></li>
-            <li><span class="prefix">Model:</span><span id="model"></span></li>
-            <li><span class="prefix">Release year:</span><span id="releaseYear"></span></li>
-            <li><span class="prefix">Mileage:</span><span id="mileage"></span></li>
-            <li><span class="prefix">Body type:</span><span id="bodyType"></span></li>
-            <li><span class="prefix">Color:</span><span id="color"></span></li>
-            <li><span class="prefix">Engine capacity:</span><span id="engineCapacity"></span></li>
-            <li><span class="prefix">Engine type:</span><span id="engineType"></span></li>
-            <li><span class="prefix">Power:</span><span id="power"></span></li>
-            <li><span class="prefix">Cost:</span><span id="cost"></span></li>
+            <li>
+                <span class="prefix">Mark:</span>
+                <span id="mark"></span>
+            </li>
+            <li>
+                <span class="prefix">Model:</span>
+                <span id="model"></span>
+            </li>
+            <li>
+                <span class="prefix">Release year:</span>
+                <span id="releaseYear"></span>
+            </li>
+            <li>
+                <span class="prefix">Mileage:</span>
+                <span id="mileage"></span>
+            </li>
+            <li>
+                <span class="prefix">Body type:</span>
+                <span id="bodyType"></span>
+            </li>
+            <li>
+                <span class="prefix">Color:</span>
+                <span id="color"></span>
+            </li>
+            <li>
+                <span class="prefix">Engine capacity:</span>
+                <span id="engineCapacity"></span>
+            </li>
+            <li>
+                <span class="prefix">Engine type:</span>
+                <span id="engineType"></span>
+            </li>
+            <li>
+                <span class="prefix">Power:</span>
+                <span id="power"></span>
+            </li>
+            <li>
+                <span class="prefix">Cost:</span>
+                <span id="cost"></span>
+            </li>
         </ul>
     </div>
     <hr>
@@ -60,6 +90,24 @@
     </form>
     <h4 style="text-align: center">Filters</h4>
     <hr>
+    <form action="filterCars" id="addFilters">
+        Mark:<input name="mark" id="filterMark"/>
+        <br/>
+        <br/>
+        Model:<input name="model" id="filterModel"/>
+        <br/>
+        <br/>
+        <span>Cost from:</span>
+        <input name="costFrom" id="filterCostFrom" pattern="\d{0,10}" size="4"/>
+        <span>to:</span>
+        <input name="costTo" id="filterCostTo" pattern="\d{0,10}" size="4" title="hhh"/>
+        <br/>
+        <br/>
+        <input type="submit" value="Use filters">
+    </form>
+    <form id="dropFilters">
+        <input type="submit" value="Drop filters"/>
+    </form>
 </div>
 </body>
 </html>
