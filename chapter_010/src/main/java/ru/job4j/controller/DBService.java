@@ -1,11 +1,9 @@
 package ru.job4j.controller;
 
-import org.hibernate.Criteria;
 import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
-import org.hibernate.criterion.Restrictions;
 import ru.job4j.carstorage.Car;
 import ru.job4j.carstorage.Comment;
 import ru.job4j.carstorage.Image;
@@ -257,6 +255,11 @@ public class DBService {
         session.close();
     }
 
+    /**
+     * Method returns list of filtered cars.
+     * @param filters for cars.
+     * @return filtered cars as List.
+     */
     public List<Car> getFilterCars(Map<String, String> filters) {
         Session session = factory.openSession();
         session.beginTransaction();
@@ -276,7 +279,14 @@ public class DBService {
         return filterCars;
     }
 
-    private void addFilters(CriteriaBuilder builder, CriteriaQuery<Car> criteria, Root<Car> rootCar, Map<String, String> filters) {
+    /**
+     * Method adds filters in query to DB.
+     * @param builder - object which creates conditions of query.
+     * @param query of DB entity.
+     * @param rootCar - object entity of DB.
+     * @param filters - map with values of filter conditions.
+     */
+    private void addFilters(CriteriaBuilder builder, CriteriaQuery<Car> query, Root<Car> rootCar, Map<String, String> filters) {
         Predicate searchPattern = builder.equal(rootCar.get("sold"), false);
 
         String mark = filters.get("mark");
@@ -312,6 +322,6 @@ public class DBService {
             searchPattern = builder.and(searchPattern, builder.lessThanOrEqualTo(
                     rootCar.get("cost"), to));
         }
-        criteria.where(searchPattern);
+        query.where(searchPattern);
     }
 }

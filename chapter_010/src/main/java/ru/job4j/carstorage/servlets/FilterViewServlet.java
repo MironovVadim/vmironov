@@ -15,6 +15,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Servlet return filtered cars and return then as JSON.
+ */
 public class FilterViewServlet extends HttpServlet {
     /**
      * Data Base service.
@@ -38,22 +41,19 @@ public class FilterViewServlet extends HttpServlet {
         JSONCarWriter.writeJSONCars(filterCars, out);
     }
 
+    /**
+     * Method add filters from HttpServletRequest to map.
+     * @param filters - target for filters
+     * @param req - request with filters.
+     */
     private void fillFilters(Map<String, String> filters, HttpServletRequest req) {
         String mark = req.getParameter("mark");
         String model = req.getParameter("model");
         String costFromStr = req.getParameter("costFrom");
         String costToStr = req.getParameter("costTo");
-        if (mark.length() != 0) {
             filters.put("mark", mark);
-        }
-        if (model.length() != 0) {
             filters.put("model", model);
-        }
-        if (costFromStr.length() != 0) {
             filters.put("costFrom", costFromStr);
-        }
-        if (costToStr.length() != 0) {
             filters.put("costTo", costToStr);
-        }
     }
 }

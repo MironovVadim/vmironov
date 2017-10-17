@@ -11,6 +11,9 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.List;
 
+/**
+ * Util class for writing Cars as JSON.
+ */
 public class JSONCarWriter {
     /**
      * Method write json to PrintWriter.
