@@ -6,7 +6,6 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import ru.job4j.carstorage.Car;
 import ru.job4j.carstorage.Comment;
-import ru.job4j.carstorage.Image;
 import ru.job4j.carstorage.User;
 import ru.job4j.todolist.Task;
 
@@ -94,30 +93,15 @@ public class DBService {
 
     /**
      * Method adds new car to DB.
+     * @param car - car entity.
      * @param userId of car.
-     * @param mark of car.
-     * @param model of car.
-     * @param releaseYear of car.
-     * @param mileage of car.
-     * @param bodyType of car.
-     * @param color of car.
-     * @param engineCapacity of car.
-     * @param engineType of car.
-     * @param power of car.
-     * @param cost of car.
-     * @param description of car.
-     * @param images of car.
      * @return car id.
      */
-    public int addNewCar(int userId, String mark, String model, int releaseYear, int mileage, String bodyType,
-                          String color, double engineCapacity, String engineType, int power,
-                          int cost, String description, List<Image> images) {
+    public int addNewCar(Car car, int userId) {
         Session session = factory.openSession();
         session.beginTransaction();
         User user = session.get(User.class, userId);
-        Date createdDate = new Date();
-        Car car = new Car(user, mark, model, releaseYear, mileage, bodyType, color, engineCapacity,
-                engineType, power, cost, description, createdDate, images);
+        car.setUser(user);
         session.save(car);
         session.getTransaction().commit();
         session.close();
@@ -126,16 +110,12 @@ public class DBService {
 
     /**
      * Method adds new User in DB.
-     * @param nickname of user.
-     * @param login of user.
-     * @param password of user.
+     * @param user - user entity.
      * @return user id.
      */
-    public int addNewUser(String nickname, String login, String password) {
+    public int addNewUser(User user) {
         Session session = factory.openSession();
         session.beginTransaction();
-        Date createdDate = new Date();
-        User user = new User(nickname, login, password, createdDate);
         session.save(user);
         session.getTransaction().commit();
         session.close();
@@ -171,16 +151,15 @@ public class DBService {
      * Method adds new comment in DB.
      * @param userId of user which do comment.
      * @param carId of car which contains comment.
-     * @param description of comment.
+     * @param comment at car.
      * @return created comment.
      */
-    public Comment addNewComment(int userId, int carId, String description) {
+    public Comment addNewComment(int userId, int carId, Comment comment) {
         Session session = factory.openSession();
         session.beginTransaction();
         Car car = session.get(Car.class, carId);
         User user = session.get(User.class, userId);
-        Date createdDate = new Date();
-        Comment comment = new Comment(user, description, createdDate);
+        comment.setUser(user);
         car.getComments().add(comment);
         session.update(car);
         session.getTransaction().commit();

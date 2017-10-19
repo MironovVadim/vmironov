@@ -4,12 +4,15 @@ import org.junit.Test;
 import ru.job4j.carstorage.Car;
 import ru.job4j.carstorage.Comment;
 import ru.job4j.carstorage.Image;
+import ru.job4j.carstorage.User;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.ArrayList;
-import java.util.Map;
 import java.util.Set;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.Date;
+
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -90,21 +93,30 @@ public class DBServiceTest {
      */
     private static String description = "description";
     /**
+     * Date created.
+     */
+    private static Date date = new Date();
+    /**
      * Car comment.
      */
-    private static String comment = "Some comment";
+    private static String commentDesc = "Some comment";
+
+
 
     static {
-        service.addNewUser(nickname, login, password);
+        User user = new User(nickname, login, password, date);
+        service.addNewUser(user);
         List<Image> images = new ArrayList<>();
-        service.addNewCar(userId, mark, model, releaseYear, mileage, bodyType, color, engineCapacity,
-                engineType, power, cost, description, images);
+        Car car = new Car(mark, model, releaseYear, mileage, bodyType, color, engineCapacity,
+                engineType, power, cost, description, date, images);
+        service.addNewCar(car, userId);
         String anotherMark = "Ford";
         String anotherModel = "Focus";
         int anotherCost = 5000;
         images = new ArrayList<>();
-        service.addNewCar(userId, anotherMark, anotherModel, releaseYear, mileage, bodyType, color, engineCapacity,
-                engineType, power, anotherCost, description, images);
+        Car anotherCar = new Car(anotherMark, anotherModel, releaseYear, mileage, bodyType, color, engineCapacity,
+                engineType, power, anotherCost, description, date, images);
+        service.addNewCar(anotherCar, userId);
     }
 
     /**
@@ -149,8 +161,9 @@ public class DBServiceTest {
     @Test
     public void whenSellCarThenGetTwoCars() {
         List<Image> images = new ArrayList<>();
-        int newCarId = service.addNewCar(userId, mark, model, releaseYear, mileage, bodyType, color, engineCapacity,
-                engineType, power, cost, description, images);
+        Car car = new Car(mark, model, releaseYear, mileage, bodyType, color, engineCapacity,
+                engineType, power, cost, description, date, images);
+        int newCarId = service.addNewCar(car, userId);
         List<Car> carList = service.getUnsoldCars();
 
         assertEquals(3, carList.size());
@@ -166,6 +179,7 @@ public class DBServiceTest {
      */
     @Test
     public void whenAddNewCommentThenGetThisComment() {
+        Comment comment = new Comment(commentDesc, date);
         service.addNewComment(userId, carId, comment);
         Set<Comment> commentList = service
                 .getSpecifiedCar(carId)

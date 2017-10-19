@@ -37,12 +37,10 @@ public class Comment {
 
     /**
      * Second constructor with initialization fields.
-     * @param user of comment.
      * @param description of comment.
      * @param created date of comment.
      */
-    public Comment(User user, String description, Date created) {
-        this.user = user;
+    public Comment(String description, Date created) {
         this.description = description;
         this.created = created;
     }

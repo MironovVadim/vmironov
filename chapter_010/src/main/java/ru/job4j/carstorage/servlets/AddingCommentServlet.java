@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.util.Date;
 
 /**
  * Servlet for adding comments to car.
@@ -30,10 +31,11 @@ public class AddingCommentServlet extends HttpServlet {
         int carId = Integer.parseInt(req.getParameter("carId"));
         String description = req.getParameter("description");
 
-        Comment newComment = service.addNewComment(userId, carId, description);
+        Comment comment = new Comment(description, new Date());
+        service.addNewComment(userId, carId, comment);
 
         PrintWriter out = resp.getWriter();
-        this.writeJSON(newComment, out);
+        this.writeJSON(comment, out);
     }
 
     /**

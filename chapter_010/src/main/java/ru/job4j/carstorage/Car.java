@@ -96,7 +96,6 @@ public class Car {
 
     /**
      * Constructor with initialization fields.
-     * @param user of car
      * @param mark of car
      * @param model of car
      * @param releaseYear of car
@@ -111,7 +110,9 @@ public class Car {
      * @param created of car
      * @param images of car
      */
-    public Car(User user, String mark, String model, int releaseYear, int mileage, String bodyType, String color, double engineCapacity, String engineType, int power, int cost, String description, Date created, List<Image> images) {
+    public Car(String mark, String model, int releaseYear, int mileage, String bodyType, String color,
+               double engineCapacity, String engineType, int power, int cost, String description,
+               Date created, List<Image> images) {
         this.user = user;
         this.mark = mark;
         this.model = model;

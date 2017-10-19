@@ -1,5 +1,6 @@
 package ru.job4j.carstorage.servlets;
 
+import ru.job4j.carstorage.User;
 import ru.job4j.controller.DBService;
 
 import javax.servlet.ServletException;
@@ -7,6 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Date;
 
 /**
  * Servlet registers new User.
@@ -26,8 +28,9 @@ public class UserManageServlet extends HttpServlet {
         if (service.isUserLoginExist(login)) {
             resp.sendError(400, "This login already exist!");
         } else {
-            int userId = service.addNewUser(nickname, login, password);
-            req.getSession().setAttribute("id", userId);
+            User user = new User(nickname, login, password, new Date());
+            service.addNewUser(user);
+            req.getSession().setAttribute("id", user.getId());
         }
     }
 }

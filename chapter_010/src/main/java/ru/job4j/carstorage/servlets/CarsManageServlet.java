@@ -16,10 +16,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
+import java.util.ArrayList;
 import java.util.Map;
+import java.util.HashMap;
+import java.util.Date;
+
 
 /**
  * Getter/Setter car servlet.
@@ -77,7 +79,9 @@ public class CarsManageServlet extends HttpServlet {
             int power = Integer.parseInt(fields.get("power"));
             int cost = Integer.parseInt(fields.get("cost"));
             String description = fields.get("description");
-            service.addNewCar(userId, mark, model, releaseYear, mileage, bodyType, color, engineCapacity, engineType, power, cost, description, images);
+            Car car = new Car(mark, model, releaseYear, mileage, bodyType, color, engineCapacity,
+                    engineType, power, cost, description, new Date(), images);
+            service.addNewCar(car, userId);
         }
     }
 }

@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.util.Date;
 
 /**
  * Servlet adds new comment to car.
@@ -26,10 +27,10 @@ public class CommentManageServlet extends HttpServlet {
         int userId = (int) req.getSession().getAttribute("id");
         int carId = Integer.parseInt(req.getParameter("carId"));
         String description = req.getParameter("description");
-        Comment comment = service.addNewComment(userId, carId, description);
+        Comment comment = new Comment(description, new Date());
+        service.addNewComment(userId, carId, comment);
         PrintWriter out = resp.getWriter();
         this.writeJSON(comment, out);
-
     }
 
     /**
