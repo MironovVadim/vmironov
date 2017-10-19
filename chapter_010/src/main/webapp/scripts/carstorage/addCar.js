@@ -8,7 +8,6 @@ window.onload = function () {
         for (var i = 0; i < files.length; i++) {
             formData.append("photo" + i, files[i]);
         }
-        formData.delete("files");
         $.ajax({
             type: 'POST',
             url: addNewCar,

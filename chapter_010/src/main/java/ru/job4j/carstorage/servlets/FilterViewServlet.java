@@ -30,7 +30,7 @@ public class FilterViewServlet extends HttpServlet {
         int userId = (int) req.getSession().getAttribute("id");
         Map<String, String> filters = new HashMap<>();
         this.fillFilters(filters, req);
-        List<Car> filterCars = service.getFilterCars(filters);
+        List<Car> filterCars = service.getFilteredCars(filters);
         for (Car car : filterCars) {
             User user = car.getUser();
             if (userId == user.getId()) {
@@ -51,9 +51,17 @@ public class FilterViewServlet extends HttpServlet {
         String model = req.getParameter("model");
         String costFromStr = req.getParameter("costFrom");
         String costToStr = req.getParameter("costTo");
+        if (!mark.equals("")) {
             filters.put("mark", mark);
+        }
+        if (!model.equals("")) {
             filters.put("model", model);
+        }
+        if (!costFromStr.equals("")) {
             filters.put("costFrom", costFromStr);
+        }
+        if (!costToStr.equals("")) {
             filters.put("costTo", costToStr);
+        }
     }
 }

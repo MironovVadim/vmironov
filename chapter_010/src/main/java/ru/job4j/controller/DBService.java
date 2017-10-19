@@ -26,7 +26,9 @@ public class DBService {
     /**
      * Connection factory.
      */
-    private static SessionFactory factory = new Configuration().configure().buildSessionFactory();
+    private static SessionFactory factory = new Configuration()
+            .configure()
+            .buildSessionFactory();
     /**
      * Singleton.
      */
@@ -80,6 +82,17 @@ public class DBService {
     }
 
     /**
+     * Method return List of tasks.
+     * @return tasks.
+     */
+    public List<Task> getTasks() {
+        Session session = factory.openSession();
+        List tasks = session.createQuery("FROM Task ORDER BY created").list();
+        session.close();
+        return tasks;
+    }
+
+    /**
      * Method adds new car to DB.
      * @param userId of car.
      * @param mark of car.
@@ -94,16 +107,21 @@ public class DBService {
      * @param cost of car.
      * @param description of car.
      * @param images of car.
+     * @return car id.
      */
-    public void addNewCar(int userId, String mark, String model, int releaseYear, int mileage, String bodyType, String color, double engineCapacity, String engineType, int power, int cost, String description, List<Image> images) {
+    public int addNewCar(int userId, String mark, String model, int releaseYear, int mileage, String bodyType,
+                          String color, double engineCapacity, String engineType, int power,
+                          int cost, String description, List<Image> images) {
         Session session = factory.openSession();
         session.beginTransaction();
         User user = session.get(User.class, userId);
         Date createdDate = new Date();
-        Car car = new Car(user, mark, model, releaseYear, mileage, bodyType, color, engineCapacity, engineType, power, cost, description, createdDate, images);
+        Car car = new Car(user, mark, model, releaseYear, mileage, bodyType, color, engineCapacity,
+                engineType, power, cost, description, createdDate, images);
         session.save(car);
         session.getTransaction().commit();
         session.close();
+        return car.getId();
     }
 
     /**
@@ -114,8 +132,6 @@ public class DBService {
      * @return user id.
      */
     public int addNewUser(String nickname, String login, String password) {
-
-
         Session session = factory.openSession();
         session.beginTransaction();
         Date createdDate = new Date();
@@ -136,16 +152,17 @@ public class DBService {
         int result;
         Session session = factory.openSession();
         session.beginTransaction();
-        List<Integer> userId = session.createQuery("SELECT id FROM User WHERE login = :currLogin AND password = :currPassword")
+        Integer userId = (Integer) session
+                .createQuery("SELECT id FROM User WHERE login = :currLogin AND password = :currPassword")
                 .setParameter("currLogin", userLogin)
                 .setParameter("currPassword", userPassword)
-                .list();
+                .uniqueResult();
         session.getTransaction().commit();
         session.close();
-        if (userId.isEmpty()) {
+        if (userId == null) {
             result = -1;
         } else {
-            result = userId.get(0);
+            result = userId;
         }
         return result;
     }
@@ -198,9 +215,11 @@ public class DBService {
         Session session = factory.openSession();
         session.beginTransaction();
         Car car = session.get(Car.class, carId);
-        Hibernate.initialize(car.getUser());
-        Hibernate.initialize(car.getComments());
-        Hibernate.initialize(car.getImages());
+        if (car != null) {
+            Hibernate.initialize(car.getUser());
+            Hibernate.initialize(car.getComments());
+            Hibernate.initialize(car.getImages());
+        }
         session.getTransaction().commit();
         session.close();
         return car;
@@ -214,12 +233,12 @@ public class DBService {
     public boolean isUserLoginExist(String userLogin) {
         Session session = factory.openSession();
         session.beginTransaction();
-        Long count = (Long) session.createQuery("SELECT count(login) FROM User WHERE login = :currLogin")
+        long count = (long) session.createQuery("SELECT count(login) FROM User WHERE login = :currLogin")
                 .setParameter("currLogin", userLogin)
                 .uniqueResult();
         session.getTransaction().commit();
         session.close();
-        return count != null;
+        return count != 0;
     }
 
     /**
@@ -227,17 +246,6 @@ public class DBService {
      */
     public void closeFactory() {
         factory.close();
-    }
-
-    /**
-     * Method return List of tasks.
-     * @return tasks.
-     */
-    public List<Task> getTasks() {
-        Session session = factory.openSession();
-        List tasks = session.createQuery("FROM Task ORDER BY created").list();
-        session.close();
-        return tasks;
     }
 
     /**
@@ -260,7 +268,7 @@ public class DBService {
      * @param filters for cars.
      * @return filtered cars as List.
      */
-    public List<Car> getFilterCars(Map<String, String> filters) {
+    public List<Car> getFilteredCars(Map<String, String> filters) {
         Session session = factory.openSession();
         session.beginTransaction();
         CriteriaBuilder builder = factory.getCriteriaBuilder();
