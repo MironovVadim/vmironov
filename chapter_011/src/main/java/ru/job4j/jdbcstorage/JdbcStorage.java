@@ -25,7 +25,8 @@ public class JdbcStorage implements Storage {
      * @param driverClass - driver class.
      * @param url - url of DB.
      */
-    public JdbcStorage(@Value("postgres") String user, @Value("user") String password,
+    public JdbcStorage(@Value("postgres") String user,
+                       @Value("user") String password,
                        @Value("org.postgresql.Driver") String driverClass,
                        @Value("jdbc:postgresql://localhost:5432/Spring_chapter") String url) {
         basicDataSource.setDriverClassName(driverClass);

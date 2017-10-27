@@ -6,6 +6,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import ru.job4j.carstorage.Car;
 import ru.job4j.carstorage.Comment;
+import ru.job4j.carstorage.Image;
 import ru.job4j.carstorage.User;
 import ru.job4j.todolist.Task;
 
@@ -14,6 +15,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -310,5 +312,11 @@ public class DBService {
                     rootCar.get("cost"), to));
         }
         query.where(searchPattern);
+    }
+
+    public static void main(String[] args) {
+        DBService service = DBService.newInstance();
+
+        service.addNewComment(1, 1, new Comment("desc", new Date()));
     }
 }

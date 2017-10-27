@@ -2,10 +2,6 @@ package ru.job4j.servlets;
 
 import org.apache.commons.dbcp2.BasicDataSource;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-
 /**
  * DB Connector - Singleton.
  */

@@ -10,11 +10,11 @@
         <property name="connection.password">user</property>
         <property name="dialect">org.hibernate.dialect.PostgreSQL95Dialect</property>
 
-        <mapping resource="ru/job4j/todolist/Task.hbm.xml"/>
+        <mapping class="ru.job4j.carstorage.Car"/>
+        <mapping class="ru.job4j.carstorage.User"/>
+        <mapping class="ru.job4j.carstorage.Image"/>
+        <mapping class="ru.job4j.carstorage.Comment"/>
 
-        <mapping resource="ru/job4j/carstorage/User.hbm.xml"/>
-        <mapping resource="ru/job4j/carstorage/Car.hbm.xml"/>
-        <mapping resource="ru/job4j/carstorage/Comment.hbm.xml"/>
-        <mapping resource="ru/job4j/carstorage/Image.hbm.xml"/>
+        <mapping class="ru.job4j.todolist.Task"/>
     </session-factory>
 </hibernate-configuration>

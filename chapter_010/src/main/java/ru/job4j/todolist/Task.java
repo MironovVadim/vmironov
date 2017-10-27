@@ -2,28 +2,37 @@ package ru.job4j.todolist;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 
+import javax.persistence.*;
 import java.util.Date;
 
 /**
  * DB entity.
  */
 @JsonAutoDetect
+@Entity
+@Table(name = "tasks")
 public class Task {
     /**
      * id.
      */
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
     private int id;
     /**
      * Description.
      */
+    @Column(name = "description")
     private String desc;
     /**
      * Create date.
      */
+    @Column(name = "created_date")
     private Date created;
     /**
      * Is task done.
      */
+    @Column(name = "isdone")
     private boolean done;
 
     /**

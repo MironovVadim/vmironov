@@ -1,5 +1,11 @@
-checkUser = "/items/carstorage/signIn";
-
+/**
+ * Address of sign in servlet.
+ * @type {string}
+ */
+checkUser = "signIn";
+/**
+ * Adding form behavior of checking login and password.
+ */
 window.onload = function () {
     $("#loginForm").on("submit", function (e) {
         e.preventDefault();
@@ -8,9 +14,7 @@ window.onload = function () {
             url: checkUser,
             data: $("#loginForm").serialize(),
             statusCode: {
-                400: function (jqXHR, textStatus, errorThrown) {
-                    var responseHtml = $.parseHTML(jqXHR.responseText);
-                    console.log(responseHtml[0]);
+                400: function () {
                     $("#error").html("Error!").css("color", "red");
                 }
             },

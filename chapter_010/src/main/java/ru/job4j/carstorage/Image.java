@@ -3,24 +3,31 @@ package ru.job4j.carstorage;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.hibernate.annotations.Type;
 import sun.misc.BASE64Encoder;
 
-
+import javax.persistence.*;
 import java.util.Arrays;
 
 /**
  * Car image.
  */
 @JsonAutoDetect
+@Entity
+@Table(name = "images")
 public class Image {
     /**
      * Id.
      */
     @JsonIgnore
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private int id;
     /**
      * Image.
      */
+    @Column(name = "image")
     private byte[] image;
 
     /**

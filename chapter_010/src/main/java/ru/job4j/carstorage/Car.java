@@ -3,7 +3,9 @@ package ru.job4j.carstorage;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonFilter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.Where;
 
+import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
@@ -13,79 +15,107 @@ import java.util.Set;
  */
 @JsonFilter("carFilter")
 @JsonAutoDetect
+@Entity
+@Table(name = "cars")
+@Where(clause = "is_sold = false")
 public class Car {
     /**
      * Id.
      */
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private int id;
     /**
      * Car owner.
      */
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "user_id", nullable = false)
     private User user;
     /**
      * Mark.
      */
+    @Column(name = "mark")
     private String mark;
     /**
      * Model.
      */
+    @Column(name = "model")
     private String model;
     /**
      * Release year.
      */
+    @Column(name = "release_year")
     private int releaseYear;
     /**
      * Mileage.
      */
+    @Column(name = "mileage")
     private int mileage;
     /**
      * Body type.
      */
+    @Column(name = "body_type")
     private String bodyType;
     /**
      * Color.
      */
+    @Column(name = "color")
     private String color;
     /**
      * Engine capacity.
      */
+    @Column(name = "engine_capacity")
     private double engineCapacity;
     /**
      * Engine type.
      */
+    @Column(name = "engine_type")
     private String engineType;
     /**
      * Power.
      */
+    @Column(name = "power")
     private int power;
     /**
      * Cost.
      */
+    @Column(name = "cost")
     private int cost;
     /**
      * Is car sold.
      */
     @JsonIgnore
+    @Column(name = "is_sold")
     private boolean sold;
     /**
      * Description.
      */
+    @Column(name = "description")
     private String description;
     /**
      * Created date.
      */
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "created_date")
     private Date created;
     /**
      * Comments.
      */
+    @OrderBy("created asc")
+    @JoinTable()
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, targetEntity = Comment.class)
     private Set<Comment> comments;
     /**
      * Images.
      */
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, targetEntity = Image.class)
+    @JoinColumn(name = "car_id")
     private List<Image> images;
     /**
      * Addition field to know is current user of car storage a owner of current car.
      */
+    @Transient
     private boolean owner;
 
     /**
@@ -113,7 +143,6 @@ public class Car {
     public Car(String mark, String model, int releaseYear, int mileage, String bodyType, String color,
                double engineCapacity, String engineType, int power, int cost, String description,
                Date created, List<Image> images) {
-        this.user = user;
         this.mark = mark;
         this.model = model;
         this.releaseYear = releaseYear;

@@ -5,6 +5,7 @@ import ru.job4j.carstorage.Comment;
 import ru.job4j.controller.DBService;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,6 +17,7 @@ import java.util.Date;
 /**
  * Servlet adds new comment to car.
  */
+@WebServlet(name = "commentAdding", urlPatterns = "/carstorage/createComment")
 public class CommentManageServlet extends HttpServlet {
     /**
      * Data Base Service.

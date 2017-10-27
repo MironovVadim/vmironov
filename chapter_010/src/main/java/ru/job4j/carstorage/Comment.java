@@ -3,30 +3,41 @@ package ru.job4j.carstorage;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * Car comment.
  */
 @JsonAutoDetect
-public class Comment {
+@Entity
+@Table(name = "comments")
+public class Comment implements Serializable {
     /**
      * Comment id.
      */
     @JsonIgnore
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private int id;
     /**
      * Comment of user id.
      */
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "user_id")
     private User user;
 
     /**
      * Description.
      */
+    @Column(name = "description")
     private String description;
     /**
      * time of creating.
      */
+    @Column(name = "created_date")
     private Date created;
 
     /**

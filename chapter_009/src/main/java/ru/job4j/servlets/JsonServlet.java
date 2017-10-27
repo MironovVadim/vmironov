@@ -6,6 +6,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * JSON Servlet.
+ */
 public class JsonServlet extends HttpServlet {
 
     @Override
