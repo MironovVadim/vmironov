@@ -23,14 +23,14 @@ public class Car {
      * Id.
      */
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     private int id;
     /**
      * Car owner.
      */
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "user_id", nullable = false)
+    @JoinColumn(name = "user_id")
     private User user;
     /**
      * Mark.
@@ -103,7 +103,7 @@ public class Car {
      * Comments.
      */
     @OrderBy("created asc")
-    @JoinTable()
+    @JoinColumn(name = "id")
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, targetEntity = Comment.class)
     private Set<Comment> comments;
     /**

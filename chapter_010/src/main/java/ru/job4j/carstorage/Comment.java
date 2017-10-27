@@ -28,7 +28,6 @@ public class Comment implements Serializable {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
     private User user;
-
     /**
      * Description.
      */
