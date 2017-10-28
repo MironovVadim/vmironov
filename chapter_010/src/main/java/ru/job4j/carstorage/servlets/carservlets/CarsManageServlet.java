@@ -1,12 +1,12 @@
-package ru.job4j.carstorage.servlets;
+package ru.job4j.carstorage.servlets.carservlets;
 
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
-import ru.job4j.carstorage.Car;
-import ru.job4j.carstorage.Image;
-import ru.job4j.carstorage.User;
+import ru.job4j.carstorage.entities.Car;
+import ru.job4j.carstorage.entities.Image;
+import ru.job4j.carstorage.entities.User;
 import ru.job4j.carstorage.json.JSONCarWriter;
 import ru.job4j.controller.DBService;
 
@@ -17,10 +17,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 import java.util.ArrayList;
-import java.util.Map;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Date;
 
 
@@ -62,7 +62,9 @@ public class CarsManageServlet extends HttpServlet {
                     if (fileItem.isFormField()) {
                         fields.put(fileItem.getFieldName(), fileItem.getString());
                     } else {
-                        images.add(new Image(fileItem.get()));
+                        if (fileItem.getSize() > 0) {
+                            images.add(new Image(fileItem.get()));
+                        }
                     }
                 }
             } catch (FileUploadException e) {

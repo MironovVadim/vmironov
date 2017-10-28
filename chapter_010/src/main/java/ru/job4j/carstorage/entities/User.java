@@ -1,8 +1,13 @@
-package ru.job4j.carstorage;
+package ru.job4j.carstorage.entities;
 
 import com.fasterxml.jackson.annotation.*;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.util.Date;
 
 /**
@@ -147,15 +152,27 @@ public class User {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
 
         User user = (User) o;
 
-        if (id != user.id) return false;
-        if (!nickname.equals(user.nickname)) return false;
-        if (!login.equals(user.login)) return false;
-        if (!password.equals(user.password)) return false;
+        if (id != user.id) {
+            return false;
+        }
+        if (!nickname.equals(user.nickname)) {
+            return false;
+        }
+        if (!login.equals(user.login)) {
+            return false;
+        }
+        if (!password.equals(user.password)) {
+            return false;
+        }
         return created.equals(user.created);
     }
 
@@ -172,12 +189,12 @@ public class User {
     @Override
     public String toString() {
 
-        return "User{" +
-                "id=" + id +
-                ", nickname='" + nickname + '\'' +
-                ", login='" + login + '\'' +
-                ", password='" + password + '\'' +
-                ", created=" + created +
-                '}';
+        return "User{"
+                + "id=" + id
+                + ", nickname='" + nickname + '\''
+                + ", login='" + login + '\''
+                + ", password='" + password + '\''
+                + ", created=" + created
+                + '}';
     }
 }

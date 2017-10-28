@@ -1,4 +1,4 @@
-package ru.job4j.carstorage.servlets;
+package ru.job4j.carstorage.servlets.carservlets;
 
 import ru.job4j.controller.DBService;
 

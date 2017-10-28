@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ser.FilterProvider;
 import com.fasterxml.jackson.databind.ser.impl.SimpleBeanPropertyFilter;
 import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;
-import ru.job4j.carstorage.Car;
+import ru.job4j.carstorage.entities.Car;
 
 import java.io.IOException;
 import java.io.PrintWriter;

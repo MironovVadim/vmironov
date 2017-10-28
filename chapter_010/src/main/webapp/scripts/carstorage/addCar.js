@@ -12,9 +12,6 @@ window.onload = function () {
         event.preventDefault();
         var files = $("input[name='files']")[0].files;
         var formData = new FormData(this);
-        for (var i = 0; i < files.length; i++) {
-            formData.append("photo" + i, files[i]);
-        }
         transferCarInfo(formData);
     });
 };

@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import ru.job4j.controller.DBService;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,6 +15,7 @@ import java.io.StringWriter;
 /**
  * Adding servlet.
  */
+@WebServlet(name = "addingTask", urlPatterns = "/todolist/adding")
 public class AddServlet extends HttpServlet {
     /**
      * DB service class.

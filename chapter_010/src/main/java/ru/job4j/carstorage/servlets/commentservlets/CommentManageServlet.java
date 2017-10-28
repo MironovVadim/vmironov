@@ -1,7 +1,7 @@
-package ru.job4j.carstorage.servlets;
+package ru.job4j.carstorage.servlets.commentservlets;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import ru.job4j.carstorage.Comment;
+import ru.job4j.carstorage.entities.Comment;
 import ru.job4j.controller.DBService;
 
 import javax.servlet.ServletException;

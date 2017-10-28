@@ -5,9 +5,9 @@ title = "<tr>"
     + "<th>Is done</th>"
     + "</tr>";
 
-addUrl = "/items/adding";
+addUrl = "adding";
 
-completeUrl = "/items/complete";
+completeUrl = "complete";
 
 timeOptions = {
     year: 'numeric',
@@ -108,6 +108,7 @@ function addNewTask() {
             function () {
                 fillPage();
             });
+        desc.value = "";
     }
 }
 

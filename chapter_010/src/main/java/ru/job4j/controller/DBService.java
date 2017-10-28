@@ -4,18 +4,16 @@ import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
-import ru.job4j.carstorage.Car;
-import ru.job4j.carstorage.Comment;
-import ru.job4j.carstorage.Image;
-import ru.job4j.carstorage.User;
-import ru.job4j.todolist.Task;
+import ru.job4j.carstorage.entities.Car;
+import ru.job4j.carstorage.entities.Comment;
+import ru.job4j.carstorage.entities.User;
+import ru.job4j.todolist.entities.Task;
 
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -176,7 +174,7 @@ public class DBService {
     public List<Car> getUnsoldCars() {
         Session session = factory.openSession();
         session.beginTransaction();
-        List<Car> carList = session.createQuery("FROM Car WHERE sold = false ORDER BY created DESC")
+        List<Car> carList = session.createQuery("FROM Car ORDER BY created DESC")
                 .list();
         for (Car car : carList) {
             Hibernate.initialize(car.getUser());
@@ -315,8 +313,6 @@ public class DBService {
     }
 
     public static void main(String[] args) {
-        DBService service = DBService.newInstance();
-
-        service.addNewComment(1, 1, new Comment("desc", new Date()));
+        DBService.newInstance();
     }
 }

@@ -1,8 +1,13 @@
-package ru.job4j.todolist;
+package ru.job4j.todolist.entities;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GenerationType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.util.Date;
 
 /**
@@ -16,7 +21,7 @@ public class Task {
      * id.
      */
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
     /**

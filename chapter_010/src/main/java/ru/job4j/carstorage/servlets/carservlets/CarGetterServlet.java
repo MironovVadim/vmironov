@@ -1,8 +1,9 @@
-package ru.job4j.carstorage.servlets;
+package ru.job4j.carstorage.servlets.carservlets;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;
-import ru.job4j.carstorage.Comment;
+import ru.job4j.carstorage.entities.Car;
+import ru.job4j.carstorage.entities.User;
 import ru.job4j.controller.DBService;
 
 import javax.servlet.ServletException;
@@ -13,47 +14,45 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.util.Date;
 
 /**
- * Servlet for adding comments to car.
+ * Car getter Servlet.
  */
-@WebServlet(name = "addingComment", urlPatterns = "/carstorage/sendComment")
-public class AddingCommentServlet extends HttpServlet {
+@WebServlet(name = "currentCarGetter", urlPatterns = "/carstorage/getCar")
+public class CarGetterServlet extends HttpServlet {
     /**
-     * Data base service.
+     * Data Base Service.
      */
     private static DBService service = DBService.newInstance();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("application/json");
-
-        int userId = (int) req.getSession().getAttribute("id");
         int carId = Integer.parseInt(req.getParameter("carId"));
-        String description = req.getParameter("description");
-
-        Comment comment = new Comment(description, new Date());
-        service.addNewComment(userId, carId, comment);
-
-        PrintWriter out = resp.getWriter();
-        this.writeJSON(comment, out);
+        Car car = service.getSpecifiedCar(carId);
+        User carUser = car.getUser();
+        int userId = (int) req.getSession().getAttribute("id");
+        if (userId == carUser.getId()) {
+            car.setOwner(true);
+        }
+        PrintWriter printWriter = resp.getWriter();
+        this.writeJSON(car, printWriter);
     }
 
     /**
-     * Method write comment to PrintWriter.
-     * @param newComment - POJO object.
-     * @param out - target.
+     * Method write json to PrintWriter.
+     * @param car - POJO object.
+     * @param out - target for writing.
      * @throws IOException if POJO object could not be written.
      */
-    private void writeJSON(Comment newComment, PrintWriter out) throws IOException {
-        ObjectMapper mapper = new ObjectMapper();
+    private void writeJSON(Car car, PrintWriter out) throws IOException {
         StringWriter writer = new StringWriter();
+        ObjectMapper mapper = new ObjectMapper();
         SimpleFilterProvider provider = new SimpleFilterProvider();
         provider.setFailOnUnknownId(false);
         mapper.setFilterProvider(provider);
-        mapper.writeValue(writer, newComment);
-        out.print(writer.toString());
+        mapper.writeValue(writer, car);
+        out.println(writer.toString());
         out.flush();
     }
 }

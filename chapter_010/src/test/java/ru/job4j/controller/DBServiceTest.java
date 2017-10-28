@@ -1,10 +1,10 @@
 package ru.job4j.controller;
 
 import org.junit.Test;
-import ru.job4j.carstorage.Car;
-import ru.job4j.carstorage.Comment;
-import ru.job4j.carstorage.Image;
-import ru.job4j.carstorage.User;
+import ru.job4j.carstorage.entities.Car;
+import ru.job4j.carstorage.entities.Comment;
+import ru.job4j.carstorage.entities.Image;
+import ru.job4j.carstorage.entities.User;
 
 import java.util.List;
 import java.util.ArrayList;

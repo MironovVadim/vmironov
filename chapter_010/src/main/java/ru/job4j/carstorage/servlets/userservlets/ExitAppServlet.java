@@ -1,4 +1,4 @@
-package ru.job4j.carstorage.servlets;
+package ru.job4j.carstorage.servlets.userservlets;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

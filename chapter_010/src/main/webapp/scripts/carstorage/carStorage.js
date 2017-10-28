@@ -393,7 +393,9 @@ function settingSellButtonOptions(car) {
  * @param car - current car.
  */
 function showSellButton(car) {
+
     $("#sellButton")
+        .off()
         .removeAttr("hidden")
         .click(function () {
                 sellCar(car);
@@ -417,8 +419,10 @@ function hideSellButton() {
  */
 function removeCarFromStorage(car) {
     $("#" + car["id"]).remove();
-    var carId = $(".carInfo")[0]["id"];
-    addFullCarInfo(carId);
+    var addingCar = $(".carInfo")[0];
+    if (typeof addingCar !== "undefined") {
+        addFullCarInfo(addingCar["id"]);
+    }
 }
 
 /**

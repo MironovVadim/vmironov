@@ -1,7 +1,7 @@
-package ru.job4j.carstorage.servlets;
+package ru.job4j.carstorage.servlets.carservlets;
 
-import ru.job4j.carstorage.Car;
-import ru.job4j.carstorage.User;
+import ru.job4j.carstorage.entities.Car;
+import ru.job4j.carstorage.entities.User;
 import ru.job4j.carstorage.json.JSONCarWriter;
 import ru.job4j.controller.DBService;
 

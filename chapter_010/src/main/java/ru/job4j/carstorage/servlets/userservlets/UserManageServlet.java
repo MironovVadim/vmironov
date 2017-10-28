@@ -1,5 +1,6 @@
-package ru.job4j.carstorage.servlets;
+package ru.job4j.carstorage.servlets.userservlets;
 
+import ru.job4j.carstorage.entities.User;
 import ru.job4j.controller.DBService;
 
 import javax.servlet.ServletException;
@@ -8,26 +9,30 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Date;
 
 /**
- * Servlet check existence of user.
+ * Servlet registers new User.
  */
-@WebServlet(name = "signIn", urlPatterns = "/carstorage/signIn")
-public class CheckUserServlet extends HttpServlet {
+@WebServlet(name = "userAdding", urlPatterns = "/carstorage/createUser")
+public class UserManageServlet extends HttpServlet {
     /**
-     * Data base service.
+     * Data Base Service.
      */
     private static DBService service = DBService.newInstance();
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String nickname = req.getParameter("nickname");
         String login = req.getParameter("login");
         String password = req.getParameter("password");
-        int id = service.checkUser(login, password);
-        if (id > 0) {
-            req.getSession().setAttribute("id", id);
+
+        if (service.isUserLoginExist(login)) {
+            resp.sendError(400, "This login already exist!");
         } else {
-            resp.sendError(400, "Wrong login or password.");
+            User user = new User(nickname, login, password, new Date());
+            service.addNewUser(user);
+            req.getSession().setAttribute("id", user.getId());
         }
     }
 }
